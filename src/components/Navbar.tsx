@@ -58,7 +58,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.path}
-              className={`text-white hover:text-dexRed transition-colors animated-underline ${
+              className={`relative text-white hover:text-dexRed transition-colors duration-300 ease-in-out animated-underline ${
                 location.pathname === link.path ? 'font-medium after:w-full' : 'font-normal'
               }`}
             >
@@ -69,7 +69,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Button */}
         <button
-          className="md:hidden text-white focus:outline-none"
+          className="md:hidden text-white focus:outline-none transition-transform duration-200 hover:scale-110"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -88,7 +88,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.path}
-              className={`text-white hover:text-dexRed transition-colors py-2 ${
+              className={`text-white hover:text-dexRed transition-colors duration-300 py-2 ${
                 location.pathname === link.path ? 'font-medium' : 'font-normal'
               }`}
             >
