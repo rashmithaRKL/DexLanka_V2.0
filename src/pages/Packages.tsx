@@ -449,29 +449,29 @@ const Packages = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
               {
-                question: 'How long does it take to complete a website?',
-                answer: 'Completion times vary by project complexity. A one-page website typically takes 1-2 weeks, a 5-page site 3-4 weeks, and larger projects 6-12 weeks. We'll provide a specific timeline during our initial consultation.'
+                question: "How long does it take to complete a website?",
+                answer: "Completion times vary by project complexity. A one-page website typically takes 1-2 weeks, a 5-page site 3-4 weeks, and larger projects 6-12 weeks. We'll provide a specific timeline during our initial consultation."
               },
               {
-                question: 'Do you offer ongoing maintenance?',
-                answer: 'Yes, we offer maintenance packages to keep your website secure, updated, and performing optimally. These can be purchased separately or added to your initial package.'
+                question: "Do you offer ongoing maintenance?",
+                answer: "Yes, we offer maintenance packages to keep your website secure, updated, and performing optimally. These can be purchased separately or added to your initial package."
               },
               {
-                question: 'What payment methods do you accept?',
-                answer: 'We accept credit cards, bank transfers, and PayPal. For most projects, we require a 50% deposit to begin work, with the remainder due upon completion.'
+                question: "What payment methods do you accept?",
+                answer: "We accept credit cards, bank transfers, and PayPal. For most projects, we require a 50% deposit to begin work, with the remainder due upon completion."
               },
               {
-                question: 'Can you help with content creation?',
-                answer: 'Yes, we offer content creation services including copywriting, photography, and video production as add-ons to our packages. Ask about our content creation services during consultation.'
+                question: "Can you help with content creation?",
+                answer: "Yes, we offer content creation services including copywriting, photography, and video production as add-ons to our packages. Ask about our content creation services during consultation."
               },
               {
-                question: 'Do you offer hosting services?',
-                answer: 'Yes, we provide reliable hosting solutions for all our web projects. Our hosting includes regular backups, security monitoring, and technical support.'
+                question: "Do you offer hosting services?",
+                answer: "Yes, we provide reliable hosting solutions for all our web projects. Our hosting includes regular backups, security monitoring, and technical support."
               },
               {
-                question: 'Can I upgrade my package later?',
-                answer: 'Absolutely! We design our solutions to be scalable. You can start with a basic package and upgrade as your business grows and your needs evolve.'
-              },
+                question: "Can I upgrade my package later?",
+                answer: "Absolutely! We design our solutions to be scalable. You can start with a basic package and upgrade as your business grows and your needs evolve."
+              }
             ].map((faq, index) => (
               <motion.div
                 key={index}
