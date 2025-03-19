@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -19,25 +18,21 @@ const Contact = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedText
-              text={<span className="inline-block text-xl text-dexRed font-medium mb-4">Contact Us</span>}
+              text="Contact Us"
               animation="slide-up"
-              className="mb-4"
+              className="inline-block text-xl text-dexRed font-medium mb-4"
             />
             <AnimatedText
-              text={<h1 className="text-4xl md:text-5xl font-bold mb-6">Let's Work Together</h1>}
+              text="Let's Work Together"
               animation="slide-up"
               delay={100}
-              className="mb-6"
+              className="text-4xl md:text-5xl font-bold mb-6"
             />
             <AnimatedText
-              text={
-                <p className="text-gray-300 text-lg">
-                  Have a project in mind or questions about our services? We're here to help.
-                  Reach out to us and let's start a conversation.
-                </p>
-              }
+              text="Have a project in mind or questions about our services? We're here to help. Reach out to us and let's start a conversation."
               animation="slide-up"
               delay={200}
+              className="text-gray-300 text-lg"
             />
           </div>
         </div>

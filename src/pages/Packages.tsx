@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -255,25 +254,21 @@ const Packages = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedText
-              text={<span className="inline-block text-xl text-dexRed font-medium mb-4">Our Packages</span>}
+              text="Our Packages"
               animation="slide-up"
-              className="mb-4"
+              className="inline-block text-xl text-dexRed font-medium mb-4"
             />
             <AnimatedText
-              text={<h1 className="text-4xl md:text-5xl font-bold mb-6">Choose the Perfect Package</h1>}
+              text="Choose the Perfect Package"
               animation="slide-up"
               delay={100}
-              className="mb-6"
+              className="text-4xl md:text-5xl font-bold mb-6"
             />
             <AnimatedText
-              text={
-                <p className="text-gray-300 text-lg">
-                  We offer a range of packages to suit different business needs and budgets.
-                  Each package is designed to deliver maximum value and can be customized to your specific requirements.
-                </p>
-              }
+              text="We offer a range of packages to suit different business needs and budgets. Each package is designed to deliver maximum value and can be customized to your specific requirements."
               animation="slide-up"
               delay={200}
+              className="text-gray-300 text-lg"
             />
           </div>
         </div>

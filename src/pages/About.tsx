@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -82,24 +81,21 @@ const About = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedText
-              text={<span className="inline-block text-xl text-dexRed font-medium mb-4">Our Story</span>}
+              text="Our Story"
               animation="slide-up"
-              className="mb-4"
+              className="inline-block text-xl text-dexRed font-medium mb-4"
             />
             <AnimatedText
-              text={<h1 className="text-4xl md:text-5xl font-bold mb-6">We Are <span className="dex-span">Dex</span><span className="lanka-span">Lanka</span></h1>}
+              text="We Are DexLanka"
               animation="slide-up"
               delay={100}
-              className="mb-6"
+              className="text-4xl md:text-5xl font-bold mb-6"
             />
             <AnimatedText
-              text={
-                <p className="text-gray-300 text-lg">
-                  A passionate team of designers, developers, and digital strategists dedicated to creating exceptional software solutions that drive business growth and deliver outstanding user experiences.
-                </p>
-              }
+              text="A passionate team of designers, developers, and digital strategists dedicated to creating exceptional software solutions that drive business growth and deliver outstanding user experiences."
               animation="slide-up"
               delay={200}
+              className="text-gray-300 text-lg"
             />
           </div>
         </div>

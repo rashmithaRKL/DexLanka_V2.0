@@ -1,4 +1,3 @@
-
 import React, { Suspense, lazy } from 'react';
 import HeroSection from '@/components/HeroSection';
 import Navbar from '@/components/Navbar';
@@ -102,20 +101,21 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <AnimatedText
-              text={<span className="inline-block text-xl text-dexRed font-medium mb-4">Our Services</span>}
+              text="Our Services"
               animation="slide-up"
-              className="mb-4"
+              className="inline-block text-xl text-dexRed font-medium mb-4"
             />
             <AnimatedText
-              text={<h2 className="text-3xl md:text-4xl font-bold mb-6">Comprehensive Software Solutions for Your Business</h2>}
+              text="Comprehensive Software Solutions for Your Business"
               animation="slide-up"
               delay={100}
-              className="mb-6"
+              className="text-3xl md:text-4xl font-bold mb-6"
             />
             <AnimatedText
-              text={<p className="text-gray-300">We offer a wide range of software development services tailored to meet the unique needs of your business. Our expert team is dedicated to delivering high-quality solutions that drive growth and success.</p>}
+              text="We offer a wide range of software development services tailored to meet the unique needs of your business. Our expert team is dedicated to delivering high-quality solutions that drive growth and success."
               animation="slide-up"
               delay={200}
+              className="text-gray-300"
             />
           </div>
           
@@ -165,20 +165,21 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <AnimatedText
-              text={<span className="inline-block text-xl text-dexRed font-medium mb-4">Testimonials</span>}
+              text="Testimonials"
               animation="slide-up"
-              className="mb-4"
+              className="inline-block text-xl text-dexRed font-medium mb-4"
             />
             <AnimatedText
-              text={<h2 className="text-3xl md:text-4xl font-bold mb-6">What Our Clients Say</h2>}
+              text="What Our Clients Say"
               animation="slide-up"
               delay={100}
-              className="mb-6"
+              className="text-3xl md:text-4xl font-bold mb-6"
             />
             <AnimatedText
-              text={<p className="text-gray-300">Don't just take our word for it. Hear what our clients have to say about our services and solutions.</p>}
+              text="Don't just take our word for it. Hear what our clients have to say about our services and solutions."
               animation="slide-up"
               delay={200}
+              className="text-gray-300"
             />
           </div>
           
