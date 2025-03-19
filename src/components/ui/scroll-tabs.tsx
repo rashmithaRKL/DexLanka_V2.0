@@ -25,7 +25,7 @@ const ScrollTabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 >(({ className, ...props }, ref) => {
-  // Prevent default behavior which causes page to scroll to top
+  // Prevent default scrolling behavior when tab is clicked
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
   };

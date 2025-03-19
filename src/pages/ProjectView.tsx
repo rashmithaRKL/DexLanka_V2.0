@@ -76,7 +76,7 @@ const ProjectView = () => {
             <AnimatedText
               text="Project Showcase"
               animation="slide-up"
-              className="inline-block text-xl text-dexRed font-medium mb-4"
+              className="inline-block text-xl text-primary font-medium mb-4"
             />
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -108,7 +108,7 @@ const ProjectView = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={descriptionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-gray-300 mb-6"
+              className="text-muted-foreground mb-6"
             >
               {selectedProject.description}
             </motion.p>
