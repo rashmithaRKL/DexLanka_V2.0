@@ -205,7 +205,7 @@ const Packages = () => {
       {
         feature: 'User Accounts',
         onePage: false,
-        fivePage: false,
+        fivePage: 'Optional',
         tenPage: 'Optional',
         webApp: true,
         eCommerce: true,
@@ -213,7 +213,7 @@ const Packages = () => {
       {
         feature: 'Payment Processing',
         onePage: false,
-        fivePage: 'Optional',
+        fivePage: false,
         tenPage: 'Optional',
         webApp: 'Optional',
         eCommerce: true,
@@ -228,7 +228,7 @@ const Packages = () => {
       },
       {
         feature: 'Revisions Included',
-        onePage: '1',
+        onePage: '5',
         fivePage: '2',
         tenPage: '3',
         webApp: '3',
@@ -236,11 +236,11 @@ const Packages = () => {
       },
       {
         feature: 'Support Period',
-        onePage: '1 month',
-        fivePage: '3 months',
-        tenPage: '3 months',
-        webApp: '6 months',
-        eCommerce: '12 months',
+        onePage: '2 days',
+        fivePage: '4 days',
+        tenPage: '1 week',
+        webApp: '1 month',
+        eCommerce: '1-2 months',
       },
     ],
   };
