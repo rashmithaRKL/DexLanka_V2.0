@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedText from '@/components/AnimatedText';
 import CounterAnimation from '@/components/CounterAnimation';
+import CEO from '../assets/images/Firefly 20250428003444.png';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -21,7 +22,7 @@ const About = () => {
     {
       name: 'Alex Rivera',
       position: 'CEO & Founder',
-      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=300&h=300',
+      image: CEO,
       bio: 'Alex founded DexLanka with a vision to create exceptional software solutions that transform businesses.',
     },
     {
