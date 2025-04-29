@@ -36,22 +36,22 @@ const About = () => {
 
   const timeline = [
     {
-      year: '2024-August',
+      year: '2024',
       title: 'DexLanka Founded',
       description: 'Started as a small team of 3 passionate developers with a vision to create innovative software solutions.',
     },
     {
-      year: '2024-October',
+      year: '2024',
       title: 'First Major Client',
       description: 'Secured our first enterprise client and expanded the team to 10 members to handle growing projects.',
     },
     {
-      year: '2024-December',
+      year: '2024',
       title: 'Mobile App Division',
       description: 'Launched our dedicated mobile application development division to focus on iOS and Android platforms.',
     },
     {
-      year: '2025-February',
+      year: '2025',
       title: 'International Expansion',
       description: 'Opened our first international office and partnered with global technology leaders.',
     },
