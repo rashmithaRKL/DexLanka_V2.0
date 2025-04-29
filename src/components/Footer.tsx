@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
               <a href="https://www.instagram.com/dex_lanka/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/in/rashmitha-kalhara/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
               <li className="flex items-center">
                 <Phone size={20} className="text-dexRed shrink-0 mr-3" />
                 <a href="tel:+94123456789" className="text-gray-400 hover:text-white transition-colors">
-                  +94 78 548 8789
+                  +94 70 558 8789
                 </a>
               </li>
               <li className="flex items-center">
