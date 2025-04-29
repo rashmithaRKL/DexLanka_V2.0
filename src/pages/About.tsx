@@ -20,28 +20,16 @@ const About = () => {
 
   const team = [
     {
-      name: 'Alex Rivera',
-      position: 'CEO & Founder',
+      name: 'Rashmitha Kalhara',
+      position: 'CEO, Founder, Lead Developer',
       image: CEO,
-      bio: 'Alex founded DexLanka with a vision to create exceptional software solutions that transform businesses.',
+      bio: 'Rashmitha founded DexLanka with a vision to create exceptional software solutions that transform businesses.',
     },
     {
-      name: 'Natalie Chen',
-      position: 'CTO',
+      name: 'Tharushi Nethmini',
+      position: 'UI/UX Director, Developer',
       image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300&h=300',
       bio: 'Natalie leads our technical team with over 12 years of experience in software development and architecture.',
-    },
-    {
-      name: 'David Kumar',
-      position: 'Lead Developer',
-      image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=300&h=300',
-      bio: 'David is a full-stack developer with expertise in React, Node.js, and cloud infrastructure.',
-    },
-    {
-      name: 'Sarah Johnson',
-      position: 'UI/UX Director',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=300&h=300',
-      bio: 'Sarah ensures all our products deliver exceptional user experiences through thoughtful design.',
     },
   ];
 
