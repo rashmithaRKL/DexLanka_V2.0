@@ -19,7 +19,7 @@ const Packages = () => {
     websites: [
       {
         title: 'One-Page Website',
-        price: '$599',
+        price: '$25',
         description: 'Perfect for landing pages or simple business sites',
         features: [
           'One-page responsive design',
@@ -32,10 +32,10 @@ const Packages = () => {
       },
       {
         title: '5-Page Website',
-        price: '$1,499',
+        price: '$60',
         description: 'Ideal for small businesses and personal brands',
         features: [
-          '5 custom designed pages',
+          '5 custom-designed pages',
           'Responsive design for all devices',
           'Contact form & Google Maps',
           'Basic SEO optimization',
@@ -46,7 +46,7 @@ const Packages = () => {
       },
       {
         title: '10+ Page Website',
-        price: '$2,999',
+        price: '$100',
         description: 'Comprehensive solution for established businesses',
         features: [
           '10 or more custom pages',
@@ -63,7 +63,7 @@ const Packages = () => {
     applications: [
       {
         title: 'Web Application',
-        price: '$5,999',
+        price: '$65',
         description: 'Custom web application with advanced functionality',
         features: [
           'Custom user accounts',
@@ -78,7 +78,7 @@ const Packages = () => {
       },
       {
         title: 'E-Commerce Website',
-        price: '$7,999',
+        price: '$100',
         description: 'Complete online store with all necessary features',
         features: [
           'Product catalog with categories',
@@ -94,7 +94,7 @@ const Packages = () => {
       },
       {
         title: 'Desktop Application',
-        price: '$8,999',
+        price: '$200',
         description: 'Native desktop application for Windows/Mac/Linux',
         features: [
           'Cross-platform compatibility',
@@ -111,7 +111,7 @@ const Packages = () => {
     mobile: [
       {
         title: 'Simple Mobile App',
-        price: '$7,499',
+        price: '$30',
         description: 'Basic mobile application for iOS or Android',
         features: [
           'Up to 5 screens/features',
@@ -125,7 +125,7 @@ const Packages = () => {
       },
       {
         title: 'Advanced Mobile App',
-        price: '$12,999',
+        price: '$80',
         description: 'Feature-rich application for iOS and Android',
         features: [
           'Cross-platform (iOS & Android)',
@@ -141,7 +141,7 @@ const Packages = () => {
       },
       {
         title: 'E-Commerce Mobile App',
-        price: '$15,999',
+        price: '$150',
         description: 'Complete shopping experience for mobile users',
         features: [
           'Product catalog and search',
