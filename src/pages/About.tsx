@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import AnimatedText from '@/components/AnimatedText';
 import CounterAnimation from '@/components/CounterAnimation';
 import CEO from '../assets/images/Firefly 20250428003444.png';
+import FrontEndDev from '../assets/images/Firefly 20250430030414.png';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -28,36 +29,31 @@ const About = () => {
     {
       name: 'Tharushi Nethmini',
       position: 'UI/UX Director, Developer',
-      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=300&h=300',
-      bio: 'Natalie leads our technical team with over 12 years of experience in software development and architecture.',
+      image: FrontEndDev,
+      bio: 'Tharushi leads our technical team with over 12 years of experience in software development and architecture.',
     },
   ];
 
   const timeline = [
     {
-      year: '2016',
+      year: '2024-August',
       title: 'DexLanka Founded',
       description: 'Started as a small team of 3 passionate developers with a vision to create innovative software solutions.',
     },
     {
-      year: '2018',
+      year: '2024-October',
       title: 'First Major Client',
       description: 'Secured our first enterprise client and expanded the team to 10 members to handle growing projects.',
     },
     {
-      year: '2020',
+      year: '2024-December',
       title: 'Mobile App Division',
       description: 'Launched our dedicated mobile application development division to focus on iOS and Android platforms.',
     },
     {
-      year: '2022',
+      year: '2025-February',
       title: 'International Expansion',
       description: 'Opened our first international office and partnered with global technology leaders.',
-    },
-    {
-      year: '2024',
-      title: 'Innovation Lab',
-      description: 'Established our Innovation Lab focused on emerging technologies like AI, AR/VR, and blockchain.',
     },
   ];
 
