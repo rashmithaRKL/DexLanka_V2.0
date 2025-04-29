@@ -9,15 +9,16 @@ const Navbar = () => {
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
-  
+
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
-    { name: 'Project', path: '/project-view' },
+    // { name: 'Project', path: '/project-view' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'Packages', path: '/packages' },
     { name: 'Contact', path: '/contact' },
-    
+
   ];
 
   useEffect(() => {
@@ -41,10 +42,9 @@ const Navbar = () => {
   }, [location]);
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'glass py-3' : 'py-5'
-      }`}
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass py-3' : 'py-5'
+        }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link to="/" className="flex items-center">
@@ -60,9 +60,8 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.path}
-              className={`relative text-white hover:text-dexRed transition-colors duration-300 ease-in-out animated-underline ${
-                location.pathname === link.path ? 'font-medium after:w-full' : 'font-normal'
-              }`}
+              className={`relative text-white hover:text-dexRed transition-colors duration-300 ease-in-out animated-underline ${location.pathname === link.path ? 'font-medium after:w-full' : 'font-normal'
+                }`}
             >
               {link.name}
             </Link>
@@ -81,18 +80,16 @@ const Navbar = () => {
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`md:hidden absolute w-full glass transition-transform duration-300 ease-in-out transform ${
-          isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-        }`}
+        className={`md:hidden absolute w-full glass transition-transform duration-300 ease-in-out transform ${isOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+          }`}
       >
         <div className="container mx-auto py-4 px-6 flex flex-col space-y-4">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className={`text-white hover:text-dexRed transition-colors duration-300 py-2 ${
-                location.pathname === link.path ? 'font-medium' : 'font-normal'
-              }`}
+              className={`text-white hover:text-dexRed transition-colors duration-300 py-2 ${location.pathname === link.path ? 'font-medium' : 'font-normal'
+                }`}
             >
               {link.name}
             </Link>

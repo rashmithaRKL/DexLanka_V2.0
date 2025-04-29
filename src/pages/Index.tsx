@@ -17,12 +17,12 @@ const Index = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
-  
+
   const [statsRef, statsInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-  
+
   const [testimonialsRef, testimonialsInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -62,10 +62,10 @@ const Index = () => {
   ];
 
   const stats = [
-    { number: 8, suffix: '+', label: 'Years Experience' },
-    { number: 120, suffix: '+', label: 'Projects Completed' },
-    { number: 85, suffix: '+', label: 'Happy Clients' },
-    { number: 15, suffix: '+', label: 'Team Experts' },
+    { number: 3, suffix: '+', label: 'Years Experience' },
+    { number: 33, suffix: '+', label: 'Projects Completed' },
+    { number: 21, suffix: '+', label: 'Happy Clients' },
+    { number: 6, suffix: '+', label: 'Team Experts' },
   ];
 
   const testimonials = [
@@ -92,10 +92,10 @@ const Index = () => {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <Navbar />
-      
+
       {/* Hero Section */}
       <HeroSection />
-      
+
       {/* Services Section */}
       <section id="services" className="section-padding" ref={servicesRef}>
         <div className="container mx-auto">
@@ -118,7 +118,7 @@ const Index = () => {
               className="text-gray-300"
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <ServiceCard
@@ -132,7 +132,7 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Stats Section */}
       <section className="py-20 bg-darkBlue" ref={statsRef}>
         <div className="container mx-auto px-6">
@@ -159,7 +159,7 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Testimonials Section */}
       <section className="section-padding bg-gradient-to-b from-background to-darkBlue" ref={testimonialsRef}>
         <div className="container mx-auto">
@@ -182,7 +182,7 @@ const Index = () => {
               className="text-gray-300"
             />
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
@@ -193,11 +193,11 @@ const Index = () => {
                 className="glass p-8 rounded-2xl"
               >
                 <svg width="45" height="36" className="text-dexRed/30 mb-6" viewBox="0 0 45 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.95 36C9.225 36 5.625 34.5 3.15 31.5C1.05 29.1 0 25.95 0 22.05C0 17.85 1.275 14.025 3.825 10.575C6.375 7.125 10.05 4.275 14.85 2.025L18.225 7.65C14.625 9.45 11.925 11.4 10.125 13.5C8.325 15.6 7.425 17.325 7.425 18.675C7.425 19.275 7.65 19.8 8.1 20.25C8.55 20.625 9.225 21 10.125 21.375C12.225 22.275 13.8 23.4 14.85 24.75C15.9 26.025 16.425 27.675 16.425 29.7C16.425 31.65 15.675 33.225 14.175 34.425C12.75 35.475 11.025 36 13.95 36ZM37.8 36C33.075 36 29.475 34.5 27 31.5C24.9 29.1 23.85 25.95 23.85 22.05C23.85 17.85 25.125 14.025 27.675 10.575C30.225 7.125 33.9 4.275 38.7 2.025L42.075 7.65C38.475 9.45 35.775 11.4 33.975 13.5C32.175 15.6 31.275 17.325 31.275 18.675C31.275 19.275 31.5 19.8 31.95 20.25C32.4 20.625 33.075 21 33.975 21.375C36.075 22.275 37.65 23.4 38.7 24.75C39.75 26.025 40.275 27.675 40.275 29.7C40.275 31.65 39.525 33.225 38.025 34.425C36.6 35.475 34.875 36 37.8 36Z" fill="currentColor"/>
+                  <path d="M13.95 36C9.225 36 5.625 34.5 3.15 31.5C1.05 29.1 0 25.95 0 22.05C0 17.85 1.275 14.025 3.825 10.575C6.375 7.125 10.05 4.275 14.85 2.025L18.225 7.65C14.625 9.45 11.925 11.4 10.125 13.5C8.325 15.6 7.425 17.325 7.425 18.675C7.425 19.275 7.65 19.8 8.1 20.25C8.55 20.625 9.225 21 10.125 21.375C12.225 22.275 13.8 23.4 14.85 24.75C15.9 26.025 16.425 27.675 16.425 29.7C16.425 31.65 15.675 33.225 14.175 34.425C12.75 35.475 11.025 36 13.95 36ZM37.8 36C33.075 36 29.475 34.5 27 31.5C24.9 29.1 23.85 25.95 23.85 22.05C23.85 17.85 25.125 14.025 27.675 10.575C30.225 7.125 33.9 4.275 38.7 2.025L42.075 7.65C38.475 9.45 35.775 11.4 33.975 13.5C32.175 15.6 31.275 17.325 31.275 18.675C31.275 19.275 31.5 19.8 31.95 20.25C32.4 20.625 33.075 21 33.975 21.375C36.075 22.275 37.65 23.4 38.7 24.75C39.75 26.025 40.275 27.675 40.275 29.7C40.275 31.65 39.525 33.225 38.025 34.425C36.6 35.475 34.875 36 37.8 36Z" fill="currentColor" />
                 </svg>
-                
+
                 <p className="text-gray-300 mb-6">{testimonial.content}</p>
-                
+
                 <div className="mt-auto">
                   <h4 className="font-semibold">{testimonial.author}</h4>
                   <p className="text-gray-400 text-sm">{testimonial.position}</p>
@@ -207,7 +207,7 @@ const Index = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Contact Section */}
       <section id="contact" className="section-padding bg-darkBlue">
         <div className="container mx-auto">
@@ -218,13 +218,13 @@ const Index = () => {
               Have a project in mind? We'd love to hear from you. Reach out to us and let's create something amazing together.
             </p>
           </div>
-          
+
           <Suspense fallback={<div className="text-center">Loading form...</div>}>
             <ContactForm />
           </Suspense>
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );

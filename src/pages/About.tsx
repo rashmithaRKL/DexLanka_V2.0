@@ -11,7 +11,7 @@ const About = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
-  
+
   const [journeyRef, journeyInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -75,7 +75,7 @@ const About = () => {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="pt-36 pb-20 bg-darkBlue">
         <div className="container mx-auto px-6">
@@ -100,16 +100,16 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Stats Section */}
       <section className="py-20">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
             {[
-              { number: 8, label: 'Years of Excellence' },
-              { number: 120, suffix: '+', label: 'Projects Delivered' },
-              { number: 85, suffix: '+', label: 'Happy Clients' },
-              { number: 15, label: 'Team Members' },
+              { number: 3, label: 'Years of Excellence' },
+              { number: 33, suffix: '+', label: 'Projects Delivered' },
+              { number: 21, suffix: '+', label: 'Happy Clients' },
+              { number: 6, label: 'Team Members' },
             ].map((stat, index) => (
               <div key={index} className="glass p-6 rounded-2xl">
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2 flex items-baseline justify-center">
@@ -126,7 +126,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       {/* About Content */}
       <section className="section-padding">
         <div className="container mx-auto px-6">
@@ -152,7 +152,7 @@ const About = () => {
                 <p className="text-white font-medium mt-3">— Alex Rivera, CEO & Founder</p>
               </div>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -167,7 +167,18 @@ const About = () => {
                 />
                 <div className="absolute inset-0 bg-darkBg/30 flex items-center justify-center">
                   <button className="w-16 h-16 rounded-full bg-dexRed/90 flex items-center justify-center text-white hover:bg-dexRed transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="ml-1"
+                    >
                       <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
                   </button>
@@ -177,7 +188,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Team Section */}
       <section ref={teamRef} className="section-padding bg-darkBlue">
         <div className="container mx-auto px-6">
@@ -185,11 +196,11 @@ const About = () => {
             <span className="inline-block text-xl text-dexRed font-medium mb-4">Our Team</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet The Experts</h2>
             <p className="text-gray-300">
-              Our diverse team of talented professionals is the heart of everything we do at DexLanka. 
+              Our diverse team of talented professionals is the heart of everything we do at DexLanka.
               Each member brings unique expertise and passion to deliver exceptional results.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
               <motion.div
@@ -216,7 +227,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Company Journey */}
       <section ref={journeyRef} className="section-padding">
         <div className="container mx-auto px-6">
@@ -224,15 +235,15 @@ const About = () => {
             <span className="inline-block text-xl text-dexRed font-medium mb-4">Our Journey</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">The DexLanka Story</h2>
             <p className="text-gray-300">
-              From humble beginnings to where we are today, our journey has been defined by innovation, 
+              From humble beginnings to where we are today, our journey has been defined by innovation,
               perseverance, and a relentless pursuit of excellence.
             </p>
           </div>
-          
+
           <div className="relative">
             {/* Timeline Line */}
             <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gray-800 transform md:translate-x-[-0.5px]"></div>
-            
+
             {/* Timeline Items */}
             <div className="relative z-10">
               {timeline.map((item, index) => (
@@ -241,9 +252,8 @@ const About = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={journeyInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ duration: 0.6, delay: index * 0.2 }}
-                  className={`mb-12 md:mb-24 flex flex-col ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } items-center`}
+                  className={`mb-12 md:mb-24 flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                    } items-center`}
                 >
                   {/* Year and Dot */}
                   <div className="mb-6 md:mb-0 md:w-1/2 flex flex-col items-center md:items-end md:pr-12">
@@ -254,7 +264,7 @@ const About = () => {
                       <span className="text-2xl font-bold mr-4 md:mr-0">{item.year}</span>
                     </div>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="md:w-1/2 md:pl-12">
                     <div className="glass p-6 rounded-2xl">
@@ -268,7 +278,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Call to Action */}
       <section className="py-24 bg-gradient-to-b from-darkBlue to-background">
         <div className="container mx-auto px-6">
@@ -286,7 +296,7 @@ const About = () => {
           </div>
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );

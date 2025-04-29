@@ -47,8 +47,8 @@ const DeviceFrame = ({ type, url, className }: DeviceFrameProps) => {
         </span>
       </div>
       <div className={cn('bg-white relative overflow-hidden', frameClass)} style={{ width, height }}>
-        <iframe 
-          src={url} 
+        <iframe
+          src={url}
           className="w-full h-full"
           title={`${type} preview`}
           sandbox="allow-same-origin allow-scripts"

@@ -14,17 +14,17 @@ import { useInView } from 'react-intersection-observer';
 const ProjectView = () => {
   const [currentProject, setCurrentProject] = useState('project1');
   const isMobile = useIsMobile();
-  
+
   const [headerRef, headerInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-  
+
   const [descriptionRef, descriptionInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-  
+
   const [deviceRef, deviceInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -36,7 +36,7 @@ const ProjectView = () => {
       description: 'A fully responsive e-commerce website built with React, Tailwind CSS, and a headless CMS. Features include product filtering, searching, cart functionality, and secure checkout.',
       deviceUrls: {
         mobile: 'https://example.com/mobile',
-        web: 'https://example.com',
+        web: 'https://i.ibb.co/84XH7sjT/1.png',
         desktop: 'https://example.com/desktop'
       },
       technologies: ['React', 'Tailwind CSS', 'Node.js', 'MongoDB']
@@ -68,7 +68,7 @@ const ProjectView = () => {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <Navbar />
-      
+
       <div className="pt-24 pb-16 px-4 md:px-6">
         <div className="container mx-auto">
           {/* Header Section */}
@@ -78,7 +78,7 @@ const ProjectView = () => {
               animation="slide-up"
               className="inline-block text-xl text-primary font-medium mb-4"
             />
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -87,7 +87,7 @@ const ProjectView = () => {
               {selectedProject.title}
             </motion.h1>
           </div>
-          
+
           {/* Project Selection */}
           <div className="mb-8 flex justify-center">
             <ScrollTabs defaultValue="project1" value={currentProject} onValueChange={setCurrentProject}>
@@ -98,10 +98,10 @@ const ProjectView = () => {
               </ScrollTabsList>
             </ScrollTabs>
           </div>
-          
+
           {/* Project Description */}
-          <div 
-            className="max-w-3xl mx-auto mb-12 text-center" 
+          <div
+            className="max-w-3xl mx-auto mb-12 text-center"
             ref={descriptionRef}
           >
             <motion.p
@@ -112,7 +112,7 @@ const ProjectView = () => {
             >
               {selectedProject.description}
             </motion.p>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={descriptionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -126,7 +126,7 @@ const ProjectView = () => {
               ))}
             </motion.div>
           </div>
-          
+
           {/* Device Preview Section */}
           <div className="mt-16" ref={deviceRef}>
             <ScrollTabs defaultValue="web">
@@ -137,7 +137,7 @@ const ProjectView = () => {
                   <ScrollTabsTrigger value="desktop">Desktop App View</ScrollTabsTrigger>
                 </ScrollTabsList>
               </div>
-              
+
               <ScrollArea className="w-full">
                 <ScrollTabsContent value="web" className="flex justify-center">
                   <motion.div
@@ -145,49 +145,49 @@ const ProjectView = () => {
                     animate={deviceInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <DeviceFrame 
-                      type="web" 
-                      url={selectedProject.deviceUrls.web} 
-                      className={isMobile ? "scale-75 origin-top" : ""} 
+                    <DeviceFrame
+                      type="web"
+                      url={selectedProject.deviceUrls.web}
+                      className={isMobile ? "scale-75 origin-top" : ""}
                     />
                   </motion.div>
                 </ScrollTabsContent>
-                
+
                 <ScrollTabsContent value="mobile" className="flex justify-center">
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={deviceInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <DeviceFrame 
-                      type="mobile" 
-                      url={selectedProject.deviceUrls.mobile} 
-                      className={isMobile ? "scale-90 origin-top" : ""} 
+                    <DeviceFrame
+                      type="mobile"
+                      url={selectedProject.deviceUrls.mobile}
+                      className={isMobile ? "scale-90 origin-top" : ""}
                     />
                   </motion.div>
                 </ScrollTabsContent>
-                
+
                 <ScrollTabsContent value="desktop" className="flex justify-center">
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={deviceInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.6 }}
                   >
-                    <DeviceFrame 
-                      type="desktop" 
-                      url={selectedProject.deviceUrls.desktop} 
-                      className={isMobile ? "scale-75 origin-top" : ""} 
+                    <DeviceFrame
+                      type="desktop"
+                      url={selectedProject.deviceUrls.desktop}
+                      className={isMobile ? "scale-75 origin-top" : ""}
                     />
                   </motion.div>
                 </ScrollTabsContent>
               </ScrollArea>
             </ScrollTabs>
           </div>
-          
+
           {/* Back button */}
           <div className="mt-12 text-center">
-            <Button 
-              onClick={() => window.history.back()} 
+            <Button
+              onClick={() => window.history.back()}
               variant="outline"
               className="mx-auto"
             >
@@ -196,7 +196,7 @@ const ProjectView = () => {
           </div>
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );

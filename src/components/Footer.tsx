@@ -5,7 +5,7 @@ import { ArrowRight, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-darkBlue pt-20 pb-10">
       <div className="container mx-auto px-6">
@@ -21,21 +21,21 @@ const Footer: React.FC = () => {
               Premium software solutions tailored to your business needs. We build digital experiences that transform companies.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61574091291394" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Facebook">
                 <Facebook size={20} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Twitter">
+              <a href="https://x.com/dexlanka" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Twitter">
                 <Twitter size={20} />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Instagram">
+              <a href="https://www.instagram.com/dex_lanka/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="LinkedIn">
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
             </div>
           </div>
-          
+
           <div>
             <h3 className="text-white font-semibold text-lg mb-6">Quick Links</h3>
             <ul className="space-y-3">
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
               ))}
             </ul>
           </div>
-          
+
           <div>
             <h3 className="text-white font-semibold text-lg mb-6">Services</h3>
             <ul className="space-y-3">
@@ -76,32 +76,32 @@ const Footer: React.FC = () => {
               ))}
             </ul>
           </div>
-          
+
           <div>
             <h3 className="text-white font-semibold text-lg mb-6">Contact Us</h3>
             <ul className="space-y-5">
               <li className="flex items-start">
                 <MapPin size={20} className="text-dexRed shrink-0 mt-1 mr-3" />
                 <span className="text-gray-400">
-                  123 Technology Park, Colombo 04, Sri Lanka
+                  Meegoda, Homagama, Sri Lanka
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="text-dexRed shrink-0 mr-3" />
                 <a href="tel:+94123456789" className="text-gray-400 hover:text-white transition-colors">
-                  +94 123 456 789
+                  +94 78 548 8789
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="text-dexRed shrink-0 mr-3" />
-                <a href="mailto:info@dexlanka.com" className="text-gray-400 hover:text-white transition-colors">
-                  info@dexlanka.com
+                <a href="mailto:dexlanka@gmail.com" className="text-gray-400 hover:text-white transition-colors">
+                  dexlanka@gmail.com
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        
+
         <div className="border-t border-gray-800 pt-8 mt-8 text-center">
           <p className="text-gray-500">
             &copy; {currentYear} DexLanka. All rights reserved.

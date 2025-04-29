@@ -12,7 +12,7 @@ const Contact = () => {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="pt-36 pb-20 bg-darkBlue">
         <div className="container mx-auto px-6">
@@ -37,7 +37,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Contact Information & Form */}
       <section className="py-20">
         <div className="container mx-auto px-6">
@@ -51,7 +51,7 @@ const Contact = () => {
             >
               <div className="glass p-8 rounded-2xl">
                 <h2 className="text-2xl font-semibold mb-6">Get in Touch</h2>
-                
+
                 <div className="space-y-6">
                   <div className="flex items-start">
                     <div className="w-12 h-12 rounded-full bg-dexRed/10 flex items-center justify-center flex-shrink-0">
@@ -60,13 +60,13 @@ const Contact = () => {
                     <div className="ml-4">
                       <h3 className="font-medium mb-1">Our Office</h3>
                       <p className="text-gray-300">
-                        123 Technology Park<br />
-                        Colombo 04<br />
+                        Meegoda,<br />
+                        Homagama,<br />
                         Sri Lanka
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <div className="w-12 h-12 rounded-full bg-dexRed/10 flex items-center justify-center flex-shrink-0">
                       <Phone size={20} className="text-dexRed" />
@@ -75,12 +75,12 @@ const Contact = () => {
                       <h3 className="font-medium mb-1">Phone</h3>
                       <p className="text-gray-300">
                         <a href="tel:+94123456789" className="hover:text-white transition-colors">
-                          +94 123 456 789
+                          +94 78 548 8789
                         </a>
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <div className="w-12 h-12 rounded-full bg-dexRed/10 flex items-center justify-center flex-shrink-0">
                       <Mail size={20} className="text-dexRed" />
@@ -88,13 +88,13 @@ const Contact = () => {
                     <div className="ml-4">
                       <h3 className="font-medium mb-1">Email</h3>
                       <p className="text-gray-300">
-                        <a href="mailto:info@dexlanka.com" className="hover:text-white transition-colors">
-                          info@dexlanka.com
+                        <a href="mailto:dexlanka@gmail.com" className="hover:text-white transition-colors">
+                        dexlanka@gmail.com
                         </a>
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start">
                     <div className="w-12 h-12 rounded-full bg-dexRed/10 flex items-center justify-center flex-shrink-0">
                       <Clock size={20} className="text-dexRed" />
@@ -102,14 +102,14 @@ const Contact = () => {
                     <div className="ml-4">
                       <h3 className="font-medium mb-1">Working Hours</h3>
                       <p className="text-gray-300">
-                        Monday - Friday: 9:00 AM - 6:00 PM<br />
-                        Weekend: Closed
+                        Monday - Saturday: 9:00 AM - 6:00 PM<br />
+                        Sunday: Closed
                       </p>
                     </div>
                   </div>
                 </div>
               </div>
-              
+
               <div className="glass p-8 rounded-2xl">
                 <h2 className="text-2xl font-semibold mb-6">Connect With Us</h2>
                 <div className="flex space-x-4">
@@ -128,7 +128,7 @@ const Contact = () => {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -141,7 +141,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Google Map */}
       <section className="pb-20">
         <div className="container mx-auto px-6">
@@ -155,7 +155,7 @@ const Contact = () => {
                 </div>
               </div>
             )}
-            
+
             {/* Google Map Iframe */}
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63371.80385596383!2d79.8211860931036!3d6.922003946689936!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253d10f7a7003%3A0x320b2e4d32d3838d!2sColombo!5e0!3m2!1sen!2slk!4v1626787671196!5m2!1sen!2slk"
@@ -168,7 +168,7 @@ const Contact = () => {
               onLoad={() => setMapLoaded(true)}
               title="DexLanka Office Location"
             ></iframe>
-            
+
             {/* Map Location Pin */}
             <div className="absolute top-4 right-4">
               <a
@@ -184,7 +184,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-      
+
       {/* FAQ Section */}
       <section className="py-20 bg-darkBlue">
         <div className="container mx-auto px-6">
@@ -195,7 +195,7 @@ const Contact = () => {
               Find answers to common questions about our contact and consultation process.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
               {
@@ -229,7 +229,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
-      
+
       <Footer />
     </div>
   );
