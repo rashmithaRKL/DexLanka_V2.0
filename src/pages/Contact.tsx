@@ -158,7 +158,7 @@ const Contact = () => {
 
             {/* Google Map Iframe */}
             <iframe
-              src="ttps://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.481774934834!2d80.04007167574686!3d6.832692793165292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253a3d37ac853%3A0x88205e1a91e6c19b!2sRK%20Software%20Technologies!5e0!3m2!1sen!2slk!4v1745960780817!5m2!1sen!2slk"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.481774934834!2d80.04007167574686!3d6.832692793165292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae253a3d37ac853%3A0x88205e1a91e6c19b!2sRK%20Software%20Technologies!5e0!3m2!1sen!2slk!4v1745960780817!5m2!1sen!2slk"
               width="100%"
               height="100%"
               style={{ border: 0 }}
