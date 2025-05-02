@@ -131,6 +131,9 @@ export default {
 				'neon': '0 0 5px theme(colors.dexRed), 0 0 20px rgba(234, 56, 76, 0.2)',
 				'soft': '0 10px 25px -5px rgba(0, 0, 0, 0.05)',
 			},
+			maxHeight: {
+				'96': '24rem', // or use arbitrary value directly like 'max-h-[500px]'
+			},
 		},
 	},
 	plugins: [require("tailwindcss-animate")],
