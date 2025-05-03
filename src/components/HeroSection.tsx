@@ -11,7 +11,7 @@ const generateBubbles = () => {
     size: Math.random() * 60 + 20,
     left: Math.random() * 100,
     delay: Math.random() * 5,
-    duration: Math.random() * 8 + 2,
+    duration: Math.random() * 2 + 2,
   }));
 };
 const HeroSection: React.FC = () => {
