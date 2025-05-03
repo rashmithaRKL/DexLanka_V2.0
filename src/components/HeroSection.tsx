@@ -41,7 +41,7 @@ const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: 0.5, y: -300 }}
           transition={{ duration: bubble.duration, delay: bubble.delay, repeat: Infinity, repeatType: "loop" }}
-          className="absolute bg-white/50 rounded-full backdrop-blur-md"
+          className="absolute bg-white/10 rounded-full backdrop-blur-md"
           style={{
             width: `${bubble.size}px`,
             height: `${bubble.size}px`,
