@@ -132,7 +132,7 @@ export default {
 				'soft': '0 10px 25px -5px rgba(0, 0, 0, 0.05)',
 			},
 			maxHeight: {
-				'96': '36rem', // or use arbitrary value directly like 'max-h-[500px]'
+				'96': '50rem', // or use arbitrary value directly like 'max-h-[500px]'
 			},
 		},
 	},
