@@ -10,7 +10,7 @@ const generateBubbles = () => {
     id: index,
     size: Math.random() * 60 + 20,
     left: Math.random() * 100,
-    delay: Math.random() * 8,
+    delay: Math.random() * 5,
     duration: Math.random() * 8 + 2,
   }));
 };
