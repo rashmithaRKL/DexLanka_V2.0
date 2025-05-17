@@ -63,10 +63,10 @@ const StatsSection = () => {
     <section className="py-16 px-6 bg-card/50">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
-          <Stat value={5} label="Years Experience" suffix="+" />
-          <Stat value={48} label="Projects Completed" suffix="+" />
-          <Stat value={36} label="Happy Clients" suffix="+" />
-          <Stat value={9} label="Team Experts" suffix="+" />
+          <Stat value={3} label="Years Experience" suffix="+" />
+          <Stat value={12} label="Projects Completed" suffix="+" />
+          <Stat value={10} label="Happy Clients" suffix="+" />
+          <Stat value={2} label="Team Experts" suffix="+" />
         </div>
       </div>
     </section>
