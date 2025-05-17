@@ -30,7 +30,7 @@ const About = () => {
       name: 'Tharushi Nethmini',
       position: 'UI/UX Director, Developer',
       image: FrontEndDev,
-      bio: 'Tharushi leads our technical team with over 12 years of experience in software development and architecture.',
+      bio: 'Tharushi leads our technical team with over 3 years of experience in software development and architecture.',
     },
   ];
 
