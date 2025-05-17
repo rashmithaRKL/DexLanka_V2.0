@@ -92,9 +92,9 @@ const About = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10 text-center">
             {[
               { number: 3, label: 'Years of Excellence' },
-              { number: 33, suffix: '+', label: 'Projects Delivered' },
-              { number: 21, suffix: '+', label: 'Happy Clients' },
-              { number: 6, label: 'Team Members' },
+              { number: 12, suffix: '+', label: 'Projects Delivered' },
+              { number: 10, suffix: '+', label: 'Happy Clients' },
+              { number: 2, label: 'Team Members' },
             ].map((stat, index) => (
               <div key={index} className="glass p-6 rounded-2xl">
                 <div className="text-4xl md:text-5xl font-bold text-white mb-2 flex items-baseline justify-center">
