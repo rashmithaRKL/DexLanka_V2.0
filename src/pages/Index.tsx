@@ -63,9 +63,9 @@ const Index = () => {
 
   const stats = [
     { number: 3, suffix: '+', label: 'Years Experience' },
-    { number: 33, suffix: '+', label: 'Projects Completed' },
-    { number: 21, suffix: '+', label: 'Happy Clients' },
-    { number: 6, suffix: '+', label: 'Team Experts' },
+    { number: 12, suffix: '+', label: 'Projects Completed' },
+    { number: 10, suffix: '+', label: 'Happy Clients' },
+    { number: 2, suffix: '+', label: 'Team Experts' },
   ];
 
   const testimonials = [
