@@ -35,56 +35,7 @@ const App = () => {
             <Route path="/services" element={<Services />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/gallery" element={<Gallery />} />import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, Suspense, lazy } from "react";
-import ScrollToTop from "./components/ScrollToTop";
-
-// Lazy loaded pages
-const Index = lazy(() => import("./pages/Index"));
-const About = lazy(() => import("./pages/About"));
-const Services = lazy(() => import("./pages/Services"));
-const Packages = lazy(() => import("./pages/Packages"));
-const Contact = lazy(() => import("./pages/Contact"));
-const Gallery = lazy(() => import("./pages/Gallery"));
-const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
-const ProjectView = lazy(() => import("./pages/ProjectView"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-
-const App = () => {
-  const [queryClient] = useState(() => new QueryClient());
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/packages" element={<Packages />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/project/:id" element={<ProjectDetail />} />
-              <Route path="/project-view" element={<ProjectView />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-};
-
-export default App;
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/project/:id" element={<ProjectDetail />} />
 {/*             <Route path="/project-view" element={<ProjectView />} /> */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
