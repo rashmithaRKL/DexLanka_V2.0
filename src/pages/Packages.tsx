@@ -8,18 +8,14 @@ import { useInView } from 'react-intersection-observer';
 import { CheckCircle, XCircle } from 'lucide-react';
 
 const Packages = () => {
-  const [comparisonRef, comparisonInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-  
+  const [comparisonRef, comparisonInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [currentTab, setCurrentTab] = useState('websites');
 
   const packages = {
     websites: [
       {
         title: 'One-Page Website',
-        price: '$25',
+        price: '$599',
         description: 'Perfect for landing pages or simple business sites',
         features: [
           'One-page responsive design',
@@ -32,10 +28,10 @@ const Packages = () => {
       },
       {
         title: '5-Page Website',
-        price: '$60',
+        price: '$1,499',
         description: 'Ideal for small businesses and personal brands',
         features: [
-          '5 custom-designed pages',
+          '5 custom designed pages',
           'Responsive design for all devices',
           'Contact form & Google Maps',
           'Basic SEO optimization',
@@ -46,7 +42,7 @@ const Packages = () => {
       },
       {
         title: '10+ Page Website',
-        price: '$100',
+        price: '$2,999',
         description: 'Comprehensive solution for established businesses',
         features: [
           '10 or more custom pages',
@@ -63,7 +59,7 @@ const Packages = () => {
     applications: [
       {
         title: 'Web Application',
-        price: '$65',
+        price: '$5,999',
         description: 'Custom web application with advanced functionality',
         features: [
           'Custom user accounts',
@@ -78,7 +74,7 @@ const Packages = () => {
       },
       {
         title: 'E-Commerce Website',
-        price: '$100',
+        price: '$7,999',
         description: 'Complete online store with all necessary features',
         features: [
           'Product catalog with categories',
@@ -94,7 +90,7 @@ const Packages = () => {
       },
       {
         title: 'Desktop Application',
-        price: '$200',
+        price: '$8,999',
         description: 'Native desktop application for Windows/Mac/Linux',
         features: [
           'Cross-platform compatibility',
@@ -111,7 +107,7 @@ const Packages = () => {
     mobile: [
       {
         title: 'Simple Mobile App',
-        price: '$30',
+        price: '$7,499',
         description: 'Basic mobile application for iOS or Android',
         features: [
           'Up to 5 screens/features',
@@ -125,7 +121,7 @@ const Packages = () => {
       },
       {
         title: 'Advanced Mobile App',
-        price: '$80',
+        price: '$12,999',
         description: 'Feature-rich application for iOS and Android',
         features: [
           'Cross-platform (iOS & Android)',
@@ -141,7 +137,7 @@ const Packages = () => {
       },
       {
         title: 'E-Commerce Mobile App',
-        price: '$150',
+        price: '$15,999',
         description: 'Complete shopping experience for mobile users',
         features: [
           'Product catalog and search',
@@ -205,7 +201,7 @@ const Packages = () => {
       {
         feature: 'User Accounts',
         onePage: false,
-        fivePage: 'Optional',
+        fivePage: false,
         tenPage: 'Optional',
         webApp: true,
         eCommerce: true,
@@ -213,7 +209,7 @@ const Packages = () => {
       {
         feature: 'Payment Processing',
         onePage: false,
-        fivePage: false,
+        fivePage: 'Optional',
         tenPage: 'Optional',
         webApp: 'Optional',
         eCommerce: true,
@@ -228,7 +224,7 @@ const Packages = () => {
       },
       {
         feature: 'Revisions Included',
-        onePage: '5',
+        onePage: '1',
         fivePage: '2',
         tenPage: '3',
         webApp: '3',
@@ -236,11 +232,11 @@ const Packages = () => {
       },
       {
         feature: 'Support Period',
-        onePage: '2 days',
-        fivePage: '4 days',
-        tenPage: '1 week',
-        webApp: '1 month',
-        eCommerce: '1-2 months',
+        onePage: '1 month',
+        fivePage: '3 months',
+        tenPage: '3 months',
+        webApp: '6 months',
+        eCommerce: '12 months',
       },
     ],
   };
@@ -248,180 +244,87 @@ const Packages = () => {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="pt-36 pb-20 bg-darkBlue">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <AnimatedText
-              text="Our Packages"
-              animation="slide-up"
-              className="inline-block text-xl text-dexRed font-medium mb-4"
-            />
-            <AnimatedText
-              text="Choose the Perfect Package"
-              animation="slide-up"
-              delay={100}
-              className="text-4xl md:text-5xl font-bold mb-6"
-            />
-            <AnimatedText
-              text="We offer a range of packages to suit different business needs and budgets. Each package is designed to deliver maximum value and can be customized to your specific requirements."
-              animation="slide-up"
-              delay={200}
-              className="text-gray-300 text-lg"
-            />
+            <AnimatedText text="Our Packages" animation="slide-up" className="inline-block text-xl text-dexRed font-medium mb-4" />
+            <AnimatedText text="Choose the Perfect Package" animation="slide-up" delay={100} className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" />
+            <AnimatedText text="We offer a range of packages to suit different business needs and budgets..." animation="slide-up" delay={200} className="text-gray-300 text-base sm:text-lg" />
           </div>
         </div>
       </section>
-      
+
       {/* Packages Tabs */}
-      <section className="section-padding">
-        <div className="container mx-auto px-6">
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="flex justify-center mb-12">
-            <div className="inline-flex glass rounded-lg p-1">
-              {[
-                { id: 'websites', label: 'Websites' },
-                { id: 'applications', label: 'Applications' },
-                { id: 'mobile', label: 'Mobile Apps' },
-                { id: 'enterprise', label: 'Enterprise' },
-              ].map((tab) => (
+            <div className="inline-flex glass rounded-lg p-1 flex-wrap gap-2 justify-center">
+              {[{ id: 'websites', label: 'Websites' }, { id: 'applications', label: 'Applications' }, { id: 'mobile', label: 'Mobile Apps' }, { id: 'enterprise', label: 'Enterprise' }].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setCurrentTab(tab.id)}
-                  className={`px-6 py-3 rounded-lg font-medium transition-all ${
-                    currentTab === tab.id
-                      ? 'bg-dexRed text-white'
-                      : 'text-gray-300 hover:text-white'
-                  }`}
+                  className={`px-6 py-3 rounded-lg font-medium transition-all text-sm sm:text-base ${currentTab === tab.id ? 'bg-dexRed text-white' : 'text-gray-300 hover:text-white'}`}
                 >
                   {tab.label}
                 </button>
               ))}
             </div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {packages[currentTab as keyof typeof packages].map((pkg, index) => (
-              <PackageCard
-                key={index}
-                title={pkg.title}
-                price={pkg.price}
-                description={pkg.description}
-                features={pkg.features}
-                isPopular={pkg.isPopular}
-                delay={index}
-              />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {packages[currentTab].map((pkg, index) => (
+              <PackageCard key={index} {...pkg} delay={index} />
             ))}
           </div>
-          
+
           <div className="text-center mt-16">
-            <p className="text-gray-300 mb-6">
-              Don't see a package that fits your needs? We offer custom solutions tailored to your specific requirements.
-            </p>
-            <a
-              href="/contact"
-              className="inline-block px-8 py-4 border border-dexRed text-dexRed rounded-lg font-medium hover:bg-dexRed/10 transition-colors"
-            >
+            <p className="text-gray-300 mb-6">Don't see a package that fits your needs? We offer custom solutions.</p>
+            <a href="/contact" className="inline-block px-6 py-3 border border-dexRed text-dexRed rounded-lg text-sm sm:text-base hover:bg-dexRed/10 transition-colors">
               Request Custom Quote
             </a>
           </div>
         </div>
       </section>
-      
+
       {/* Comparison Table */}
-      <section ref={comparisonRef} className="section-padding bg-darkBlue">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+      <section ref={comparisonRef} className="py-16 px-4 sm:px-6 lg:px-8 bg-darkBlue">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="inline-block text-xl text-dexRed font-medium mb-4">Package Comparison</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Compare Our Website Packages</h2>
-            <p className="text-gray-300">
-              See which package is right for your business with our detailed comparison.
-              Each package is designed to provide the features you need at different stages of your business.
-            </p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">Compare Our Website Packages</h2>
+            <p className="text-gray-300 text-sm sm:text-base">See which package is right for your business...</p>
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={comparisonInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.7 }}
             className="overflow-x-auto glass rounded-2xl"
           >
-            <table className="min-w-full">
+            <table className="min-w-full text-sm sm:text-base">
               <thead>
                 <tr>
-                  {comparisonData.headers.map((header, index) => (
-                    <th
-                      key={index}
-                      className={`px-6 py-4 text-left text-sm font-semibold ${
-                        index === 0 ? 'text-white' : 'text-dexRed'
-                      } border-b border-gray-800`}
-                    >
+                  {comparisonData.headers.map((header, i) => (
+                    <th key={i} className={`px-4 py-3 text-left font-semibold ${i === 0 ? 'text-white' : 'text-dexRed'} border-b border-gray-800 whitespace-nowrap`}>
                       {header}
                     </th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {comparisonData.rows.map((row, rowIndex) => (
-                  <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-dark-800/30' : ''}>
-                    <td className="px-6 py-4 text-white font-medium border-b border-gray-800">
-                      {row.feature}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-800">
-                      {typeof row.onePage === 'boolean' ? (
-                        row.onePage ? (
-                          <CheckCircle size={20} className="text-dexRed" />
+                {comparisonData.rows.map((row, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-dark-800/30' : ''}>
+                    {['feature', 'onePage', 'fivePage', 'tenPage', 'webApp', 'eCommerce'].map((key, j) => (
+                      <td key={j} className="px-4 py-3 border-b border-gray-800">
+                        {typeof row[key] === 'boolean' ? (
+                          row[key] ? <CheckCircle size={18} className="text-dexRed" /> : <XCircle size={18} className="text-gray-600" />
                         ) : (
-                          <XCircle size={20} className="text-gray-600" />
-                        )
-                      ) : (
-                        <span className="text-gray-300">{row.onePage}</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-800">
-                      {typeof row.fivePage === 'boolean' ? (
-                        row.fivePage ? (
-                          <CheckCircle size={20} className="text-dexRed" />
-                        ) : (
-                          <XCircle size={20} className="text-gray-600" />
-                        )
-                      ) : (
-                        <span className="text-gray-300">{row.fivePage}</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-800">
-                      {typeof row.tenPage === 'boolean' ? (
-                        row.tenPage ? (
-                          <CheckCircle size={20} className="text-dexRed" />
-                        ) : (
-                          <XCircle size={20} className="text-gray-600" />
-                        )
-                      ) : (
-                        <span className="text-gray-300">{row.tenPage}</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-800">
-                      {typeof row.webApp === 'boolean' ? (
-                        row.webApp ? (
-                          <CheckCircle size={20} className="text-dexRed" />
-                        ) : (
-                          <XCircle size={20} className="text-gray-600" />
-                        )
-                      ) : (
-                        <span className="text-gray-300">{row.webApp}</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-4 border-b border-gray-800">
-                      {typeof row.eCommerce === 'boolean' ? (
-                        row.eCommerce ? (
-                          <CheckCircle size={20} className="text-dexRed" />
-                        ) : (
-                          <XCircle size={20} className="text-gray-600" />
-                        )
-                      ) : (
-                        <span className="text-gray-300">{row.eCommerce}</span>
-                      )}
-                    </td>
+                          <span className="text-gray-300">{row[key]}</span>
+                        )}
+                      </td>
+                    ))}
                   </tr>
                 ))}
               </tbody>
@@ -429,86 +332,8 @@ const Packages = () => {
           </motion.div>
         </div>
       </section>
-      
-      {/* FAQ Section */}
-      <section className="section-padding">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="inline-block text-xl text-dexRed font-medium mb-4">FAQs</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Frequently Asked Questions</h2>
-            <p className="text-gray-300">
-              Find answers to common questions about our packages and services.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {[
-              {
-                question: "How long does it take to complete a website?",
-                answer: "Completion times vary by project complexity. A one-page website typically takes 1-2 weeks, a 5-page site 3-4 weeks, and larger projects 6-12 weeks. We'll provide a specific timeline during our initial consultation."
-              },
-              {
-                question: "Do you offer ongoing maintenance?",
-                answer: "Yes, we offer maintenance packages to keep your website secure, updated, and performing optimally. These can be purchased separately or added to your initial package."
-              },
-              {
-                question: "What payment methods do you accept?",
-                answer: "We accept credit cards, bank transfers, and PayPal. For most projects, we require a 50% deposit to begin work, with the remainder due upon completion."
-              },
-              {
-                question: "Can you help with content creation?",
-                answer: "Yes, we offer content creation services including copywriting, photography, and video production as add-ons to our packages. Ask about our content creation services during consultation."
-              },
-              {
-                question: "Do you offer hosting services?",
-                answer: "Yes, we provide reliable hosting solutions for all our web projects. Our hosting includes regular backups, security monitoring, and technical support."
-              },
-              {
-                question: "Can I upgrade my package later?",
-                answer: "Absolutely! We design our solutions to be scalable. You can start with a basic package and upgrade as your business grows and your needs evolve."
-              }
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass p-8 rounded-2xl"
-              >
-                <h3 className="text-xl font-semibold mb-4">{faq.question}</h3>
-                <p className="text-gray-300">{faq.answer}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Call to Action */}
-      <section className="py-24 bg-gradient-to-b from-darkBlue to-background">
-        <div className="container mx-auto px-6">
-          <div className="glass p-12 rounded-2xl text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
-            <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-              Contact us today to discuss your project requirements and find the perfect package for your business.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="/contact"
-                className="px-8 py-4 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
-              >
-                Contact Us
-              </a>
-              <a
-                href="/services"
-                className="px-8 py-4 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-all"
-              >
-                Explore Services
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      
+
+      {/* Footer */}
       <Footer />
     </div>
   );
