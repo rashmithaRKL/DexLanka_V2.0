@@ -224,11 +224,11 @@ const Packages = () => {
       },
       {
         feature: 'Revisions Included',
-        onePage: '5',
-        fivePage: '2',
-        tenPage: '3',
-        webApp: '3',
-        eCommerce: '3',
+        onePage: 'Unlimited',
+        fivePage: 'Unlimited',
+        tenPage: 'Unlimited',
+        webApp: 'Unlimited',
+        eCommerce: 'Unlimited',
       },
       {
         feature: 'Support Period',
