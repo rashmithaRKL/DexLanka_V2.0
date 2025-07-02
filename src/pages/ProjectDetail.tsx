@@ -36,14 +36,30 @@ const ProjectDetail = () => {
     // Simulate loading for 1.5 seconds
     setTimeout(() => {
       setDemoLoading(false);
-      toast({
-        title: "Demo Launched",
-        description: `${project?.title} demo is now running in a new tab`,
-      });
-      // Open a demo URL in a new tab
-      window.open(`https://rashmitharkl.github.io/tranquil_haven/${id}`, '_blank');
+
+      if (project?.liveDemoUrl) {
+        toast({
+          title: "Demo Launched",
+          description: `${project?.title} demo is now running in a new tab`,
+        });
+        window.open(project.liveDemoUrl, '_blank');
+      } else {
+        toast({
+          title: "Demo Not Available",
+          description: "This project doesn't have a live demo link yet.",
+        });
+      }
     }, 1500);
   };
+      
+  //     toast({
+  //       title: "Demo Launched",
+  //       description: `${project?.title} demo is now running in a new tab`,
+  //     });
+  //     // Open a demo URL in a new tab
+  //     window.open(`https://example.com/demo/${id}`, '_blank');
+  //   }, 1500);
+  // };
 
   if (!project) {
     return (
