@@ -29,6 +29,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Book,
+    liveDemoUrl:  "https://github.com/rashmithaRKL/booksmith_interactive",
     description: "A professional and elegant website designed to showcase creative writing and development services."
   },
 
@@ -37,6 +38,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Hotel,
+    liveDemoUrl:  "https://lovable.dev/projects/7e18ce90-5567-473b-b99d-da5a0b8db92d",
     description: "A stylish and modern website designed to showcase culinary artistry and dining experiences."
   },
   {
