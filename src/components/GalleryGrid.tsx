@@ -29,7 +29,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Book,
-    liveDemoUrl:  "https://github.com/rashmithaRKL/booksmith_interactive",
+    liveDemoUrl:  "https://rashmitharkl.github.io/booksmith_interactive/",
     description: "A professional and elegant website designed to showcase creative writing and development services."
   },
 
@@ -54,7 +54,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Tech,
-    liveDemoUrl: "https://lovable.dev/projects/ecf2b682-867d-484c-be53-2a8e704d15d7",
+    // liveDemoUrl: "#",
     description:"Modern, responsive website showcasing the latest in tech innovation."
   },
   {
@@ -62,7 +62,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Food,
-    liveDemoUrl: "https://lovable.dev/projects/7e18ce90-5567-473b-b99d-da5a0b8db92d",
+    liveDemoUrl: "https://rashmitharkl.github.io/delectable/",
     description:"Elegant and responsive website designed to elevate the dining experience online."
   },
   {
@@ -79,7 +79,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Design,
-    liveDemoUrl: "https://lovable.dev/projects/39be042e-7aee-489f-9071-e0384048cc9f",
+    liveDemoUrl: "https://rashmitharkl.github.io/flourishify/",
     description: "A sleek and modern website platform designed to deliver intuitive UI and seamless user experience."
   },
 
@@ -88,7 +88,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Com,
-    liveDemoUrl: "https://lovable.dev/projects/51ee2c42-6966-4723-abae-e6de28ebbfc9",
+    liveDemoUrl: "https://rashmitharkl.github.io/pixel-store/",
     description: "Modern website built with cutting-edge technologies for optimal user experience."
   },
 
@@ -97,7 +97,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Create,
-    liveDemoUrl: "https://lovable.dev/projects/1a132eb7-3b96-4c8c-984e-beab91946298",
+    liveDemoUrl: "https://rashmitharkl.github.io/Content/",
     description: "A professional content-focused web platform designed to turn ideas into impactful digital experiences."
   },
 
