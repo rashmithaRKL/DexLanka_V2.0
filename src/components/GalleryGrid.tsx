@@ -70,7 +70,7 @@ export const galleryItems: GalleryItem[] = [
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Pixel,
-     liveDemoUrl: "https://rashmitharkl.github.io/PixelGenius/",
+     // liveDemoUrl: "https://rashmitharkl.github.io/PixelGenius/",
     description: "A modern, responsive website designed to showcase engaging content with intuitive user interface."
   },
 
