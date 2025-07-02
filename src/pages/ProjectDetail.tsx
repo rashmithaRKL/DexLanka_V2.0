@@ -41,7 +41,7 @@ const ProjectDetail = () => {
         description: `${project?.title} demo is now running in a new tab`,
       });
       // Open a demo URL in a new tab
-      window.open(`https://example.com/demos/${id}`, '_blank');
+      window.open(`https://rashmitharkl.github.io/tranquil_haven/${id}`, '_blank');
     }, 1500);
   };
 
