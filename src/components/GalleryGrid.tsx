@@ -34,7 +34,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 1,
+    id: 2,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Hotel,
@@ -42,7 +42,7 @@ export const galleryItems: GalleryItem[] = [
     description: "A stylish and modern website designed to showcase culinary artistry and dining experiences."
   },
   {
-    id: 1,
+    id: 3,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Resort,
@@ -50,7 +50,7 @@ export const galleryItems: GalleryItem[] = [
     description: "A refined website crafted to highlight luxury stays and exceptional guest experiences."
   },
   {
-    id: 1,
+    id: 4,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Tech,
@@ -58,7 +58,7 @@ export const galleryItems: GalleryItem[] = [
     description:"Modern, responsive website showcasing the latest in tech innovation."
   },
   {
-    id: 1,
+    id: 5,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Food,
@@ -66,7 +66,7 @@ export const galleryItems: GalleryItem[] = [
     description:"Elegant and responsive website designed to elevate the dining experience online."
   },
   {
-    id: 1,
+    id: 6,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Pixel,
@@ -75,7 +75,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 1,
+    id: 7,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Design,
@@ -84,7 +84,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 1,
+    id: 8,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Com,
@@ -93,7 +93,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 1,
+    id: 9,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Create,
@@ -106,35 +106,35 @@ export const galleryItems: GalleryItem[] = [
  
   
   {
-    id: 2,
+    id: 10,
     title: "Mobile E-Commerce App",
     category: "Mobile Applications",
     imageUrl: "/placeholder.svg",
     description: "Native and cross-platform mobile app for iOS and Android with custom experience."
   },
   {
-    id: 3,
+    id: 11,
     title: "Dashboard UX Design",
     category: "UI/UX Design",
     imageUrl: "/placeholder.svg",
     description: "User-centric design solution that elevates product quality with intuitive navigation."
   },
   {
-    id: 4,
+    id: 12,
     title: "Online Marketplace",
     category: "E-Commerce",
     imageUrl: "/placeholder.svg",
     description: "Custom online store and marketplace solutions to boost revenue."
   },
   {
-    id: 5,
+    id: 13,
     title: "Enterprise Management System",
     category: "Desktop Applications",
     imageUrl: "/placeholder.svg",
     description: "High-performance desktop application for Windows and MacOS platforms."
   },
   {
-    id: 6,
+    id: 14,
     title: "SEO & Marketing Campaign",
     category: "Digital Marketing",
     imageUrl: "/placeholder.svg",
