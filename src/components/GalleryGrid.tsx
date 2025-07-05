@@ -26,8 +26,8 @@ export const galleryItems: GalleryItem[] = [
   
   {
     id: 1,
-    title: "Web Development Platform",
-    category: "Web Development",
+    title: "Scriptoria",
+    category: "Web Development Literary Masterpieces",
     imageUrl: Book,
     liveDemoUrl:  "https://rashmitharkl.github.io/booksmith_interactive/",
     description: "A professional and elegant website designed to showcase creative writing and development services."
@@ -35,7 +35,7 @@ export const galleryItems: GalleryItem[] = [
 
   {
     id: 2,
-    title: "Web Development Platform",
+    title: "Delectable Restaurant",
     category: "Web Development",
     imageUrl: Hotel,
     liveDemoUrl:  "https://rashmitharkl.github.io/delectable/",
@@ -43,7 +43,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 3,
-    title: "Web Development Platform",
+    title: "Tranquil Haven Resort",
     category: "Web Development",
     imageUrl: Resort,
     liveDemoUrl: "https://rashmitharkl.github.io/tranquil_haven/",
@@ -51,23 +51,23 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: 4,
-    title: "Web Development Platform",
+    title: "Tech Venture",
     category: "Web Development",
     imageUrl: Tech,
     // liveDemoUrl: "#",
     description:"Modern, responsive website showcasing the latest in tech innovation."
   },
-  {
-    id: 5,
-    title: "Web Development Platform",
-    category: "Web Development",
-    imageUrl: Food,
-    liveDemoUrl: "https://rashmitharkl.github.io/delectable/",
-    description:"Elegant and responsive website designed to elevate the dining experience online."
-  },
+  // {
+  //   id: 5,
+  //   title: "Web Development Platform",
+  //   category: "Web Development",
+  //   imageUrl: Food,
+  //   liveDemoUrl: "https://rashmitharkl.github.io/delectable/",
+  //   description:"Elegant and responsive website designed to elevate the dining experience online."
+  // },
   {
     id: 6,
-    title: "Web Development Platform",
+    title: "Pixel Genius",
     category: "Web Development",
     imageUrl: Pixel,
      // liveDemoUrl: "https://rashmitharkl.github.io/PixelGenius/",
@@ -76,7 +76,7 @@ export const galleryItems: GalleryItem[] = [
 
   {
     id: 7,
-    title: "Web Development Platform",
+    title: "Pulchr Design ",
     category: "Web Development",
     imageUrl: Design,
     liveDemoUrl: "https://rashmitharkl.github.io/flourishify/",
@@ -85,21 +85,21 @@ export const galleryItems: GalleryItem[] = [
 
   {
     id: 8,
-    title: "Web Development Platform",
+    title: "Tech Pulse Computers",
     category: "Web Development",
     imageUrl: Com,
     liveDemoUrl: "https://rashmitharkl.github.io/pixel-store/",
     description: "Modern website built with cutting-edge technologies for optimal user experience."
   },
 
-  {
-    id: 9,
-    title: "Web Development Platform",
-    category: "Web Development",
-    imageUrl: Create,
-    liveDemoUrl: "https://rashmitharkl.github.io/Content/",
-    description: "A professional content-focused web platform designed to turn ideas into impactful digital experiences."
-  },
+  // {
+  //   id: 9,
+  //   title: "Web Development Platform",
+  //   category: "Web Development",
+  //   imageUrl: Create,
+  //   liveDemoUrl: "https://rashmitharkl.github.io/Content/",
+  //   description: "A professional content-focused web platform designed to turn ideas into impactful digital experiences."
+  // },
 
  
 
