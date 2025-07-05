@@ -3,6 +3,7 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { ExternalLink, Image as ImageIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Art from '../assets/images/image.png';
 import Book from '../assets/images/book.png';
 import Tech from '../assets/images/tech.png';
 import Hotel from '../assets/images/hotel.png';
@@ -57,14 +58,14 @@ export const galleryItems: GalleryItem[] = [
     // liveDemoUrl: "#",
     description:"Modern, responsive website showcasing the latest in tech innovation."
   },
-  // {
-  //   id: 5,
-  //   title: "Web Development Platform",
-  //   category: "Web Development",
-  //   imageUrl: Food,
-  //   liveDemoUrl: "https://rashmitharkl.github.io/delectable/",
-  //   description:"Elegant and responsive website designed to elevate the dining experience online."
-  // },
+  {
+    id: 5,
+    title: "Art Gallery",
+    category: "Web Development",
+    imageUrl: Art,
+    liveDemoUrl: "https://rashmitharkl.github.io/Art-Gallery/",
+    description:"Elegant and responsive website designed to elevate the dining experience online."
+  },
   {
     id: 6,
     title: "Pixel Genius",
