@@ -34,7 +34,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 2,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Hotel,
@@ -42,7 +42,7 @@ export const galleryItems: GalleryItem[] = [
     description: "A stylish and modern website designed to showcase culinary artistry and dining experiences."
   },
   {
-    id: 3,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Resort,
@@ -50,7 +50,7 @@ export const galleryItems: GalleryItem[] = [
     description: "A refined website crafted to highlight luxury stays and exceptional guest experiences."
   },
   {
-    id: 4,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Tech,
@@ -58,7 +58,7 @@ export const galleryItems: GalleryItem[] = [
     description:"Modern, responsive website showcasing the latest in tech innovation."
   },
   {
-    id: 5,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Food,
@@ -66,7 +66,7 @@ export const galleryItems: GalleryItem[] = [
     description:"Elegant and responsive website designed to elevate the dining experience online."
   },
   {
-    id: 6,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Pixel,
@@ -75,7 +75,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 7,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Design,
@@ -84,7 +84,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 8,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Com,
@@ -93,7 +93,7 @@ export const galleryItems: GalleryItem[] = [
   },
 
   {
-    id: 9,
+    id: 1,
     title: "Web Development Platform",
     category: "Web Development",
     imageUrl: Create,
