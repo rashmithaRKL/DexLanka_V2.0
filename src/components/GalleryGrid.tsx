@@ -3,6 +3,7 @@ import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
 import { ExternalLink, Image as ImageIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Note from '../assets/images/Note.png';
 import Art from '../assets/images/image.png';
 import Fast from '../assets/images/fast.png';
 import Book from '../assets/images/book.png';
@@ -109,9 +110,9 @@ export const galleryItems: GalleryItem[] = [
   
   {
     id: 10,
-    title: "Mobile E-Commerce App",
+    title: "Note Tacking App",
     category: "Mobile Applications",
-    imageUrl: "/placeholder.svg",
+    imageUrl: Note,
     description: "Native and cross-platform mobile app for iOS and Android with custom experience."
   },
   {
