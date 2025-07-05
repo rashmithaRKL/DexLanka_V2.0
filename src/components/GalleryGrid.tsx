@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { ExternalLink, Image as ImageIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Art from '../assets/images/image.png';
+import Fast from '../assets/images/fast.png';
 import Book from '../assets/images/book.png';
 import Tech from '../assets/images/tech.png';
 import Hotel from '../assets/images/hotel.png';
@@ -93,14 +94,14 @@ export const galleryItems: GalleryItem[] = [
     description: "Modern website built with cutting-edge technologies for optimal user experience."
   },
 
-  // {
-  //   id: 9,
-  //   title: "Web Development Platform",
-  //   category: "Web Development",
-  //   imageUrl: Create,
-  //   liveDemoUrl: "https://rashmitharkl.github.io/Content/",
-  //   description: "A professional content-focused web platform designed to turn ideas into impactful digital experiences."
-  // },
+  {
+    id: 9,
+    title: "Fast Guard",
+    category: "Web Development",
+    imageUrl: Fast,
+    liveDemoUrl: "https://win1.dragonsof.com/",
+    description: "A professional content-focused web platform designed to turn ideas into impactful digital experiences."
+  },
 
  
 
