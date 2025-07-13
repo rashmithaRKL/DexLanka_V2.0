@@ -30,8 +30,8 @@ const Footer: React.FC = () => {
               <a href="https://www.instagram.com/dex_lanka/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Instagram">
                 <Instagram size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/rashmitha-kalhara/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="LinkedIn">
-                <Linkedin size={20} />
+              <a href="https://www.youtube.com/@Rashmitha_RK" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="YouTube">
+                <Youtube size={20} />
               </a>
             </div>
           </div>
