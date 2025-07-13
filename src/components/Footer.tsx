@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                 <Instagram size={20} />
               </a>
               <a href="https://www.youtube.com/@Rashmitha_RK" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="YouTube">
-                <Youtube size={20} />
+                <Instagram size={20} />
               </a>
             </div>
           </div>
