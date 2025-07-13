@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { ArrowRight, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
                 <Instagram size={20} />
               </a>
               <a href="https://www.youtube.com/@Rashmitha_RK" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="YouTube">
-                <Instagram size={20} />
+                <Youtube size={20} />
               </a>
             </div>
           </div>
