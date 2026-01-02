@@ -6,25 +6,28 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Plus, X } from 'lucide-react';
-import { createPackage } from '@/lib/api';
+import { Plus, X, Edit } from 'lucide-react';
+import { createPackage, updatePackage } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
+import type { Package } from '@/lib/supabase';
 
 interface AddPackageModalProps {
   onPackageAdded: () => void;
+  package?: Package | null;
+  mode?: 'add' | 'edit';
 }
 
-const AddPackageModal: React.FC<AddPackageModalProps> = ({ onPackageAdded }) => {
+const AddPackageModal: React.FC<AddPackageModalProps> = ({ onPackageAdded, package: pkg = null, mode = 'add' }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    price: '',
-    description: '',
-    features: [] as string[],
-    category: '' as 'websites' | 'applications' | 'mobile' | 'enterprise',
-    is_popular: false,
-    order_index: 0
+    title: pkg?.title || '',
+    price: pkg?.price || '',
+    description: pkg?.description || '',
+    features: pkg?.features || [],
+    category: (pkg?.category || 'websites') as 'websites' | 'applications' | 'mobile' | 'enterprise',
+    is_popular: pkg?.is_popular || false,
+    order_index: pkg?.order_index || 0
   });
   const [newFeature, setNewFeature] = useState('');
   const { toast } = useToast();
@@ -41,26 +44,25 @@ const AddPackageModal: React.FC<AddPackageModalProps> = ({ onPackageAdded }) => 
     setLoading(true);
 
     try {
-      await createPackage(formData);
-      toast({
-        title: "Success",
-        description: "Package created successfully!",
-      });
+      if (mode === 'edit' && pkg) {
+        await updatePackage(pkg.id, formData);
+        toast({
+          title: "Success",
+          description: "Package updated successfully!",
+        });
+      } else {
+        await createPackage(formData);
+        toast({
+          title: "Success",
+          description: "Package created successfully!",
+        });
+      }
       setOpen(false);
-      setFormData({
-        title: '',
-        price: '',
-        description: '',
-        features: [],
-        category: 'websites',
-        is_popular: false,
-        order_index: 0
-      });
       onPackageAdded();
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to create package. Please try again.",
+        description: `Failed to ${mode === 'edit' ? 'update' : 'create'} package. Please try again.`,
         variant: "destructive",
       });
     } finally {
@@ -88,16 +90,15 @@ const AddPackageModal: React.FC<AddPackageModalProps> = ({ onPackageAdded }) => 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-dexRed hover:bg-dexRed/90">
-          <Plus className="mr-2 h-4 w-4" />
-          Add Package
+        <Button className="bg-dexRed hover:bg-dexRed/90" size={mode === 'edit' ? 'sm' : 'default'} variant={mode === 'edit' ? 'outline' : 'default'}>
+          {mode === 'edit' ? <Edit className="h-3 w-3" /> : <><Plus className="mr-2 h-4 w-4" />Add Package</>}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-white">Add New Package</DialogTitle>
+          <DialogTitle className="text-white">{mode === 'edit' ? 'Edit Package' : 'Add New Package'}</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -110,7 +111,7 @@ const AddPackageModal: React.FC<AddPackageModalProps> = ({ onPackageAdded }) => 
                 required
               />
             </div>
-            
+
             <div>
               <Label htmlFor="price" className="text-gray-300">Price</Label>
               <Input
@@ -189,7 +190,7 @@ const AddPackageModal: React.FC<AddPackageModalProps> = ({ onPackageAdded }) => 
                 min="0"
               />
             </div>
-            
+
             <div className="flex items-center space-x-2 pt-6">
               <input
                 type="checkbox"
@@ -208,7 +209,7 @@ const AddPackageModal: React.FC<AddPackageModalProps> = ({ onPackageAdded }) => 
               Cancel
             </Button>
             <Button type="submit" disabled={loading} className="bg-dexRed hover:bg-dexRed/90">
-              {loading ? 'Creating...' : 'Create Package'}
+              {loading ? (mode === 'edit' ? 'Updating...' : 'Creating...') : (mode === 'edit' ? 'Update Package' : 'Create Package')}
             </Button>
           </div>
         </form>

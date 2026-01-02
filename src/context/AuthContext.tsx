@@ -130,18 +130,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     console.log('Found admin user:', { 
       id: adminUser.id, 
       email: adminUser.email, 
-      is_active: adminUser.is_active,
-      password_hash: adminUser.password_hash 
+      is_active: adminUser.is_active
     });
 
-    // For now, we'll do a simple password comparison
-    // In production, you should use bcrypt to hash passwords before storing them
-    // and then use bcrypt.compare() here
+    // ⚠️ CRITICAL SECURITY WARNING ⚠️
+    // This implementation uses PLAIN TEXT password comparison!
+    // This is EXTREMELY INSECURE and should NEVER be used in production!
+    // 
+    // BEFORE DEPLOYING TO PRODUCTION:
+    // 1. Install bcrypt: npm install bcrypt @types/bcrypt
+    // 2. Hash passwords before storing: bcrypt.hash(password, 10)
+    // 3. Compare with: await bcrypt.compare(password, adminUser.password_hash)
+    // 
+    // For development/testing ONLY:
     if (adminUser.password_hash !== password) {
-      console.log('Password mismatch:', { 
-        provided: password, 
-        stored: adminUser.password_hash 
-      });
       throw new Error('Invalid credentials');
     }
 

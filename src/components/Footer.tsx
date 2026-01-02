@@ -45,6 +45,7 @@ const Footer: React.FC = () => {
                 { name: 'Services', path: '/services' },
                 { name: 'Packages', path: '/packages' },
                 { name: 'Contact', path: '/contact' },
+                { name: 'Terms and Conditions', path: '/terms-and-conditions' },
               ].map((link) => (
                 <li key={link.name}>
                   <Link to={link.path} className="text-gray-400 hover:text-white transition-colors inline-flex items-center group">
@@ -102,10 +103,17 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 mt-8 text-center">
-          <p className="text-gray-500">
-            &copy; {currentYear} DexLanka. All rights reserved.
-          </p>
+        <div className="border-t border-gray-800 pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-500">
+              &copy; {currentYear} DexLanka. All rights reserved.
+            </p>
+            <div className="flex gap-6 text-sm">
+              <Link to="/terms-and-conditions" className="text-gray-500 hover:text-white transition-colors">
+                Terms and Conditions
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

@@ -7,8 +7,19 @@ import CEO from '../assets/images/Firefly 20250428003444.png';
 import FrontEndDev from '../assets/images/Firefly 20250430030414.png';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useSEO } from '@/hooks/useSEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 
 const About = () => {
+  // SEO Optimization
+  useSEO({
+    title: 'About Us - DexLanka Team & Story',
+    description: 'Learn about DexLanka - a leading IT services company in Sri Lanka. Meet our expert team, discover our journey, and see how we deliver premium web development, mobile apps, and digital solutions.',
+    keywords: 'about DexLanka, DexLanka team, IT company Sri Lanka, software development company, web development team, our story',
+    image: '/about-og.png',
+    url: '/about',
+    type: 'website',
+  });
   const [teamRef, teamInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -59,6 +70,10 @@ const About = () => {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: '/' },
+        { name: 'About', url: '/about' },
+      ]} />
       <Navbar />
 
       {/* Hero Section */}

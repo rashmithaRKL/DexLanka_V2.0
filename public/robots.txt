@@ -1,0 +1,32 @@
+# robots.txt for DexLanka
+# https://dexlanka.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private routes
+Disallow: /admin
+Disallow: /login
+Disallow: /signin
+Disallow: /register
+Disallow: /profile
+Disallow: /checkout
+Disallow: /cart
+
+# Allow important pages
+Allow: /
+Allow: /templates
+Allow: /templates/*
+Allow: /services
+Allow: /packages
+Allow: /about
+Allow: /contact
+Allow: /gallery
+Allow: /project/*
+
+# Sitemap
+Sitemap: https://dexlanka.com/sitemap.xml
+
+# Crawl-delay (optional, adjust as needed)
+Crawl-delay: 1
+

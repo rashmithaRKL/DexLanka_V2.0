@@ -3,13 +3,33 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import PackageCard from '@/components/PackageCard';
 import AnimatedText from '@/components/AnimatedText';
+import CustomQuoteModal from '@/components/CustomQuoteModal';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { CheckCircle, XCircle } from 'lucide-react';
+import { useUserAuth } from '@/context/UserAuthContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from '@/hooks/use-toast';
 
 const Packages = () => {
   const [comparisonRef, comparisonInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [currentTab, setCurrentTab] = useState('websites');
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const { isAuthenticated } = useUserAuth();
+  const navigate = useNavigate();
+
+  const handleRequestQuote = () => {
+    if (!isAuthenticated) {
+      toast({
+        title: "Login Required",
+        description: "Please login to request a custom quote.",
+        variant: "destructive",
+      });
+      navigate('/signin', { state: { from: '/packages' } });
+      return;
+    }
+    setIsQuoteModalOpen(true);
+  };
 
   const packages = {
     websites: [
@@ -25,6 +45,7 @@ const Packages = () => {
           '1 revision included'
         ],
         isPopular: false,
+        category: 'website',
       },
       {
         title: '5-Page Website',
@@ -39,6 +60,7 @@ const Packages = () => {
           '2 revisions included'
         ],
         isPopular: true,
+        category: 'website',
       },
       {
         title: '10+ Page Website',
@@ -54,6 +76,7 @@ const Packages = () => {
           '3 revisions included'
         ],
         isPopular: false,
+        category: 'website',
       },
     ],
     applications: [
@@ -71,6 +94,7 @@ const Packages = () => {
           '3 months support'
         ],
         isPopular: false,
+        category: 'web_application',
       },
       {
         title: 'E-Commerce Website',
@@ -87,6 +111,7 @@ const Packages = () => {
           '6 months support'
         ],
         isPopular: true,
+        category: 'web_application',
       },
       {
         title: 'Desktop Application',
@@ -102,6 +127,7 @@ const Packages = () => {
           '12 months support'
         ],
         isPopular: false,
+        category: 'desktop_system',
       },
     ],
     mobile: [
@@ -118,6 +144,7 @@ const Packages = () => {
           '3 months support'
         ],
         isPopular: false,
+        category: 'mobile_app',
       },
       {
         title: 'Advanced Mobile App',
@@ -134,6 +161,7 @@ const Packages = () => {
           '6 months support'
         ],
         isPopular: true,
+        category: 'mobile_app',
       },
       {
         title: 'E-Commerce Mobile App',
@@ -150,6 +178,7 @@ const Packages = () => {
           '12 months support'
         ],
         isPopular: false,
+        category: 'mobile_app',
       },
     ],
     enterprise: [
@@ -167,6 +196,7 @@ const Packages = () => {
           'Ongoing maintenance & updates'
         ],
         isPopular: false,
+        category: 'enterprise_application',
       },
     ],
   };
@@ -281,9 +311,12 @@ const Packages = () => {
 
           <div className="text-center mt-16">
             <p className="text-gray-300 mb-6">Don't see a package that fits your needs? We offer custom solutions.</p>
-            <a href="/contact" className="inline-block px-6 py-3 border border-dexRed text-dexRed rounded-lg text-sm sm:text-base hover:bg-dexRed/10 transition-colors">
+            <button 
+              onClick={handleRequestQuote}
+              className="inline-block px-6 py-3 border border-dexRed text-dexRed rounded-lg text-sm sm:text-base hover:bg-dexRed/10 transition-colors"
+            >
               Request Custom Quote
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -335,6 +368,18 @@ const Packages = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* Custom Quote Modal */}
+      <CustomQuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        initialCategory={
+          currentTab === 'websites' ? 'website' :
+          currentTab === 'applications' ? 'web_application' :
+          currentTab === 'mobile' ? 'mobile_app' :
+          currentTab === 'enterprise' ? 'enterprise_application' : 'website'
+        }
+      />
     </div>
   );
 };

@@ -5,8 +5,19 @@ import AnimatedText from '@/components/AnimatedText';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Smartphone, PenTool, ShoppingCart, Database, BarChart, CheckCircle, Monitor, Globe, Server, Shield, Headphones } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 
 const Services = () => {
+  // SEO Optimization
+  useSEO({
+    title: 'Our Services - IT Solutions & Digital Services | DexLanka',
+    description: 'Comprehensive IT services including web development, mobile apps, UI/UX design, e-commerce solutions, desktop applications, and digital marketing. Expert solutions for your business in Sri Lanka.',
+    keywords: 'web development services, mobile app development, UI/UX design, e-commerce solutions, digital marketing, IT services Sri Lanka, software development services',
+    image: '/services-og.png',
+    url: '/services',
+    type: 'website',
+  });
   const [servicesRef, servicesInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -186,6 +197,10 @@ const Services = () => {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: '/' },
+        { name: 'Services', url: '/services' },
+      ]} />
       <Navbar />
       
       {/* Hero Section */}

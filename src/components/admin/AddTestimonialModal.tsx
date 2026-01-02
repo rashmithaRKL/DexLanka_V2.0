@@ -4,24 +4,27 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Plus } from 'lucide-react';
-import { createTestimonial } from '@/lib/api';
+import { Plus, Edit } from 'lucide-react';
+import { createTestimonial, updateTestimonial } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
+import type { Testimonial } from '@/lib/supabase';
 
 interface AddTestimonialModalProps {
   onTestimonialAdded: () => void;
+  testimonial?: Testimonial | null;
+  mode?: 'add' | 'edit';
 }
 
-const AddTestimonialModal: React.FC<AddTestimonialModalProps> = ({ onTestimonialAdded }) => {
+const AddTestimonialModal: React.FC<AddTestimonialModalProps> = ({ onTestimonialAdded, testimonial = null, mode = 'add' }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    content: '',
-    author: '',
-    position: '',
-    company: '',
-    avatar_url: '',
-    featured: false
+    content: testimonial?.content || '',
+    author: testimonial?.author || '',
+    position: testimonial?.position || '',
+    company: testimonial?.company || '',
+    avatar_url: testimonial?.avatar_url || '',
+    featured: testimonial?.featured || false
   });
   const { toast } = useToast();
 
@@ -30,25 +33,25 @@ const AddTestimonialModal: React.FC<AddTestimonialModalProps> = ({ onTestimonial
     setLoading(true);
 
     try {
-      await createTestimonial(formData);
-      toast({
-        title: "Success",
-        description: "Testimonial created successfully!",
-      });
+      if (mode === 'edit' && testimonial) {
+        await updateTestimonial(testimonial.id, formData);
+        toast({
+          title: "Success",
+          description: "Testimonial updated successfully!",
+        });
+      } else {
+        await createTestimonial(formData);
+        toast({
+          title: "Success",
+          description: "Testimonial created successfully!",
+        });
+      }
       setOpen(false);
-      setFormData({
-        content: '',
-        author: '',
-        position: '',
-        company: '',
-        avatar_url: '',
-        featured: false
-      });
       onTestimonialAdded();
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to create testimonial. Please try again.",
+        description: `Failed to ${mode === 'edit' ? 'update' : 'create'} testimonial. Please try again.`,
         variant: "destructive",
       });
     } finally {
@@ -59,16 +62,15 @@ const AddTestimonialModal: React.FC<AddTestimonialModalProps> = ({ onTestimonial
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-dexRed hover:bg-dexRed/90">
-          <Plus className="mr-2 h-4 w-4" />
-          Add Testimonial
+        <Button className="bg-dexRed hover:bg-dexRed/90" size={mode === 'edit' ? 'sm' : 'default'} variant={mode === 'edit' ? 'outline' : 'default'}>
+          {mode === 'edit' ? <Edit className="h-3 w-3" /> : <><Plus className="mr-2 h-4 w-4" />Add Testimonial</>}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-lg">
         <DialogHeader>
-          <DialogTitle className="text-white">Add New Testimonial</DialogTitle>
+          <DialogTitle className="text-white">{mode === 'edit' ? 'Edit Testimonial' : 'Add New Testimonial'}</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <Label htmlFor="content" className="text-gray-300">Testimonial Content</Label>
@@ -94,7 +96,7 @@ const AddTestimonialModal: React.FC<AddTestimonialModalProps> = ({ onTestimonial
                 required
               />
             </div>
-            
+
             <div>
               <Label htmlFor="position" className="text-gray-300">Position</Label>
               <Input
@@ -147,7 +149,7 @@ const AddTestimonialModal: React.FC<AddTestimonialModalProps> = ({ onTestimonial
               Cancel
             </Button>
             <Button type="submit" disabled={loading} className="bg-dexRed hover:bg-dexRed/90">
-              {loading ? 'Creating...' : 'Create Testimonial'}
+              {loading ? (mode === 'edit' ? 'Updating...' : 'Creating...') : (mode === 'edit' ? 'Update Testimonial' : 'Create Testimonial')}
             </Button>
           </div>
         </form>

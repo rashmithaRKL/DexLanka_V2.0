@@ -6,28 +6,31 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Plus, X } from 'lucide-react';
-import { createProject } from '@/lib/api';
+import { Plus, X, Edit } from 'lucide-react';
+import { createProject, updateProject } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
+import type { Project } from '@/lib/supabase';
 
 interface AddProjectModalProps {
   onProjectAdded: () => void;
+  project?: Project | null;
+  mode?: 'add' | 'edit';
 }
 
-const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded }) => {
+const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded, project = null, mode = 'add' }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
-    category: '',
-    image_url: '',
-    description: '',
-    live_demo_url: '',
-    github_url: '',
-    technologies: [] as string[],
-    project_duration: '',
-    client: '',
-    featured: false
+    title: project?.title || '',
+    category: project?.category || '',
+    image_url: project?.image_url || '',
+    description: project?.description || '',
+    live_demo_url: project?.live_demo_url || '',
+    github_url: project?.github_url || '',
+    technologies: project?.technologies || [],
+    project_duration: project?.project_duration || '',
+    client: project?.client || '',
+    featured: project?.featured || false
   });
   const [newTech, setNewTech] = useState('');
   const { toast } = useToast();
@@ -46,29 +49,25 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded }) => 
     setLoading(true);
 
     try {
-      await createProject(formData);
-      toast({
-        title: "Success",
-        description: "Project created successfully!",
-      });
+      if (mode === 'edit' && project) {
+        await updateProject(project.id, formData);
+        toast({
+          title: "Success",
+          description: "Project updated successfully!",
+        });
+      } else {
+        await createProject(formData);
+        toast({
+          title: "Success",
+          description: "Project created successfully!",
+        });
+      }
       setOpen(false);
-      setFormData({
-        title: '',
-        category: '',
-        image_url: '',
-        description: '',
-        live_demo_url: '',
-        github_url: '',
-        technologies: [],
-        project_duration: '',
-        client: '',
-        featured: false
-      });
       onProjectAdded();
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to create project. Please try again.",
+        description: `Failed to ${mode === 'edit' ? 'update' : 'create'} project. Please try again.`,
         variant: "destructive",
       });
     } finally {
@@ -96,16 +95,15 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded }) => 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-dexRed hover:bg-dexRed/90">
-          <Plus className="mr-2 h-4 w-4" />
-          Add Project
+        <Button className="bg-dexRed hover:bg-dexRed/90" size={mode === 'edit' ? 'sm' : 'default'} variant={mode === 'edit' ? 'outline' : 'default'}>
+          {mode === 'edit' ? <Edit className="h-3 w-3" /> : <><Plus className="mr-2 h-4 w-4" />Add Project</>}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-white">Add New Project</DialogTitle>
+          <DialogTitle className="text-white">{mode === 'edit' ? 'Edit Project' : 'Add New Project'}</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -118,7 +116,7 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded }) => 
                 required
               />
             </div>
-            
+
             <div>
               <Label htmlFor="category" className="text-gray-300">Category</Label>
               <Select value={formData.category} onValueChange={(value) => setFormData(prev => ({ ...prev, category: value }))}>
@@ -169,7 +167,7 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded }) => 
                 placeholder="https://example.com"
               />
             </div>
-            
+
             <div>
               <Label htmlFor="github_url" className="text-gray-300">GitHub URL</Label>
               <Input
@@ -193,7 +191,7 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded }) => 
                 placeholder="e.g., 2 weeks"
               />
             </div>
-            
+
             <div>
               <Label htmlFor="client" className="text-gray-300">Client</Label>
               <Input
@@ -250,7 +248,7 @@ const AddProjectModal: React.FC<AddProjectModalProps> = ({ onProjectAdded }) => 
               Cancel
             </Button>
             <Button type="submit" disabled={loading} className="bg-dexRed hover:bg-dexRed/90">
-              {loading ? 'Creating...' : 'Create Project'}
+              {loading ? (mode === 'edit' ? 'Updating...' : 'Creating...') : (mode === 'edit' ? 'Update Project' : 'Create Project')}
             </Button>
           </div>
         </form>

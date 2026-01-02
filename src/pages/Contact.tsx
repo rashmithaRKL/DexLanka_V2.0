@@ -4,13 +4,29 @@ import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import AnimatedText from '@/components/AnimatedText';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, ExternalLink } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ExternalLink, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
+import { BreadcrumbSchema } from '@/components/StructuredData';
 
 const Contact = () => {
+  // SEO Optimization
+  useSEO({
+    title: 'Contact Us - Get in Touch | DexLanka',
+    description: 'Contact DexLanka for premium IT services, web development, mobile apps, and digital solutions in Sri Lanka. We\'d love to hear from you and discuss your project.',
+    keywords: 'contact DexLanka, IT services Sri Lanka, web development contact, software development Sri Lanka, get in touch',
+    image: '/contact-og.png',
+    url: '/contact',
+    type: 'website',
+  });
+
   const [mapLoaded, setMapLoaded] = useState(false);
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: '/' },
+        { name: 'Contact', url: '/contact' },
+      ]} />
       <Navbar />
 
       {/* Hero Section */}
@@ -113,16 +129,21 @@ const Contact = () => {
               <div className="glass p-8 rounded-2xl">
                 <h2 className="text-2xl font-semibold mb-6">Connect With Us</h2>
                 <div className="flex space-x-4">
-                  {['facebook', 'twitter', 'instagram', 'linkedin'].map((social) => (
+                  {[
+                    { name: 'Facebook', href: 'https://facebook.com', Icon: Facebook },
+                    { name: 'Twitter', href: 'https://twitter.com', Icon: Twitter },
+                    { name: 'Instagram', href: 'https://instagram.com', Icon: Instagram },
+                    { name: 'LinkedIn', href: 'https://linkedin.com', Icon: Linkedin },
+                  ].map(({ name, href, Icon }) => (
                     <a
-                      key={social}
-                      href={`https://${social}.com`}
+                      key={name}
+                      href={href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-dexRed/10 flex items-center justify-center text-dexRed hover:bg-dexRed hover:text-white transition-colors"
-                      aria-label={social}
+                      aria-label={name}
                     >
-                      <i className={`fab fa-${social}`}></i>
+                      <Icon size={20} strokeWidth={2.2} />
                     </a>
                   ))}
                 </div>

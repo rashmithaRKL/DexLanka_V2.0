@@ -79,3 +79,81 @@ export interface AdminSession {
   expires_at: string
   created_at: string
 }
+
+export interface OrderRecord {
+  id: number
+  stripe_session_id: string
+  customer_email?: string
+  customer_name?: string
+  status?: string
+  amount_total?: number
+  currency?: string
+  items?: any
+  created_at: string
+  updated_at: string
+}
+
+export interface TemplateItem {
+  id: number
+  title: string
+  description: string
+  price: number
+  category: string
+  preview_url?: string
+  thumbnail_url?: string
+  features: string[]
+  is_featured: boolean
+  created_at: string
+  updated_at: string
+  // New fields for storage and demo system
+  demo_type?: string
+  storage_path?: string | null
+  demo_config?: Record<string, any>
+  download_enabled?: boolean
+  file_count?: number
+  total_size?: number
+  full_description?: string
+  screenshots?: string[]
+  tags?: string[]
+  rating?: number
+  sales?: number
+  live_preview_url?: string
+  technologies?: string[]
+  compatibility?: string[]
+  order_index?: number
+  is_active?: boolean
+  // GitHub storage fields
+  storage_type?: 'supabase' | 'github'
+  github_repo_url?: string
+  github_repo_name?: string
+}
+
+export interface TemplatePurchase {
+  id: number
+  user_id?: string | null
+  template_id: number
+  order_id?: number | null
+  customer_email: string
+  customer_name?: string | null
+  price_paid: number
+  currency?: string
+  status: string
+  download_url?: string | null
+  download_expires_at?: string | null
+  notes?: string | null
+  created_at: string
+  updated_at?: string
+  // New fields for download tracking
+  download_count?: number
+  last_downloaded_at?: string | null
+  download_limit?: number | null
+}
+
+export interface TemplateCustomization {
+  id: number
+  purchase_id: number
+  customization_data: any
+  status: string
+  created_at: string
+  updated_at: string
+}

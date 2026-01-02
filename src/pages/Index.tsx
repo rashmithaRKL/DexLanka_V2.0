@@ -9,11 +9,23 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Code, Smartphone, PenTool, ShoppingCart, Database, BarChart } from 'lucide-react';
 import { useVisitorTracking } from '@/hooks/useVisitorTracking';
+import { useSEO } from '@/hooks/useSEO';
+import { OrganizationSchema, WebSiteSchema } from '@/components/StructuredData';
 
 // Lazy-loaded components
 const ContactForm = lazy(() => import('@/components/ContactForm'));
 
 const Index = () => {
+  // SEO Optimization
+  useSEO({
+    title: 'DexLanka - Premium IT, Branding & Digital Services in Sri Lanka',
+    description: 'Transform your business with DexLanka\'s premium IT services. Expert web development, mobile apps, UI/UX design, e-commerce solutions, and digital marketing in Sri Lanka. 3+ years of excellence, 12+ projects completed.',
+    keywords: 'DexLanka, Web Development Sri Lanka, Mobile App Development, UI/UX Design, E-Commerce Solutions, Digital Marketing, IT Services Sri Lanka, Software Development, React Development, TypeScript',
+    image: '/og-image.png',
+    url: '/',
+    type: 'website',
+  });
+
   // Track visitor
   useVisitorTracking();
 
@@ -95,6 +107,8 @@ const Index = () => {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <OrganizationSchema />
+      <WebSiteSchema />
       <Navbar />
 
       {/* Hero Section */}

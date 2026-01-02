@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
@@ -70,7 +70,8 @@ const HeroSection: React.FC = () => {
           className="touch-none"
           style={{ 
             border: 'none',
-            transform: 'translateY(-10%) scale(1.1)',
+            // Zoom and shift up slightly on mobile to match the desktop framing (hide legs/Built with Spline)
+            transform: 'translateY(-8%) scale(1.4)',
             transformOrigin: 'center center',
             touchAction: 'none'
           }}
