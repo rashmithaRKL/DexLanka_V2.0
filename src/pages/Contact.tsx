@@ -102,10 +102,10 @@ const Contact = () => {
                       <Mail size={20} className="text-dexRed" />
                     </div>
                     <div className="ml-4">
-                      <h3 className="font-medium mb-1">Email</h3>
+                      <h3 className="font-medium mb-1">Our Email</h3>
                       <p className="text-gray-300">
-                        <a href="mailto:dexlanka@gmail.com" className="hover:text-white transition-colors">
-                        dexlanka@gmail.com
+                        <a href="mailto:info@dexlanka.com" className="hover:text-white transition-colors">
+                        info@dexlanka.com
                         </a>
                       </p>
                     </div>
