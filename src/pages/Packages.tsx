@@ -68,9 +68,9 @@ const Packages = () => {
       },
       {
         title: 'Business Website',
-        price: 'From Rs 75,000 / Rs 120,000',
-        priceLkr: 'From Rs 75,000 / Rs 120,000',
-        priceUsd: 'From $250 / $400',
+        price: 'From Rs 45,000 / Rs 120,000',
+        priceLkr: 'From Rs 45,000 / Rs 120,000',
+        priceUsd: 'From $150 / $400',
         description: 'For growing businesses that need stronger service pages, galleries, forms, maps, and SEO setup',
         features: [
           'Multiple business pages',
@@ -125,9 +125,9 @@ const Packages = () => {
       },
       {
         title: 'E-commerce Website',
-        price: 'From Rs 180,000 / Rs 250,000',
-        priceLkr: 'From Rs 180,000 / Rs 250,000',
-        priceUsd: 'From $600 / $850',
+        price: 'From Rs 60,000 / Rs 250,000',
+        priceLkr: 'From Rs 60,000 / Rs 250,000',
+        priceUsd: 'From $200 / $850',
         description: 'For shops and online stores that need products, cart, checkout, and order management',
         features: [
           'Product categories',
