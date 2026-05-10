@@ -5,6 +5,13 @@ export type CurrencyCode = 'LKR' | 'USD';
 const selectedCurrencyKey = 'dexlanka_selected_currency';
 const detectedCountryKey = 'dexlanka_detected_country';
 
+const hasSriLankaBrowserSignal = () => {
+  if (typeof window === 'undefined') return false;
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const languages = [navigator.language, ...Array.from(navigator.languages || [])].filter(Boolean);
+  return timeZone === 'Asia/Colombo' || languages.some((language) => /-LK$/i.test(language));
+};
+
 export const lkrBudgetOptions = [
   'Below Rs 25,000',
   'Rs 25,000 - Rs 75,000',
@@ -31,19 +38,29 @@ export const getCurrencyPrice = (
 export const useCurrency = () => {
   const [currency, setCurrencyState] = useState<CurrencyCode>(() => {
     if (typeof window === 'undefined') return 'USD';
+    if (hasSriLankaBrowserSignal()) return 'LKR';
+    if (window.sessionStorage.getItem(detectedCountryKey) === 'LK') return 'LKR';
     const selected = window.localStorage.getItem(selectedCurrencyKey);
     return selected === 'LKR' || selected === 'USD' ? selected : 'USD';
   });
   const [countryCode, setCountryCode] = useState<string | null>(() => {
     if (typeof window === 'undefined') return null;
+    if (hasSriLankaBrowserSignal()) return 'LK';
     return window.sessionStorage.getItem(detectedCountryKey);
   });
   const [isDetected, setIsDetected] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+    const sriLankaBrowserSignal = hasSriLankaBrowserSignal();
+    if (sriLankaBrowserSignal) {
+      window.sessionStorage.setItem(detectedCountryKey, 'LK');
+      setCountryCode('LK');
+      setCurrencyState('LKR');
+    }
+
     const selected = window.localStorage.getItem(selectedCurrencyKey);
-    if (selected === 'LKR' || selected === 'USD') {
+    if (!sriLankaBrowserSignal && (selected === 'LKR' || selected === 'USD')) {
       setIsDetected(true);
       return;
     }
@@ -59,10 +76,10 @@ export const useCurrency = () => {
           window.sessionStorage.setItem(detectedCountryKey, detectedCountry);
           setCountryCode(detectedCountry);
         }
-        setCurrencyState(detectedCountry === 'LK' ? 'LKR' : 'USD');
+        setCurrencyState(detectedCountry === 'LK' || sriLankaBrowserSignal ? 'LKR' : 'USD');
       })
       .catch(() => {
-        setCurrencyState('USD');
+        setCurrencyState(sriLankaBrowserSignal ? 'LKR' : 'USD');
       })
       .finally(() => {
         window.clearTimeout(timeout);
