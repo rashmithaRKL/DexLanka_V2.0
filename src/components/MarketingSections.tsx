@@ -25,6 +25,8 @@ import {
   whyDexLanka,
 } from '@/data/site';
 import { projectDetails } from '@/data/projects';
+import { trackEvent } from '@/lib/analytics';
+import { getCurrencyPrice, useCurrency, type CurrencyCode } from '@/hooks/useCurrency';
 
 export const SectionHeading = ({
   eyebrow,
@@ -39,6 +41,40 @@ export const SectionHeading = ({
     <span className="inline-block text-xl text-dexRed font-medium mb-4">{eyebrow}</span>
     <h2 className="text-3xl md:text-4xl font-bold mb-6">{title}</h2>
     {description && <p className="text-gray-300">{description}</p>}
+  </div>
+);
+
+export const CurrencySwitcher = ({
+  currency,
+  setCurrency,
+  countryCode,
+  isDetected,
+}: {
+  currency: CurrencyCode;
+  setCurrency: (currency: CurrencyCode) => void;
+  countryCode?: string | null;
+  isDetected?: boolean;
+}) => (
+  <div className="flex flex-wrap items-center justify-center gap-3 text-sm text-gray-400 mb-8">
+    <span>
+      Prices shown in {currency === 'LKR' ? 'Sri Lankan Rupees' : 'USD'}
+      {countryCode ? ` (${countryCode})` : ''}
+      {!isDetected ? '...' : ''}
+    </span>
+    <div className="inline-flex rounded-lg border border-white/10 bg-white/5 p-1">
+      {(['LKR', 'USD'] as CurrencyCode[]).map((option) => (
+        <button
+          key={option}
+          type="button"
+          onClick={() => setCurrency(option)}
+          className={`px-3 py-1.5 rounded-md font-medium transition-colors ${
+            currency === option ? 'bg-dexRed text-white' : 'text-gray-300 hover:text-white'
+          }`}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
   </div>
 );
 
@@ -116,75 +152,80 @@ export const ProcessTimeline = () => (
   </section>
 );
 
-export const PackagesGuidanceSection = ({ compact = false }: { compact?: boolean }) => (
-  <section className={compact ? 'py-16 bg-darkBlue' : 'section-padding bg-gradient-to-b from-background to-darkBlue'}>
-    <div className="container mx-auto px-6">
-      <SectionHeading
-        eyebrow="Packages"
-        title="Transparent Starting Points for Common Projects"
-        description="These starting points help you understand what is included, what is excluded, and when a custom quote is needed."
-      />
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-        {packageGuidance.map((pkg, index) => (
-          <motion.div
-            key={pkg.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
-            className={`glass rounded-2xl p-6 h-full ${pkg.isPopular ? 'border-dexRed shadow-[0_0_40px_rgba(239,68,68,0.18)]' : ''}`}
+export const PackagesGuidanceSection = ({ compact = false }: { compact?: boolean }) => {
+  const { currency, setCurrency, countryCode, isDetected } = useCurrency();
+
+  return (
+    <section className={compact ? 'py-16 bg-darkBlue' : 'section-padding bg-gradient-to-b from-background to-darkBlue'}>
+      <div className="container mx-auto px-6">
+        <SectionHeading
+          eyebrow="Packages"
+          title="Transparent Starting Points for Common Projects"
+          description="These starting points help you understand what is included, what is excluded, and when a custom quote is needed."
+        />
+        <CurrencySwitcher currency={currency} setCurrency={setCurrency} countryCode={countryCode} isDetected={isDetected} />
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          {packageGuidance.map((pkg, index) => (
+            <motion.div
+              key={pkg.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className={`glass rounded-2xl p-6 h-full min-w-0 ${pkg.isPopular ? 'border-dexRed shadow-[0_0_40px_rgba(239,68,68,0.18)]' : ''}`}
+            >
+              {pkg.isPopular && <Badge className="bg-dexRed text-white mb-4">Popular</Badge>}
+              <h3 className="text-xl font-bold mb-3">{pkg.title}</h3>
+              <p className="text-dexRed font-semibold mb-5 leading-tight">{getCurrencyPrice(pkg, currency)}</p>
+              {'bestFor' in pkg && pkg.bestFor && (
+                <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                  <span className="text-white font-medium">Best for: </span>
+                  {pkg.bestFor}
+                </p>
+              )}
+              <h4 className="text-white font-medium mb-3">Includes</h4>
+              <ul className="space-y-3">
+                {pkg.features.map((feature) => (
+                  <li key={feature} className="flex gap-2 text-sm text-gray-300">
+                    <CheckCircle size={16} className="text-dexRed mt-0.5 shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              {'notIncluded' in pkg && pkg.notIncluded && (
+                <>
+                  <h4 className="text-white font-medium mt-6 mb-3">Not included</h4>
+                  <ul className="space-y-2">
+                    {pkg.notIncluded.map((feature) => (
+                      <li key={feature} className="flex gap-2 text-sm text-gray-400">
+                        <span className="text-dexRed mt-0.5">-</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </motion.div>
+          ))}
+        </div>
+        <p className="text-center text-gray-400 text-sm mt-8">
+          Final price depends on features, design complexity, integrations, number of pages, content, timeline, and support requirements.
+        </p>
+        <div className="text-center mt-8">
+          <a
+            href={getWhatsAppUrl(whatsappMessages.website)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
           >
-            {pkg.isPopular && <Badge className="bg-dexRed text-white mb-4">Popular</Badge>}
-            <h3 className="text-xl font-bold mb-3">{pkg.title}</h3>
-            <p className="text-dexRed font-semibold mb-5">{pkg.price}</p>
-            {'bestFor' in pkg && pkg.bestFor && (
-              <p className="text-gray-300 text-sm leading-relaxed mb-5">
-                <span className="text-white font-medium">Best for: </span>
-                {pkg.bestFor}
-              </p>
-            )}
-            <h4 className="text-white font-medium mb-3">Includes</h4>
-            <ul className="space-y-3">
-              {pkg.features.map((feature) => (
-                <li key={feature} className="flex gap-2 text-sm text-gray-300">
-                  <CheckCircle size={16} className="text-dexRed mt-0.5 shrink-0" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-            {'notIncluded' in pkg && pkg.notIncluded && (
-              <>
-                <h4 className="text-white font-medium mt-6 mb-3">Not included</h4>
-                <ul className="space-y-2">
-                  {pkg.notIncluded.map((feature) => (
-                    <li key={feature} className="flex gap-2 text-sm text-gray-400">
-                      <span className="text-dexRed mt-0.5">-</span>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </>
-            )}
-          </motion.div>
-        ))}
+            <MessageCircle size={18} className="mr-2 shrink-0" />
+            Request Website Package
+          </a>
+        </div>
       </div>
-      <p className="text-center text-gray-400 text-sm mt-8">
-        Final price depends on features, design complexity, integrations, number of pages, content, timeline, and support requirements.
-      </p>
-      <div className="text-center mt-8">
-        <a
-          href={getWhatsAppUrl(whatsappMessages.website)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
-        >
-          <MessageCircle size={18} className="mr-2" />
-          Request Website Package
-        </a>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export const TestimonialsSection = () => (
   <section className="section-padding bg-gradient-to-b from-darkBlue to-background">
@@ -397,52 +438,57 @@ export const SupportPromiseSection = () => (
   </section>
 );
 
-export const MaintenancePlansSection = () => (
-  <section className="section-padding bg-darkBlue">
-    <div className="container mx-auto px-6">
-      <SectionHeading
-        eyebrow="Maintenance"
-        title="Monthly Website and Software Support"
-        description="Support plans help keep websites, stores, and business systems updated after launch."
-      />
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {maintenancePlans.map((plan, index) => (
-          <motion.div
-            key={plan.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: index * 0.05 }}
-            className={`glass rounded-2xl p-6 h-full ${plan.isPopular ? 'border-dexRed shadow-[0_0_40px_rgba(239,68,68,0.18)]' : ''}`}
+export const MaintenancePlansSection = () => {
+  const { currency, setCurrency, countryCode, isDetected } = useCurrency();
+
+  return (
+    <section className="section-padding bg-darkBlue">
+      <div className="container mx-auto px-6">
+        <SectionHeading
+          eyebrow="Maintenance"
+          title="Monthly Website and Software Support"
+          description="Support plans help keep websites, stores, and business systems updated after launch."
+        />
+        <CurrencySwitcher currency={currency} setCurrency={setCurrency} countryCode={countryCode} isDetected={isDetected} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {maintenancePlans.map((plan, index) => (
+            <motion.div
+              key={plan.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className={`glass rounded-2xl p-6 h-full min-w-0 ${plan.isPopular ? 'border-dexRed shadow-[0_0_40px_rgba(239,68,68,0.18)]' : ''}`}
+            >
+              {plan.isPopular && <Badge className="bg-dexRed text-white mb-4">Popular</Badge>}
+              <h3 className="text-xl font-bold mb-3">{plan.title}</h3>
+              <p className="text-dexRed font-semibold mb-5 leading-tight">{getCurrencyPrice(plan, currency)}</p>
+              <ul className="space-y-3">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex gap-2 text-sm text-gray-300">
+                    <CheckCircle size={16} className="text-dexRed mt-0.5 shrink-0" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <a
+            href={getWhatsAppUrl(whatsappMessages.maintenance)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
           >
-            {plan.isPopular && <Badge className="bg-dexRed text-white mb-4">Popular</Badge>}
-            <h3 className="text-xl font-bold mb-3">{plan.title}</h3>
-            <p className="text-dexRed font-semibold mb-5">{plan.price}</p>
-            <ul className="space-y-3">
-              {plan.features.map((feature) => (
-                <li key={feature} className="flex gap-2 text-sm text-gray-300">
-                  <CheckCircle size={16} className="text-dexRed mt-0.5 shrink-0" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
+            <MessageCircle size={18} className="mr-2 shrink-0" />
+            Need website support every month?
+          </a>
+        </div>
       </div>
-      <div className="text-center mt-8">
-        <a
-          href={getWhatsAppUrl('Hi DexLanka, I need website support every month. Can we discuss a maintenance plan?')}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
-        >
-          <MessageCircle size={18} className="mr-2" />
-          Need website support every month?
-        </a>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export const FacebookVsWebsiteSection = () => (
   <section className="section-padding">
@@ -470,10 +516,10 @@ export const FacebookVsWebsiteSection = () => (
       <div className="text-center mt-8">
         <Link
           to="/website-development-sri-lanka"
-          className="inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
+          className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 bg-dexRed text-white text-center font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
         >
           Turn your Facebook page into a professional website
-          <ArrowRight size={16} className="ml-2" />
+          <ArrowRight size={16} className="ml-2 shrink-0" />
         </Link>
       </div>
     </div>
@@ -531,13 +577,21 @@ export const FreeAuditSection = () => (
               href={getWhatsAppUrl(whatsappMessages.audit)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
+              className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
             >
-              <MessageCircle size={18} className="mr-2" />
+              <MessageCircle size={18} className="mr-2 shrink-0" />
               Request Free Audit
             </a>
           </div>
-          <form className="space-y-4" action={`mailto:${BUSINESS_INFO.email}`} method="post" encType="text/plain">
+          <form
+            className="space-y-4 min-w-0"
+            action={`mailto:${BUSINESS_INFO.email}`}
+            method="post"
+            encType="text/plain"
+            onSubmit={() => {
+              trackEvent('free_audit_submit', { location: 'free_audit_section' });
+            }}
+          >
             {[
               { name: 'Business name', placeholder: 'Business name' },
               { name: 'Current website/Facebook page', placeholder: 'Website or Facebook URL' },
@@ -609,10 +663,10 @@ export const RelatedServiceLinks = ({ paths }: { paths: string[] }) => {
         <Link
           key={item.path}
           to={item.path}
-          className="inline-flex items-center px-4 py-2 rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-white hover:border-dexRed/50 transition-colors"
+          className="inline-flex max-w-full items-center px-4 py-2 rounded-full border border-white/10 bg-white/5 text-gray-300 hover:text-white hover:border-dexRed/50 transition-colors"
         >
-          {item.label}
-          <ExternalLink size={14} className="ml-2" />
+          <span className="truncate sm:whitespace-normal">{item.label}</span>
+          <ExternalLink size={14} className="ml-2 shrink-0" />
         </Link>
       ))}
     </div>
@@ -642,14 +696,14 @@ export const FinalCTA = ({
             href={getWhatsAppUrl(whatsappMessage || whatsappMessages.homepage)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
+            className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
           >
-            <MessageCircle size={18} className="mr-2" />
+            <MessageCircle size={18} className="mr-2 shrink-0" />
             {primaryLabel}
           </a>
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-all"
+            className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-all"
           >
             {secondaryLabel}
           </Link>

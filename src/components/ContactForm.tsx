@@ -6,6 +6,7 @@ import { toast } from '@/components/ui/use-toast';
 import { submitContactForm } from '@/lib/api';
 import { generateMailtoLink } from '@/lib/emailService';
 import { trackEvent } from '@/lib/analytics';
+import { lkrBudgetOptions, usdBudgetOptions, useCurrency, type CurrencyCode } from '@/hooks/useCurrency';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,13 @@ const ContactForm: React.FC = () => {
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { currency, setCurrency, countryCode } = useCurrency();
+  const budgetOptions = currency === 'LKR' ? lkrBudgetOptions : usdBudgetOptions;
+
+  const handleCurrencyChange = (nextCurrency: CurrencyCode) => {
+    setCurrency(nextCurrency);
+    setFormData((prev) => ({ ...prev, budgetRange: '' }));
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -38,6 +46,7 @@ const ContactForm: React.FC = () => {
       message: [
         `Business name: ${formData.businessName || 'Not provided'}`,
         `Project type: ${formData.projectType || 'Not selected'}`,
+        `Budget currency: ${currency}${countryCode ? ` (${countryCode})` : ''}`,
         `Budget range: ${formData.budgetRange || 'Not selected'}`,
         `Preferred contact method: ${formData.preferredContactMethod || 'Not selected'}`,
         `Expected timeline: ${formData.expectedTimeline || 'Not selected'}`,
@@ -57,6 +66,7 @@ const ContactForm: React.FC = () => {
       trackEvent('contact_form_submit', {
         project_type: formData.projectType || 'Not selected',
         budget_range: formData.budgetRange || 'Not selected',
+        currency,
       });
       
       // Reset form
@@ -110,7 +120,7 @@ const ContactForm: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="glass rounded-2xl overflow-hidden shadow-soft p-8 w-full max-w-xl mx-auto"
+    className="glass rounded-2xl overflow-hidden shadow-soft p-5 sm:p-8 w-full max-w-xl mx-auto"
     >
       <h2 className="text-2xl font-bold mb-2">Get Free Website Quote</h2>
       <p className="text-gray-300 text-sm mb-6">
@@ -211,9 +221,25 @@ const ContactForm: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="budgetRange" className="block text-sm font-medium mb-1">
-              Budget Range
-            </label>
+            <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+              <label htmlFor="budgetRange" className="block text-sm font-medium">
+                Budget Range
+              </label>
+              <div className="inline-flex rounded-lg border border-white/10 bg-white/5 p-0.5 text-xs">
+                {(['LKR', 'USD'] as CurrencyCode[]).map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => handleCurrencyChange(option)}
+                    className={`rounded-md px-2.5 py-1 font-medium transition-colors ${
+                      currency === option ? 'bg-dexRed text-white' : 'text-gray-300 hover:text-white'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
             <select
               id="budgetRange"
               name="budgetRange"
@@ -222,11 +248,11 @@ const ContactForm: React.FC = () => {
               className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
             >
               <option value="">Select budget range</option>
-              <option value="Rs 25,000 - Rs 75,000">Rs 25,000 - Rs 75,000</option>
-              <option value="Rs 75,000 - Rs 120,000">Rs 75,000 - Rs 120,000</option>
-              <option value="Rs 120,000 - Rs 250,000">Rs 120,000 - Rs 250,000</option>
-              <option value="Rs 250,000+">Rs 250,000+</option>
-              <option value="Quote based">Quote based</option>
+              {budgetOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -299,7 +325,7 @@ const ContactForm: React.FC = () => {
                 setFormData((prev) => ({ ...prev, reference: prev.reference ? `${prev.reference} | Uploaded file: ${fileName}` : `Uploaded file: ${fileName}` }));
               }
             }}
-            className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed file:mr-4 file:rounded-md file:border-0 file:bg-dexRed file:px-3 file:py-2 file:text-white"
+            className="w-full max-w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed file:mr-4 file:rounded-md file:border-0 file:bg-dexRed file:px-3 file:py-2 file:text-white"
           />
           <p className="text-gray-400 text-xs mt-2">If upload delivery is not configured, add a Google Drive or reference link above as well.</p>
         </div>

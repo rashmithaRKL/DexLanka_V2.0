@@ -48,7 +48,7 @@ const BlogPost = () => {
   return (
     <div className="bg-background text-foreground min-h-screen">
       <StructuredData
-        type="Article"
+        type="BlogPosting"
         id={`article-${post.slug}`}
         data={{
           headline: post.title,

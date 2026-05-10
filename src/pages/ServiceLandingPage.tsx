@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { BreadcrumbSchema, FAQSchema, ServiceSchema } from '@/components/StructuredData';
 import {
   CaseStudiesSection,
+  CurrencySwitcher,
   FAQSection,
   FinalCTA,
   PackagesGuidanceSection,
@@ -17,12 +18,35 @@ import {
   SupportPromiseSection,
   TrustBar,
 } from '@/components/MarketingSections';
-import { BUSINESS_INFO, getServicePageByPath, getWhatsAppUrl, whatsappMessages } from '@/data/site';
+import { BUSINESS_INFO, getServicePageByPath, getWhatsAppUrl, packageGuidance, whatsappMessages } from '@/data/site';
+import { getCurrencyPrice, useCurrency } from '@/hooks/useCurrency';
 import { useSEO } from '@/hooks/useSEO';
+
+const getGuidancePackage = (path: string) => {
+  const normalizedPath = path.toLowerCase();
+  if (normalizedPath.includes('ecommerce') || normalizedPath.includes('shop')) return packageGuidance[2];
+  if (
+    normalizedPath.includes('pos') ||
+    normalizedPath.includes('inventory') ||
+    normalizedPath.includes('software') ||
+    normalizedPath.includes('dashboard') ||
+    normalizedPath.includes('saas') ||
+    normalizedPath.includes('mvp') ||
+    normalizedPath.includes('app') ||
+    normalizedPath.includes('react') ||
+    normalizedPath.includes('supabase') ||
+    normalizedPath.includes('migration')
+  ) {
+    return packageGuidance[3];
+  }
+  if (normalizedPath.includes('business') || normalizedPath.includes('agency')) return packageGuidance[1];
+  return packageGuidance[0];
+};
 
 const ServiceLandingPage = () => {
   const location = useLocation();
   const page = getServicePageByPath(location.pathname);
+  const { currency, setCurrency, countryCode, isDetected } = useCurrency();
 
   useSEO({
     title: page?.title || 'Service Not Found | DexLanka Software Solutions',
@@ -58,6 +82,8 @@ const ServiceLandingPage = () => {
     );
   }
 
+  const guidancePackage = getGuidancePackage(page.path);
+
   return (
     <div className="bg-background text-foreground min-h-screen">
       <ServiceSchema
@@ -80,7 +106,7 @@ const ServiceLandingPage = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedText text={page.eyebrow} animation="slide-up" className="inline-block text-xl text-dexRed font-medium mb-4" />
-            <AnimatedText text={page.heading} animation="slide-up" delay={100} className="text-4xl md:text-5xl font-bold mb-6" />
+            <AnimatedText text={page.heading} animation="slide-up" delay={100} className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" />
             <AnimatedText text={page.summary} animation="slide-up" delay={200} className="text-gray-300 text-lg" />
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -203,6 +229,8 @@ const ServiceLandingPage = () => {
             </div>
             <div className="glass rounded-2xl p-8">
               <h2 className="text-3xl font-bold mb-6">Sample Pricing Guidance</h2>
+              <CurrencySwitcher currency={currency} setCurrency={setCurrency} countryCode={countryCode} isDetected={isDetected} />
+              <p className="text-dexRed text-2xl font-bold mb-4 leading-tight">{getCurrencyPrice(guidancePackage, currency)}</p>
               <p className="text-gray-300 leading-relaxed">{page.pricing}</p>
             </div>
           </div>

@@ -49,9 +49,9 @@ const Footer: React.FC = () => {
     <ul className="space-y-3">
       {links.map((link) => (
         <li key={link.name}>
-          <Link to={link.path} className="text-gray-400 hover:text-white transition-colors inline-flex items-center group">
+          <Link to={link.path} className="text-gray-400 hover:text-white transition-colors inline-flex min-w-0 items-center group">
             <ArrowRight size={14} className="mr-2 text-dexRed transition-transform group-hover:translate-x-1" />
-            <span>{link.name}</span>
+            <span className="break-words">{link.name}</span>
           </Link>
         </li>
       ))}
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
     <footer className="bg-darkBlue pt-20 pb-10">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16">
-          <div className="space-y-6">
+          <div className="space-y-6 min-w-0">
             <Link to="/" className="flex items-center">
               <span className="text-2xl font-bold">
                 <span className="dex-span">Dex</span>
@@ -70,8 +70,8 @@ const Footer: React.FC = () => {
               </span>
             </Link>
             <p className="text-gray-400 max-w-xs">
-              DexLanka Software Solutions builds websites, mobile apps, e-commerce stores, POS systems, inventory systems,
-              dashboards, and custom business software for Sri Lankan SMEs and international startups.
+              DexLanka Software Solutions builds modern websites, e-commerce stores, mobile apps, POS systems, inventory systems,
+              and custom business software for Sri Lankan businesses and international startups.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.facebook.com/profile.php?id=61574091291394" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Facebook">
@@ -89,36 +89,36 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3 className="text-white font-semibold text-lg mb-6">Quick Links</h3>
             {renderLinks(quickLinks)}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3 className="text-white font-semibold text-lg mb-6">Local Services</h3>
             {renderLinks(localServices)}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3 className="text-white font-semibold text-lg mb-6">Industry Links</h3>
             {renderLinks(industryLinks)}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3 className="text-white font-semibold text-lg mb-6">International Services</h3>
             {renderLinks(internationalServices)}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3 className="text-white font-semibold text-lg mb-6">Contact Us</h3>
             <ul className="space-y-5">
               <li className="flex items-start">
                 <MapPin size={20} className="text-dexRed shrink-0 mt-1 mr-3" />
-                <span className="text-gray-400">{BUSINESS_INFO.location}</span>
+                <span className="text-gray-400 break-words">{BUSINESS_INFO.location}</span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="text-dexRed shrink-0 mr-3" />
-                <a href={`tel:${BUSINESS_INFO.phoneHref}`} className="text-gray-400 hover:text-white transition-colors">
+                <a href={`tel:${BUSINESS_INFO.phoneHref}`} className="text-gray-400 hover:text-white transition-colors break-words">
                   {BUSINESS_INFO.phone}
                 </a>
               </li>
@@ -130,7 +130,7 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="text-dexRed shrink-0 mr-3" />
-                <a href={`mailto:${BUSINESS_INFO.email}`} className="text-gray-400 hover:text-white transition-colors">
+                <a href={`mailto:${BUSINESS_INFO.email}`} className="text-gray-400 hover:text-white transition-colors break-words">
                   {BUSINESS_INFO.email}
                 </a>
               </li>

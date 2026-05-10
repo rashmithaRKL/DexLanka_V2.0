@@ -13,6 +13,7 @@ import { BreadcrumbSchema, StructuredData } from '@/components/StructuredData';
 import { RelatedServiceLinks } from '@/components/MarketingSections';
 import { getWhatsAppUrl } from '@/data/site';
 import { useSEO } from '@/hooks/useSEO';
+import { trackEvent } from '@/lib/analytics';
 
 const getRelatedServices = (category: string, title: string) => {
   const label = `${category} ${title}`.toLowerCase();
@@ -412,14 +413,29 @@ const ProjectDetail = () => {
                   href={getWhatsAppUrl(`Hi DexLanka, I saw the ${project.title} case study and I want a similar website, app, or business system.`)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/80 transition-colors"
+                  onClick={() =>
+                    trackEvent('project_cta_click', {
+                      project_id: project.id,
+                      project_title: project.title,
+                      project_category: project.category,
+                    })
+                  }
+                  className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/80 transition-colors"
                 >
                   <MessageCircle className="mr-2 h-4 w-4" />
                   Start a Similar Project
                 </a>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
+                  onClick={() =>
+                    trackEvent('project_cta_click', {
+                      project_id: project.id,
+                      project_title: project.title,
+                      project_category: project.category,
+                      destination: 'contact',
+                    })
+                  }
+                  className="inline-flex w-full sm:w-auto items-center justify-center px-6 py-3 border border-white/20 text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
                 >
                   Contact DexLanka
                 </Link>

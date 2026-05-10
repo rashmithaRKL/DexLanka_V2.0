@@ -16,9 +16,19 @@ const knownMetadata = {
     title: defaultTitle,
     description: defaultDescription,
   },
+  '/about': {
+    title: 'About DexLanka Software Solutions | Sri Lankan Software Studio',
+    description:
+      'Learn about DexLanka Software Solutions, a Homagama-based software studio building websites, apps, POS systems, inventory systems, and custom software.',
+  },
   '/services': {
     title: 'Web Development, Mobile Apps & Custom Software Services | DexLanka',
     description: "Explore DexLanka's website development, mobile app, e-commerce, POS, inventory, UI/UX, and custom software services for modern businesses.",
+  },
+  '/packages': {
+    title: 'Website, E-commerce, POS & Maintenance Packages | DexLanka',
+    description:
+      'View DexLanka package guidance for starter websites, business websites, e-commerce stores, POS and inventory systems, custom software, and support.',
   },
   '/gallery': {
     title: 'DexLanka Projects | Websites, Apps & Business Software Portfolio',
@@ -68,6 +78,43 @@ const knownMetadata = {
     title: 'Laravel to React Migration Services | DexLanka',
     description: 'Migrate Laravel Blade interfaces to React with DexLanka for modern dashboards, API integration, frontend structure, and maintainable UI.',
   },
+  '/blog': {
+    title: 'DexLanka Blog | Website, SEO & Software Guides',
+    description:
+      'Read DexLanka guides about website costs, online stores, restaurant websites, POS systems, inventory software, React, SEO, and business websites.',
+  },
+  '/templates': {
+    title: 'Website Templates for Businesses | DexLanka',
+    description:
+      'Browse DexLanka website templates for business websites, service pages, landing pages, and online brand launches.',
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | DexLanka Software Solutions',
+    description:
+      'Read the DexLanka privacy policy covering website inquiries, contact details, project communication, analytics, and customer data handling.',
+  },
+  '/terms-and-conditions': {
+    title: 'Terms, Refund and Cancellation Policy | DexLanka',
+    description:
+      'Read DexLanka terms and conditions covering project scope, payments, refunds, cancellations, timelines, support, and handover guidance.',
+  },
+};
+
+const projectMetadata = {
+  '/project/1': ['Scriptoria', 'Web Development Literary Masterpieces'],
+  '/project/2': ['Delectable Restaurant', 'Restaurant Website'],
+  '/project/3': ['Tranquil Haven Resort', 'Hotel and Resort Website'],
+  '/project/4': ['Tech Venture', 'Technology Website'],
+  '/project/5': ['Art Gallery', 'Art Gallery Website'],
+  '/project/6': ['Pixel Genius', 'Creative Agency Website'],
+  '/project/7': ['Pulchr Design', 'Business Website'],
+  '/project/8': ['Tech Pulse Computers', 'Computer Shop Website'],
+  '/project/9': ['Fast Guard', 'Business Website'],
+  '/project/10': ['Note Taking App', 'Mobile App'],
+  '/project/11': ['Dashboard UX Design', 'UI/UX Design'],
+  '/project/12': ['Online Marketplace', 'E-commerce Platform'],
+  '/project/13': ['Enterprise Management System', 'Business Software'],
+  '/project/14': ['SEO & Marketing Campaign', 'Digital Marketing'],
 };
 
 const escapeAttr = (value) =>
@@ -76,11 +123,69 @@ const escapeAttr = (value) =>
 const titleize = (route) =>
   route
     .replace(/^\/blog\//, '')
+    .replace(/^\/project\//, 'Project ')
     .replace(/^\//, '')
     .split('-')
     .filter(Boolean)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+
+const routeMeta = (route) => {
+  if (knownMetadata[route]) return knownMetadata[route];
+
+  const title = titleize(route);
+  const lowerTitle = title.toLowerCase();
+
+  if (route.startsWith('/blog/')) {
+    return {
+      title: `${title} | DexLanka Blog`,
+      description: `Read DexLanka's guide to ${lowerTitle} for Sri Lankan businesses, with practical website, SEO, software, and lead-generation advice.`,
+      type: 'article',
+    };
+  }
+
+  if (route.startsWith('/project/')) {
+    const project = projectMetadata[route];
+    if (project) {
+      return {
+        title: `${project[0]} Case Study | DexLanka Software Solutions`,
+        description: `View DexLanka's ${project[0]} case study for ${project[1].toLowerCase()}, including project overview, problem, solution, features, technology, timeline, and results.`,
+        type: 'article',
+      };
+    }
+
+    return {
+      title: `${title} Case Study | DexLanka Software Solutions`,
+      description: `View DexLanka's ${lowerTitle} case study with project overview, business problem, solution, features, technology stack, timeline, and results.`,
+      type: 'article',
+    };
+  }
+
+  if (route.endsWith('-websites')) {
+    return {
+      title: `${title} | DexLanka`,
+      description: `DexLanka builds ${lowerTitle} for Sri Lankan businesses with mobile-friendly design, WhatsApp lead capture, SEO setup, and starting price guidance.`,
+    };
+  }
+
+  if (
+    route.includes('react-supabase') ||
+    route.includes('saas') ||
+    route.includes('dashboard') ||
+    route.includes('startup') ||
+    route.includes('hire-react')
+  ) {
+    return {
+      title: `${title} | DexLanka`,
+      description: `DexLanka helps international startups and small businesses with ${lowerTitle}, using modern React, Supabase, Next.js, dashboards, and clear project milestones.`,
+    };
+  }
+
+  return {
+    title: `${title} | DexLanka`,
+    description: `DexLanka provides ${lowerTitle} for Sri Lankan businesses and international startups, with clear scope, responsive design, SEO setup, and WhatsApp consultation.`,
+  };
+};
 
 const setTag = (html, selector, value) => {
   const escaped = escapeAttr(value);
@@ -106,10 +211,7 @@ const routes = [...sitemap.matchAll(/<loc>https:\/\/dexlanka\.com([^<]*)<\/loc>/
 for (const route of routes) {
   if (route === '/') continue;
 
-  const meta = knownMetadata[route] || {
-    title: `${titleize(route)} | DexLanka`,
-    description: defaultDescription,
-  };
+  const meta = routeMeta(route);
   const url = `${siteUrl}${route}`;
   let html = indexHtml;
   html = setTag(html, 'title', meta.title);
@@ -118,6 +220,7 @@ for (const route of routes) {
   html = setTag(html, 'property=og:title', meta.title);
   html = setTag(html, 'property=og:description', meta.description);
   html = setTag(html, 'property=og:url', url);
+  html = setTag(html, 'property=og:type', meta.type || 'website');
   html = setTag(html, 'name=twitter:title', meta.title);
   html = setTag(html, 'name=twitter:description', meta.description);
   html = setCanonical(html, url);
@@ -128,4 +231,3 @@ for (const route of routes) {
 }
 
 console.log(`Generated ${routes.length - 1} static route HTML files.`);
-

@@ -7,6 +7,7 @@ import { useUserAuth } from '@/context/UserAuthContext';
 import { toast } from '@/hooks/use-toast';
 import { createPackageRequest } from '@/lib/api';
 import { getWhatsAppUrl } from '@/data/site';
+import { trackEvent } from '@/lib/analytics';
 
 interface PackageCardProps {
   title: string;
@@ -36,6 +37,12 @@ const PackageCard: React.FC<PackageCardProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleGetStarted = async () => {
+    trackEvent('package_click', {
+      package_title: title,
+      package_price: price,
+      package_category: category,
+    });
+
     if (!isAuthenticated || !user) {
       toast({
         title: "Opening WhatsApp quote",
@@ -110,11 +117,10 @@ const PackageCard: React.FC<PackageCardProps> = ({
           <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
         </div>
 
-        <div className="flex items-baseline mb-8 pb-6 border-b border-gray-800">
-          <span className={`font-bold ${isPopular ? 'text-5xl text-dexRed' : 'text-4xl text-white'}`}>
+        <div className="flex flex-wrap items-baseline mb-8 pb-6 border-b border-gray-800">
+          <span className={`font-bold leading-tight break-words ${isPopular ? 'text-3xl sm:text-4xl xl:text-5xl text-dexRed' : 'text-3xl sm:text-4xl text-white'}`}>
             {price}
           </span>
-          {price.startsWith('LKR') && <span className="text-gray-500 ml-2 text-sm">/project</span>}
         </div>
 
         <ul className="space-y-4 mb-8">

@@ -11,7 +11,8 @@ import { useUserAuth } from '@/context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { useSEO } from '@/hooks/useSEO';
-import { FinalCTA, MaintenancePlansSection } from '@/components/MarketingSections';
+import { CurrencySwitcher, FinalCTA, MaintenancePlansSection } from '@/components/MarketingSections';
+import { getCurrencyPrice, useCurrency } from '@/hooks/useCurrency';
 
 const Packages = () => {
   const [comparisonRef, comparisonInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -19,6 +20,7 @@ const Packages = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const { isAuthenticated } = useUserAuth();
   const navigate = useNavigate();
+  const { currency, setCurrency, countryCode, isDetected } = useCurrency();
 
   useSEO({
     title: 'Website, E-commerce, POS & Maintenance Packages | DexLanka',
@@ -48,6 +50,8 @@ const Packages = () => {
       {
         title: 'Starter Website',
         price: 'From Rs 25,000',
+        priceLkr: 'From Rs 25,000',
+        priceUsd: 'From $85',
         description: 'Best for personal brands, small shops, restaurants, cafes, and basic service businesses',
         features: [
           '1-3 pages',
@@ -64,7 +68,9 @@ const Packages = () => {
       },
       {
         title: 'Business Website',
-        price: 'From Rs 45,000 / Rs 120,000',
+        price: 'From Rs 75,000 / Rs 120,000',
+        priceLkr: 'From Rs 75,000 / Rs 120,000',
+        priceUsd: 'From $250 / $400',
         description: 'For growing businesses that need stronger service pages, galleries, forms, maps, and SEO setup',
         features: [
           'Multiple business pages',
@@ -82,6 +88,8 @@ const Packages = () => {
       {
         title: 'Free Website Audit',
         price: 'Free',
+        priceLkr: 'Free',
+        priceUsd: 'Free',
         description: 'For businesses that want DexLanka to review their current website or Facebook page first',
         features: [
           'Homepage clarity review',
@@ -99,6 +107,8 @@ const Packages = () => {
       {
         title: 'Custom Business Software',
         price: 'Quote Based',
+        priceLkr: 'Quote Based',
+        priceUsd: 'Quote Based',
         description: 'POS systems, inventory systems, employee systems, booking systems, dashboards, and automation',
         features: [
           'Admin dashboard',
@@ -115,7 +125,9 @@ const Packages = () => {
       },
       {
         title: 'E-commerce Website',
-        price: 'From Rs 60,000 / Rs 250,000',
+        price: 'From Rs 180,000 / Rs 250,000',
+        priceLkr: 'From Rs 180,000 / Rs 250,000',
+        priceUsd: 'From $600 / $850',
         description: 'For shops and online stores that need products, cart, checkout, and order management',
         features: [
           'Product categories',
@@ -133,6 +145,8 @@ const Packages = () => {
       {
         title: 'POS / Inventory System',
         price: 'Quote Based',
+        priceLkr: 'Quote Based',
+        priceUsd: 'Quote Based',
         description: 'Business system for sales, stock, reports, staff, and suppliers',
         features: [
           'Sales management',
@@ -152,6 +166,8 @@ const Packages = () => {
       {
         title: 'Simple Mobile App',
         price: 'Scoped Quote',
+        priceLkr: 'Scoped Quote',
+        priceUsd: 'Scoped Quote',
         description: 'Focused mobile app for core customer or staff workflows',
         features: [
           'Up to 5 screens/features',
@@ -167,6 +183,8 @@ const Packages = () => {
       {
         title: 'SaaS MVP',
         price: 'Scoped Quote',
+        priceLkr: 'Scoped Quote',
+        priceUsd: 'Scoped Quote',
         description: 'First version of a SaaS, marketplace, dashboard, or startup web app product',
         features: [
           'Cross-platform (iOS & Android)',
@@ -184,6 +202,8 @@ const Packages = () => {
       {
         title: 'Admin Dashboard',
         price: 'Scoped Quote',
+        priceLkr: 'Scoped Quote',
+        priceUsd: 'Scoped Quote',
         description: 'Internal tools, analytics panels, CRUD screens, and reporting',
         features: [
           'Role-based access',
@@ -202,6 +222,8 @@ const Packages = () => {
       {
         title: 'Enterprise Solution',
         price: 'Custom',
+        priceLkr: 'Custom',
+        priceUsd: 'Custom',
         description: 'Tailored software solutions for enterprise needs',
         features: [
           'Custom software architecture',
@@ -306,6 +328,7 @@ const Packages = () => {
       {/* Packages Tabs */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
+          <CurrencySwitcher currency={currency} setCurrency={setCurrency} countryCode={countryCode} isDetected={isDetected} />
           <div className="flex justify-center mb-12">
             <div className="inline-flex glass rounded-lg p-1 flex-wrap gap-2 justify-center">
               {[{ id: 'websites', label: 'Websites' }, { id: 'applications', label: 'Applications' }, { id: 'mobile', label: 'Mobile Apps' }, { id: 'enterprise', label: 'Enterprise' }].map(tab => (
@@ -321,8 +344,8 @@ const Packages = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {packages[currentTab].map((pkg, index) => (
-              <PackageCard key={index} {...pkg} delay={index} />
+            {packages[currentTab as keyof typeof packages].map((pkg, index) => (
+              <PackageCard key={index} {...pkg} price={getCurrencyPrice(pkg, currency)} delay={index} />
             ))}
           </div>
 
@@ -330,7 +353,7 @@ const Packages = () => {
             <p className="text-gray-300 mb-6">Don't see a package that fits your needs? We offer custom solutions.</p>
             <button
               onClick={handleRequestQuote}
-              className="inline-block px-6 py-3 border border-dexRed text-dexRed rounded-lg text-sm sm:text-base hover:bg-dexRed/10 transition-colors"
+              className="inline-block w-full sm:w-auto px-6 py-3 border border-dexRed text-dexRed rounded-lg text-sm sm:text-base hover:bg-dexRed/10 transition-colors"
             >
               Request Custom Quote
             </button>

@@ -30,6 +30,7 @@ export const whatsappMessages = {
   mobile: 'Hi DexLanka, I need a mobile app for my business. Can I get a quote?',
   international: 'Hi DexLanka, I need a free project audit for my startup/software project.',
   audit: 'Hi DexLanka, I would like to request a free website audit.',
+  maintenance: 'Hi DexLanka, I need monthly website maintenance support.',
 };
 
 export const serviceAreas = [
@@ -98,13 +99,17 @@ export const packageGuidance = [
   {
     title: 'Starter Website',
     price: 'From Rs 25,000',
+    priceLkr: 'From Rs 25,000',
+    priceUsd: 'From $85',
     bestFor: 'Personal brands, small shops, restaurants, cafes, and basic service businesses.',
     features: ['1-3 pages', 'Mobile responsive design', 'Contact section', 'WhatsApp button', 'Basic SEO setup', 'Social media links', 'Free domain for 1 year if included in offer'],
-    notIncluded: ['E-commerce', 'Payment gateway', 'Custom dashboard', 'Advanced SEO', 'Custom booking system', 'Large content writing', 'Advanced animations', 'Complex integrations'],
+    notIncluded: ['E-commerce', 'Payment gateway', 'Custom dashboard', 'Advanced SEO', 'Custom booking system', 'Large content writing', 'Advanced integrations'],
   },
   {
     title: 'Business Website',
     price: 'From Rs 75,000 / Rs 120,000',
+    priceLkr: 'From Rs 75,000 / Rs 120,000',
+    priceUsd: 'From $250 / $400',
     bestFor: 'Growing businesses that need more pages, service sections, gallery, forms, Google Maps, and SEO setup.',
     features: ['Multiple business pages', 'Service sections', 'Gallery/portfolio', 'Contact forms', 'Google Maps', 'SEO setup', 'WhatsApp integration', 'Mobile responsive design'],
     isPopular: true,
@@ -112,12 +117,16 @@ export const packageGuidance = [
   {
     title: 'E-commerce Website',
     price: 'From Rs 180,000 / Rs 250,000',
+    priceLkr: 'From Rs 180,000 / Rs 250,000',
+    priceUsd: 'From $600 / $850',
     bestFor: 'Shops and online stores that need product display, orders, checkout, and admin management.',
     features: ['Product categories', 'Product pages', 'Cart', 'Checkout', 'Order management', 'Admin panel', 'WhatsApp order option', 'COD/payment options depending on requirement'],
   },
   {
     title: 'Custom Business Software',
     price: 'Quote Based',
+    priceLkr: 'Quote Based',
+    priceUsd: 'Quote Based',
     bestFor: 'POS systems, inventory systems, employee systems, booking systems, dashboards, and business automation.',
     features: ['Admin dashboard', 'Staff login', 'Customer management', 'Sales management', 'Stock management', 'Reports', 'Invoices', 'Business automation'],
   },
@@ -180,17 +189,23 @@ export const maintenancePlans = [
   {
     title: 'Basic Maintenance',
     price: 'Rs 10,000/month',
+    priceLkr: 'Rs 10,000/month',
+    priceUsd: '$35/month',
     features: ['Small updates', 'Backup checks', 'Security checks', 'Minor content changes'],
   },
   {
     title: 'Business Maintenance',
     price: 'Rs 25,000/month',
+    priceLkr: 'Rs 25,000/month',
+    priceUsd: '$85/month',
     features: ['Priority support', 'Monthly updates', 'Performance checks', 'SEO monitoring', 'Bug fixes'],
     isPopular: true,
   },
   {
     title: 'Premium Maintenance',
     price: 'Rs 50,000+/month',
+    priceLkr: 'Rs 50,000+/month',
+    priceUsd: '$170+/month',
     features: ['Ongoing improvements', 'New features', 'Analytics reports', 'Conversion optimization', 'Technical support'],
   },
 ];

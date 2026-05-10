@@ -94,21 +94,21 @@ const Navbar = () => {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'glass py-3' : 'py-5'
         }`}
     >
-      <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link to="/" className="flex items-center">
-          <span className="text-2xl font-bold">
+      <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center gap-4">
+        <Link to="/" className="flex min-w-0 items-center">
+          <span className="text-xl sm:text-2xl font-bold whitespace-nowrap">
             <span className="dex-span">Dex</span>
             <span className="lanka-span">Lanka</span>
           </span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className={`relative text-white hover:text-dexRed transition-colors duration-300 ease-in-out animated-underline ${location.pathname === link.path
+              className={`relative text-sm xl:text-base text-white hover:text-dexRed transition-colors duration-300 ease-in-out animated-underline ${location.pathname === link.path
                 ? 'font-medium after:w-full'
                 : 'font-normal'
                 }`}
@@ -158,7 +158,7 @@ const Navbar = () => {
         {/* Mobile Toggle Button */}
         <button
           type="button"
-          className="md:hidden text-white focus:outline-none transition-transform duration-200 hover:scale-110"
+          className="lg:hidden text-white focus:outline-none transition-transform duration-200 hover:scale-110"
           onClick={(e) => {
             e.stopPropagation();
             toggleMenu();
@@ -174,10 +174,10 @@ const Navbar = () => {
       {/* Mobile Navigation Menu */}
       <div
         id="mobile-menu"
-        className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out glass ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out glass ${isOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'
           }`}
       >
-        <div className="container mx-auto py-4 px-6 flex flex-col space-y-5">
+        <div className="container mx-auto py-4 px-6 flex max-h-[calc(80vh-5rem)] flex-col space-y-5 overflow-y-auto">
           {navLinks.map((link) => (
             <Link
               key={link.name}

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { BUSINESS_INFO, SITE_URL } from '@/data/site';
 
 export interface StructuredDataProps {
-  type: 'Organization' | 'LocalBusiness' | 'WebSite' | 'WebPage' | 'Product' | 'BreadcrumbList' | 'Article' | 'Service' | 'FAQPage' | 'CreativeWork';
+  type: 'Organization' | 'LocalBusiness' | 'WebSite' | 'WebPage' | 'Product' | 'BreadcrumbList' | 'Article' | 'BlogPosting' | 'Service' | 'FAQPage' | 'CreativeWork';
   data: Record<string, unknown>;
   id?: string;
 }
