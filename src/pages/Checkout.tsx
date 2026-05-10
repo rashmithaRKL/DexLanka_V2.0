@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -13,6 +13,7 @@ import { createTemplatePurchase, getTemplate } from '@/lib/api';
 import { downloadTemplate } from '@/lib/clientDownload';
 import { useUserAuth } from '@/context/UserAuthContext';
 import { DownloadProgress } from '@/components/DownloadProgress';
+import { getCountryNameFromCode, useCurrency } from '@/hooks/useCurrency';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Checkout = () => {
   const { items, getTotalPrice, clearCart } = useCart();
   const { toast } = useToast();
   const { user } = useUserAuth();
+  const { countryCode, countryName } = useCurrency();
 
   // Calculate if this is a free order
   const cartTotal = getTotalPrice();
@@ -74,6 +76,7 @@ const Checkout = () => {
     zipCode: '',
     country: 'Sri Lanka',
   });
+  const [countryTouched, setCountryTouched] = useState(false);
 
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
@@ -81,8 +84,18 @@ const Checkout = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    if (name === 'country') {
+      setCountryTouched(true);
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    if (countryTouched) return;
+    const detectedCountry = countryName || getCountryNameFromCode(countryCode);
+    if (!detectedCountry) return;
+    setFormData((prev) => ({ ...prev, country: detectedCountry }));
+  }, [countryCode, countryName, countryTouched]);
 
   // Generate unique order ID
   const generateOrderId = (): string => {
