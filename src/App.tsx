@@ -14,6 +14,7 @@ import { CartProvider } from "./context/CartContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import { servicePages } from "./data/site";
+import { useConversionTracking } from "./hooks/useConversionTracking";
 
 const About = lazy(() => import("./pages/About"));
 const Services = lazy(() => import("./pages/Services"));
@@ -40,6 +41,11 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 
+const ConversionTracking = () => {
+  useConversionTracking();
+  return null;
+};
+
 // const queryClient = new QueryClient();
 
 const App = () => {
@@ -48,13 +54,8 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const markLoaded = () => setIsLoaded(true);
-    if (document.readyState === "complete") {
-      markLoaded();
-    } else {
-      window.addEventListener("load", markLoaded);
-    }
-    return () => window.removeEventListener("load", markLoaded);
+    const timer = window.setTimeout(() => setIsLoaded(true), 450);
+    return () => window.clearTimeout(timer);
   }, []);
 
   return (
@@ -68,6 +69,7 @@ const App = () => {
               <Sonner />
               <BrowserRouter>
                 <ScrollToTop />
+                <ConversionTracking />
                 <Suspense fallback={<Loader />}>
                   <Routes>
                     <Route path="/" element={<Index />} />

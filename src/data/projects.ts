@@ -1,15 +1,13 @@
-import Note from '../assets/images/Note.png';
-import Art from '../assets/images/image.png';
-import Fast from '../assets/images/fast.png';
-import Book from '../assets/images/book.png';
-import Tech from '../assets/images/tech.png';
-import Hotel from '../assets/images/hotel.png';
-import Resort from '../assets/images/resort.png';
-import Food from '../assets/images/food.png';
-import Pixel from '../assets/images/pixel.png';
-import Design from '../assets/images/design.png';
-import Com from '../assets/images/Com.png';
-import Create from '../assets/images/create.png';
+import Note from '../assets/images/mobile-app-development-sri-lanka-case-study.jpg';
+import Art from '../assets/images/art-gallery-website-case-study.jpg';
+import Fast from '../assets/images/fast-guard-business-website-case-study.jpg';
+import Book from '../assets/images/scriptoria-website-case-study.jpg';
+import Tech from '../assets/images/tech-venture-react-website-case-study.jpg';
+import Hotel from '../assets/images/restaurant-website-design-sri-lanka-case-study.jpg';
+import Resort from '../assets/images/hotel-resort-website-sri-lanka-case-study.jpg';
+import Pixel from '../assets/images/creative-agency-website-case-study.jpg';
+import Design from '../assets/images/ui-ux-business-website-design-case-study.jpg';
+import Com from '../assets/images/ecommerce-website-development-sri-lanka-case-study.jpg';
 
 export interface ProjectDetails {
   id: number;

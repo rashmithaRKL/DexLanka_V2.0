@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { BUSINESS_INFO, SITE_URL } from '@/data/site';
 
 export interface StructuredDataProps {
-  type: 'Organization' | 'LocalBusiness' | 'WebSite' | 'WebPage' | 'Product' | 'BreadcrumbList' | 'Article' | 'Service' | 'FAQPage';
+  type: 'Organization' | 'LocalBusiness' | 'WebSite' | 'WebPage' | 'Product' | 'BreadcrumbList' | 'Article' | 'Service' | 'FAQPage' | 'CreativeWork';
   data: Record<string, unknown>;
   id?: string;
 }
@@ -50,7 +50,7 @@ export const OrganizationSchema = () => {
         alternateName: BUSINESS_INFO.shortName,
         url: siteUrl,
         logo: `${siteUrl}/logo.png`,
-        description: 'DexLanka Software Solutions builds websites, e-commerce platforms, mobile apps, POS systems, inventory systems, dashboards, and custom business software for Sri Lankan SMEs and international startups.',
+        description: 'DexLanka Software Solutions builds websites, e-commerce platforms, mobile apps, POS systems, inventory systems, dashboards, and custom business software for Sri Lankan businesses and international startups.',
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: BUSINESS_INFO.phone,
@@ -60,9 +60,9 @@ export const OrganizationSchema = () => {
           availableLanguage: ['en', 'si'],
         },
         sameAs: [
-          'https://www.facebook.com/dexlanka',
-          'https://www.linkedin.com/company/dexlanka',
-          'https://twitter.com/dexlanka',
+          'https://www.facebook.com/profile.php?id=61574091291394',
+          'https://www.instagram.com/dex_lanka/',
+          'https://x.com/dexlanka',
         ],
         address: {
           '@type': 'PostalAddress',
@@ -88,7 +88,7 @@ export const LocalBusinessSchema = () => {
         image: `${siteUrl}/og-image.png`,
         telephone: BUSINESS_INFO.phone,
         email: BUSINESS_INFO.email,
-        priceRange: 'LKR 45,000+',
+        priceRange: 'Rs 25,000+',
         address: {
           '@type': 'PostalAddress',
           streetAddress: BUSINESS_INFO.location,
@@ -104,7 +104,7 @@ export const LocalBusinessSchema = () => {
             closes: '18:00',
           },
         ],
-        areaServed: ['Homagama', 'Meegoda', 'Colombo', 'Sri Lanka', 'International'],
+        areaServed: ['Sri Lanka', 'Colombo', 'Homagama', 'Maharagama', 'Kottawa', 'Nugegoda', 'Gampaha', 'Kandy', 'Galle', 'International'],
       }}
       id="local-business"
     />

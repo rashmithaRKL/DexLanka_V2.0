@@ -61,7 +61,7 @@ const PrivacyPolicy = () => {
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedText text="Privacy Policy" animation="slide-up" className="inline-block text-xl text-dexRed font-medium mb-4" />
             <AnimatedText text="How DexLanka Handles Website and Project Information" animation="slide-up" delay={100} className="text-4xl md:text-5xl font-bold mb-6" />
-            <p className="text-gray-300 text-lg">Last updated: May 9, 2026</p>
+            <p className="text-gray-300 text-lg">Last updated: May 10, 2026</p>
           </div>
         </div>
       </section>

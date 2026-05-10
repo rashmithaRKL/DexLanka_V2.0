@@ -6,7 +6,7 @@ import { Check, Sparkles } from 'lucide-react';
 import { useUserAuth } from '@/context/UserAuthContext';
 import { toast } from '@/hooks/use-toast';
 import { createPackageRequest } from '@/lib/api';
-import { whatsappUrl } from '@/data/site';
+import { getWhatsAppUrl } from '@/data/site';
 
 interface PackageCardProps {
   title: string;
@@ -41,7 +41,7 @@ const PackageCard: React.FC<PackageCardProps> = ({
         title: "Opening WhatsApp quote",
         description: "Send DexLanka your project details to get a free quote.",
       });
-      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      window.open(getWhatsAppUrl(`Hi DexLanka, I am interested in the ${title} package (${price}). Can I get details?`), '_blank', 'noopener,noreferrer');
       return;
     }
 

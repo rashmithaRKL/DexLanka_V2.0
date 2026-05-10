@@ -3,8 +3,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedText from '@/components/AnimatedText';
 import CounterAnimation from '@/components/CounterAnimation';
-import CEO from '../assets/images/Firefly 20250428003444.png';
-import FrontEndDev from '../assets/images/Firefly 20250430030414.png';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useSEO } from '@/hooks/useSEO';
@@ -16,56 +14,36 @@ const About = () => {
     title: 'About DexLanka Software Solutions | Homagama, Sri Lanka',
     description: 'Learn about DexLanka Software Solutions, a Sri Lankan software studio based near Homagama building websites, apps, POS systems, inventory systems, and custom software.',
     keywords: 'about DexLanka Software Solutions, software company Homagama, Sri Lanka web development team, custom software Sri Lanka',
-    image: '/about-og.png',
+    image: '/og-image.png',
     url: '/about',
     canonical: '/about',
     type: 'website',
   });
-  const [teamRef, teamInView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
   const [journeyRef, journeyInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const team = [
-    {
-      name: 'Rashmitha Kalhara',
-      position: 'CEO, Founder, Lead Developer',
-      image: CEO,
-      bio: 'Rashmitha founded DexLanka with a vision to create exceptional software solutions that transform businesses.',
-    },
-    {
-      name: 'Tharushi Nethmini',
-      position: 'UI/UX Director, Developer',
-      image: FrontEndDev,
-      bio: 'Tharushi leads our technical team with over 3 years of experience in software development and architecture.',
-    },
-  ];
-
   const timeline = [
     {
       year: '2024',
       title: 'DexLanka Founded',
-      description: 'Started as a small team of 3 passionate developers with a vision to create innovative software solutions.',
+      description: 'DexLanka started as a Sri Lankan software studio focused on websites, business systems, and practical digital solutions.',
     },
     {
       year: '2024',
-      title: 'First Major Client',
-      description: 'Secured our first enterprise client and expanded the team to 10 members to handle growing projects.',
-    },
-    {
-      year: '2024',
-      title: 'Mobile App Division',
-      description: 'Launched our dedicated mobile application development division to focus on iOS and Android platforms.',
+      title: 'Local Business Website Work',
+      description: 'The team focused on mobile-friendly websites, clear business copy, WhatsApp CTAs, and SEO-ready structures for SMEs.',
     },
     {
       year: '2025',
-      title: 'International Expansion',
-      description: 'Opened our first international office and partnered with global technology leaders.',
+      title: 'Business Software Capability',
+      description: 'DexLanka expanded project planning around POS systems, inventory systems, admin dashboards, mobile apps, and custom workflows.',
+    },
+    {
+      year: '2026',
+      title: 'Local and International Positioning',
+      description: 'DexLanka now positions its services for Sri Lankan businesses and international startups that need affordable React, Supabase, and custom software support.',
     },
   ];
 

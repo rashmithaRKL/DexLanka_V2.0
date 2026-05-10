@@ -4,19 +4,19 @@ import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import AnimatedText from '@/components/AnimatedText';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, ExternalLink, Facebook, Twitter, Instagram, Linkedin, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ExternalLink, Facebook, Twitter, Instagram, MessageCircle } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import { BreadcrumbSchema, FAQSchema, LocalBusinessSchema } from '@/components/StructuredData';
 import { FinalCTA, ServiceAreasSection } from '@/components/MarketingSections';
-import { BUSINESS_INFO, whatsappUrl } from '@/data/site';
+import { BUSINESS_INFO, getWhatsAppUrl, whatsappMessages } from '@/data/site';
 
 const Contact = () => {
   // SEO Optimization
   useSEO({
-    title: 'Contact DexLanka Software Solutions | Homagama, Sri Lanka',
-    description: 'Contact DexLanka Software Solutions in Homagama, Sri Lanka for websites, mobile apps, e-commerce, POS systems, inventory systems, and custom software projects.',
+    title: 'Contact DexLanka Software Solutions | Start Your Project',
+    description: 'Contact DexLanka for website development, e-commerce, mobile apps, POS systems, inventory software, and custom business software projects.',
     keywords: 'contact DexLanka, Homagama software company, web development Homagama, software development Sri Lanka, info@dexlanka.com',
-    image: '/contact-og.png',
+    image: '/og-image.png',
     url: '/contact',
     canonical: '/contact',
     type: 'website',
@@ -34,7 +34,7 @@ const Contact = () => {
     },
     {
       question: 'Can we meet in person near Homagama?',
-      answer: 'Yes. In-person meetings can be scheduled near Meegoda, Homagama when suitable. Remote consultations are also available.',
+      answer: 'Yes. In-person meetings can be scheduled near Homagama when suitable. Remote consultations are also available.',
     },
     {
       question: 'Do you work with international clients?',
@@ -147,7 +147,7 @@ const Contact = () => {
                 </div>
 
                 <a
-                  href={whatsappUrl}
+                  href={getWhatsAppUrl(whatsappMessages.homepage)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-8 w-full inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
@@ -164,7 +164,6 @@ const Contact = () => {
                     { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61574091291394', Icon: Facebook },
                     { name: 'Twitter', href: 'https://x.com/dexlanka', Icon: Twitter },
                     { name: 'Instagram', href: 'https://www.instagram.com/dex_lanka/', Icon: Instagram },
-                    { name: 'LinkedIn', href: 'https://linkedin.com', Icon: Linkedin },
                   ].map(({ name, href, Icon }) => (
                     <a
                       key={name}

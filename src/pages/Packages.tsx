@@ -11,6 +11,7 @@ import { useUserAuth } from '@/context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { useSEO } from '@/hooks/useSEO';
+import { FinalCTA, MaintenancePlansSection } from '@/components/MarketingSections';
 
 const Packages = () => {
   const [comparisonRef, comparisonInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -46,49 +47,49 @@ const Packages = () => {
     websites: [
       {
         title: 'Starter Website',
-        price: 'LKR 12,000-45,000',
-        description: 'Ideal for a clean local business website with the essentials',
+        price: 'From Rs 25,000',
+        description: 'Best for personal brands, small shops, restaurants, cafes, and basic service businesses',
         features: [
-          '5 pages',
+          '1-3 pages',
           'Mobile responsive design',
+          'Contact section',
           'WhatsApp button',
-          'Free Domain (1 Year)',
-          'Contact form',
-          'Google Map',
-          'Basic SEO'
+          'Basic SEO setup',
+          'Social media links',
+          'Free domain for 1 year if included in offer',
+          'Excludes e-commerce, payment gateways, custom dashboards, advanced SEO, booking systems, and complex integrations'
         ],
         isPopular: false,
         category: 'website',
       },
       {
         title: 'Business Website',
-        price: 'LKR 50,000-250,000',
-        description: 'For SMEs that need more pages, content control, and lead generation',
+        price: 'From Rs 45,000 / Rs 120,000',
+        description: 'For growing businesses that need stronger service pages, galleries, forms, maps, and SEO setup',
         features: [
-          '10 pages',
-          'CMS/admin panel',
-          'Blog',
-          'Free Domain (1 Year)',
-          'Free SSL',
-          'Free Hostings',
+          'Multiple business pages',
+          'Service sections',
+          'Gallery/portfolio',
+          'Contact forms',
+          'Google Maps',
           'SEO setup',
-          'Analytics',
-          'Social integration'
+          'WhatsApp integration',
+          'Mobile responsive design'
         ],
         isPopular: true,
         category: 'website',
       },
       {
-        title: 'Maintenance',
-        price: 'LKR 10,000-50,000/month',
-        description: 'Ongoing support after launch for website and system improvements',
+        title: 'Free Website Audit',
+        price: 'Free',
+        description: 'For businesses that want DexLanka to review their current website or Facebook page first',
         features: [
-          'Updates',
-          'Backups',
-          'Content changes',
-          'Support',
-          'Hosting monitoring',
-          'Bug fixes'
+          'Homepage clarity review',
+          'Mobile UX review',
+          'WhatsApp CTA review',
+          'Basic SEO observations',
+          'Speed and trust suggestions',
+          'Next-step recommendation'
         ],
         isPopular: false,
         category: 'website',
@@ -96,56 +97,52 @@ const Packages = () => {
     ],
     applications: [
       {
-        title: 'Custom Software',
-        price: 'Scoped Quote',
-        description: 'Dashboards, portals, booking systems, and workflow software',
+        title: 'Custom Business Software',
+        price: 'Quote Based',
+        description: 'POS systems, inventory systems, employee systems, booking systems, dashboards, and automation',
         features: [
-          'Custom user accounts',
-          'Database integration',
           'Admin dashboard',
-          'API development',
-          'Payment gateway integration',
-          'Cloud deployment',
-          '1 Year Support'
+          'Staff login',
+          'Customer management',
+          'Sales management',
+          'Stock management',
+          'Reports',
+          'Invoices',
+          'Business automation'
         ],
         isPopular: false,
         category: 'web_application',
       },
       {
         title: 'E-commerce Website',
-        price: 'LKR 50,000-200,000+',
-        description: 'Online store with product, order, checkout, and admin features',
+        price: 'From Rs 60,000 / Rs 250,000',
+        description: 'For shops and online stores that need products, cart, checkout, and order management',
         features: [
-          'Products',
+          'Product categories',
+          'Product pages',
           'Cart',
           'Checkout',
-          'Payment/COD',
-          'Order dashboard',
-          'Invoice',
-          'Email/WhatsApp order alerts',
-          'Free Domain (1 Year)',
-          'Free SSL',
-          'Free Hostings',
-          '1 Year Support',
-          'Training'
+          'Order management',
+          'Admin panel',
+          'WhatsApp order option',
+          'COD/payment options depending on requirement'
         ],
         isPopular: true,
         category: 'web_application',
       },
       {
         title: 'POS / Inventory System',
-        price: 'LKR 30,000-1,200,000+',
+        price: 'Quote Based',
         description: 'Business system for sales, stock, reports, staff, and suppliers',
         features: [
-          'Products',
-          'Stock',
+          'Sales management',
+          'Stock management',
           'Invoices',
           'Staff login',
           'Reports',
           'Suppliers',
           'Customers',
-          '2 Year Support',
-          'Training'
+          'Business automation'
         ],
         isPopular: false,
         category: 'desktop_system',
@@ -170,7 +167,7 @@ const Packages = () => {
       {
         title: 'SaaS MVP',
         price: 'Scoped Quote',
-        description: 'First version of a SaaS, marketplace, or dashboard product',
+        description: 'First version of a SaaS, marketplace, dashboard, or startup web app product',
         features: [
           'Cross-platform (iOS & Android)',
           'Complex functionality',
@@ -189,14 +186,13 @@ const Packages = () => {
         price: 'Scoped Quote',
         description: 'Internal tools, analytics panels, CRUD screens, and reporting',
         features: [
-          'Product catalog and search',
-          'Shopping cart & checkout',
-          'Payment gateway integration',
-          'User accounts & wishlist',
-          'Order tracking',
-          'Push notifications',
-          'Admin dashboard',
-          '2 Year Support',
+          'Role-based access',
+          'Data tables and filters',
+          'Charts and reports',
+          'CRUD screens',
+          'Export-ready workflows',
+          'Supabase/API integration',
+          'Responsive admin UI',
         ],
         isPopular: false,
         category: 'mobile_app',
@@ -386,6 +382,13 @@ const Packages = () => {
           </motion.div>
         </div>
       </section>
+
+      <MaintenancePlansSection />
+      <FinalCTA
+        title="Need a clear quote before you start?"
+        description="Send your business type, required features, budget range, and timeline. DexLanka will help you choose the right package or custom scope."
+        primaryLabel="Request Website Package"
+      />
 
       {/* Footer */}
       <Footer />

@@ -1,17 +1,23 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, AlertCircle } from 'lucide-react';
+import { Send, Mail } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { submitContactForm } from '@/lib/api';
 import { generateMailtoLink } from '@/lib/emailService';
+import { trackEvent } from '@/lib/analytics';
 
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
+    businessName: '',
     email: '',
     phone: '',
-    subject: '',
+    projectType: '',
+    budgetRange: '',
+    preferredContactMethod: '',
+    expectedTimeline: '',
+    reference: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,20 +30,46 @@ const ContactForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    const submissionData = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      subject: `${formData.projectType || 'Project'} Quote Request`,
+      message: [
+        `Business name: ${formData.businessName || 'Not provided'}`,
+        `Project type: ${formData.projectType || 'Not selected'}`,
+        `Budget range: ${formData.budgetRange || 'Not selected'}`,
+        `Preferred contact method: ${formData.preferredContactMethod || 'Not selected'}`,
+        `Expected timeline: ${formData.expectedTimeline || 'Not selected'}`,
+        `Reference image/document/link: ${formData.reference || 'Not provided'}`,
+        '',
+        'Message:',
+        formData.message,
+      ].join('\n'),
+    };
     
     try {
-      await submitContactForm(formData);
+      await submitContactForm(submissionData);
       toast({
         title: "Message sent!",
-        description: "We've received your message and will get back to you soon.",
+        description: "Tell us your project idea. We'll reply as soon as possible with the next steps.",
+      });
+      trackEvent('contact_form_submit', {
+        project_type: formData.projectType || 'Not selected',
+        budget_range: formData.budgetRange || 'Not selected',
       });
       
       // Reset form
       setFormData({
         name: '',
+        businessName: '',
         email: '',
         phone: '',
-        subject: '',
+        projectType: '',
+        budgetRange: '',
+        preferredContactMethod: '',
+        expectedTimeline: '',
+        reference: '',
         message: '',
       });
     } catch (error) {
@@ -51,7 +83,7 @@ const ContactForm: React.FC = () => {
           action: (
             <button
               onClick={() => {
-                const mailtoLink = generateMailtoLink(formData);
+                const mailtoLink = generateMailtoLink(submissionData);
                 window.open(mailtoLink, '_blank');
               }}
               className="flex items-center gap-2 px-3 py-2 bg-dexRed text-white rounded-md hover:bg-red-600 transition-colors"
@@ -82,7 +114,7 @@ const ContactForm: React.FC = () => {
     >
       <h2 className="text-2xl font-bold mb-2">Get Free Website Quote</h2>
       <p className="text-gray-300 text-sm mb-6">
-        Share your business type, project idea, must-have features, and preferred timeline.
+        Tell us your project idea. We'll reply as soon as possible with the next steps.
       </p>
       
       <form onSubmit={handleSubmit} className="space-y-5">
@@ -104,6 +136,23 @@ const ContactForm: React.FC = () => {
           </div>
           
           <div>
+            <label htmlFor="businessName" className="block text-sm font-medium mb-1">
+              Business Name
+            </label>
+            <input
+              id="businessName"
+              name="businessName"
+              type="text"
+              value={formData.businessName}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
+              placeholder="Your business name"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
             <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email
             </label>
@@ -118,44 +167,141 @@ const ContactForm: React.FC = () => {
               placeholder="your@email.com"
             />
           </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium mb-1">
+              Phone / WhatsApp
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
+              placeholder="+94..."
+            />
+          </div>
         </div>
-        
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label htmlFor="projectType" className="block text-sm font-medium mb-1">
+              Project Type
+            </label>
+            <select
+              id="projectType"
+              name="projectType"
+              required
+              value={formData.projectType}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
+            >
+              <option value="" disabled>Select project type</option>
+              <option value="Website">Website</option>
+              <option value="E-commerce">E-commerce</option>
+              <option value="Mobile app">Mobile app</option>
+              <option value="POS system">POS system</option>
+              <option value="Inventory system">Inventory system</option>
+              <option value="Custom software">Custom software</option>
+              <option value="Branding">Branding</option>
+              <option value="Website redesign">Website redesign</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="budgetRange" className="block text-sm font-medium mb-1">
+              Budget Range
+            </label>
+            <select
+              id="budgetRange"
+              name="budgetRange"
+              value={formData.budgetRange}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
+            >
+              <option value="">Select budget range</option>
+              <option value="Rs 25,000 - Rs 75,000">Rs 25,000 - Rs 75,000</option>
+              <option value="Rs 75,000 - Rs 120,000">Rs 75,000 - Rs 120,000</option>
+              <option value="Rs 120,000 - Rs 250,000">Rs 120,000 - Rs 250,000</option>
+              <option value="Rs 250,000+">Rs 250,000+</option>
+              <option value="Quote based">Quote based</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label htmlFor="preferredContactMethod" className="block text-sm font-medium mb-1">
+              Preferred Contact Method
+            </label>
+            <select
+              id="preferredContactMethod"
+              name="preferredContactMethod"
+              value={formData.preferredContactMethod}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
+            >
+              <option value="">Select contact method</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Phone call">Phone call</option>
+              <option value="Email">Email</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="expectedTimeline" className="block text-sm font-medium mb-1">
+              Expected Timeline
+            </label>
+            <select
+              id="expectedTimeline"
+              name="expectedTimeline"
+              value={formData.expectedTimeline}
+              onChange={handleChange}
+              className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
+            >
+              <option value="">Select timeline</option>
+              <option value="As soon as possible">As soon as possible</option>
+              <option value="Within 2-4 weeks">Within 2-4 weeks</option>
+              <option value="Within 1-2 months">Within 1-2 months</option>
+              <option value="Flexible">Flexible</option>
+            </select>
+          </div>
+        </div>
+
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium mb-1">
-            Phone Number
+          <label htmlFor="reference" className="block text-sm font-medium mb-1">
+            Reference Image / Document / Link (Optional)
           </label>
           <input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
+            id="reference"
+            name="reference"
+            type="text"
+            value={formData.reference}
             onChange={handleChange}
             className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
-            placeholder="Your phone number (optional)"
+            placeholder="Paste a website, Drive link, image link, or note"
           />
         </div>
-        
+
         <div>
-          <label htmlFor="subject" className="block text-sm font-medium mb-1">
-            Subject
+          <label htmlFor="referenceFile" className="block text-sm font-medium mb-1">
+            Upload Reference Image / Document (Optional)
           </label>
-          <select
-            id="subject"
-            name="subject"
-            required
-            value={formData.subject}
-            onChange={handleChange}
-            className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
-          >
-            <option value="" disabled>Select a subject</option>
-            <option value="Website Quote">Website Quote</option>
-            <option value="Mobile App Quote">Mobile App Quote</option>
-            <option value="E-commerce Website">E-commerce Website</option>
-            <option value="POS / Inventory System">POS / Inventory System</option>
-            <option value="Custom Software">Custom Software</option>
-            <option value="Maintenance Support">Maintenance Support</option>
-            <option value="Other">Other</option>
-          </select>
+          <input
+            id="referenceFile"
+            name="referenceFile"
+            type="file"
+            onChange={(event) => {
+              const fileName = event.target.files?.[0]?.name;
+              if (fileName) {
+                setFormData((prev) => ({ ...prev, reference: prev.reference ? `${prev.reference} | Uploaded file: ${fileName}` : `Uploaded file: ${fileName}` }));
+              }
+            }}
+            className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed file:mr-4 file:rounded-md file:border-0 file:bg-dexRed file:px-3 file:py-2 file:text-white"
+          />
+          <p className="text-gray-400 text-xs mt-2">If upload delivery is not configured, add a Google Drive or reference link above as well.</p>
         </div>
         
         <div>

@@ -11,9 +11,9 @@ import { useSEO } from '@/hooks/useSEO';
 
 const Gallery = () => {
   useSEO({
-    title: 'Project Case Studies | DexLanka Software Solutions',
+    title: 'DexLanka Projects | Websites, Apps & Business Software Portfolio',
     description:
-      'Explore DexLanka project case studies for websites, mobile apps, e-commerce, dashboards, UI/UX, and custom business software.',
+      "View DexLanka's portfolio of websites, e-commerce platforms, mobile apps, business software, branding, and digital solutions.",
     keywords: 'DexLanka projects, website case studies Sri Lanka, software project portfolio, React projects Sri Lanka',
     image: '/og-image.png',
     url: '/gallery',

@@ -8,15 +8,15 @@ import { useInView } from 'react-intersection-observer';
 import { Code, Smartphone, PenTool, ShoppingCart, Database, BarChart, CheckCircle, Monitor, Globe, Server, Shield, Headphones } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
 import { BreadcrumbSchema, ServiceSchema } from '@/components/StructuredData';
-import { FinalCTA, PackagesGuidanceSection, SupportPromiseSection } from '@/components/MarketingSections';
+import { FinalCTA, PackagesGuidanceSection, SupportPromiseSection, WhoWeHelpSection } from '@/components/MarketingSections';
 
 const Services = () => {
   // SEO Optimization
   useSEO({
-    title: 'Web Development, Mobile Apps & POS Systems in Sri Lanka | DexLanka',
-    description: "Explore DexLanka's website development, mobile app development, e-commerce, POS, inventory, UI/UX, branding, SEO, and custom software services.",
+    title: 'Web Development, Mobile Apps & Custom Software Services | DexLanka',
+    description: "Explore DexLanka's website development, mobile app, e-commerce, POS, inventory, UI/UX, and custom software services for modern businesses.",
     keywords: 'web development Sri Lanka, mobile app development Sri Lanka, POS system Sri Lanka, inventory system Sri Lanka, custom software Sri Lanka, e-commerce website Sri Lanka, UI UX SEO Sri Lanka',
-    image: '/services-og.png',
+    image: '/og-image.png',
     url: '/services',
     canonical: '/services',
     type: 'website',
@@ -43,7 +43,7 @@ const Services = () => {
         'SEO-friendly architecture',
         'Content management systems',
       ],
-      path: '/web-development-sri-lanka',
+      path: '/website-development-sri-lanka',
     },
     {
       icon: <Smartphone size={40} />,
@@ -108,7 +108,7 @@ const Services = () => {
         'Analytics setup',
         'Analytics and performance tracking',
       ],
-      path: '/web-development-sri-lanka',
+      path: '/website-development-sri-lanka',
     },
     {
       icon: <Monitor size={40} />,
@@ -289,6 +289,7 @@ const Services = () => {
       </section>
 
       <PackagesGuidanceSection compact />
+      <WhoWeHelpSection />
       
       {/* Our Process */}
       <section ref={processRef} className="section-padding bg-darkBlue">

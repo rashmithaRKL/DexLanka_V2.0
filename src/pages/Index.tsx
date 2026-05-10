@@ -13,9 +13,12 @@ import {
   CaseStudiesSection,
   ClientLogosSection,
   FAQSection,
+  FacebookVsWebsiteSection,
   FinalCTA,
   FounderStorySection,
+  FreeAuditSection,
   GoogleReviewPlaceholderSection,
+  MaintenancePlansSection,
   PackagesGuidanceSection,
   ProcessTimeline,
   RelatedServiceLinks,
@@ -24,9 +27,10 @@ import {
   SupportPromiseSection,
   TestimonialsSection,
   TrustBar,
+  WhoWeHelpSection,
   WhyDexLanka,
 } from '@/components/MarketingSections';
-import { homepageFaqs, servicePages } from '@/data/site';
+import { getWhatsAppUrl, homepageFaqs, servicePages, whatsappMessages } from '@/data/site';
 
 const ContactForm = lazy(() => import('@/components/ContactForm'));
 
@@ -34,7 +38,7 @@ const Index = () => {
   useSEO({
     title: 'DexLanka Software Solutions | Web, Mobile & Business Software in Sri Lanka',
     description:
-      'DexLanka builds modern websites, e-commerce stores, mobile apps, POS systems, inventory systems, and custom business software for Sri Lankan SMEs and global startups.',
+      'DexLanka builds websites, e-commerce platforms, mobile apps, POS systems, inventory systems, and custom software for Sri Lankan businesses and global startups.',
     keywords:
       'DexLanka Software Solutions, web development Sri Lanka, mobile apps Sri Lanka, POS system Sri Lanka, inventory system Sri Lanka, e-commerce website Sri Lanka, React Supabase Next.js',
     image: '/og-image.png',
@@ -51,7 +55,7 @@ const Index = () => {
       title: 'Web Development',
       description:
         'Modern business websites, landing pages, CMS websites, and web apps built for mobile users, local SEO, and customer inquiries.',
-      href: '/web-development-sri-lanka',
+      href: '/website-development-sri-lanka',
     },
     {
       icon: <Smartphone size={24} />,
@@ -128,6 +132,16 @@ const Index = () => {
               />
             ))}
           </div>
+          <div className="text-center mt-12">
+            <a
+              href={getWhatsAppUrl(whatsappMessages.website)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
+            >
+              Start Your Website Today
+            </a>
+          </div>
         </div>
       </section>
 
@@ -167,10 +181,14 @@ const Index = () => {
 
       <CaseStudiesSection limit={6} />
       <WhyDexLanka />
+      <WhoWeHelpSection />
+      <FacebookVsWebsiteSection />
       <ClientLogosSection />
       <FounderStorySection />
       <ProcessTimeline />
       <PackagesGuidanceSection />
+      <FreeAuditSection />
+      <MaintenancePlansSection />
       <SupportPromiseSection />
       <ServiceAreasSection />
       <TestimonialsSection />

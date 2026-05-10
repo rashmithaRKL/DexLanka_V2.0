@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from 'lucide-react';
-import { BUSINESS_INFO } from '@/data/site';
+import { ArrowRight, Facebook, Instagram, Mail, MapPin, MessageCircle, Phone, Twitter, Youtube } from 'lucide-react';
+import { BUSINESS_INFO, getWhatsAppUrl, whatsappMessages } from '@/data/site';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -17,12 +17,23 @@ const Footer: React.FC = () => {
   ];
 
   const localServices = [
-    { name: 'Web Development Sri Lanka', path: '/web-development-sri-lanka' },
-    { name: 'Mobile Apps Sri Lanka', path: '/mobile-app-development-sri-lanka' },
-    { name: 'E-commerce Websites', path: '/ecommerce-website-development-sri-lanka' },
-    { name: 'POS Systems', path: '/pos-system-sri-lanka' },
-    { name: 'Inventory Systems', path: '/inventory-management-system-sri-lanka' },
+    { name: 'Website Development', path: '/website-development-sri-lanka' },
+    { name: 'E-Commerce Development', path: '/ecommerce-website-development-sri-lanka' },
+    { name: 'Mobile App Development', path: '/mobile-app-development-sri-lanka' },
+    { name: 'POS System', path: '/pos-system-sri-lanka' },
+    { name: 'Inventory System', path: '/inventory-management-system-sri-lanka' },
     { name: 'Custom Software', path: '/custom-software-development-sri-lanka' },
+    { name: 'UI/UX Design', path: '/services' },
+    { name: 'Website Maintenance', path: '/packages' },
+  ];
+
+  const industryLinks = [
+    { name: 'Restaurant Websites', path: '/restaurant-websites' },
+    { name: 'Shop Websites', path: '/shop-websites' },
+    { name: 'Salon Websites', path: '/salon-websites' },
+    { name: 'Clinic Websites', path: '/clinic-websites' },
+    { name: 'Travel Agency Websites', path: '/travel-agency-websites' },
+    { name: 'Personal Brand Websites', path: '/personal-brand-websites' },
   ];
 
   const internationalServices = [
@@ -50,7 +61,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-darkBlue pt-20 pb-10">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10 mb-16">
           <div className="space-y-6">
             <Link to="/" className="flex items-center">
               <span className="text-2xl font-bold">
@@ -89,6 +100,11 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
+            <h3 className="text-white font-semibold text-lg mb-6">Industry Links</h3>
+            {renderLinks(industryLinks)}
+          </div>
+
+          <div>
             <h3 className="text-white font-semibold text-lg mb-6">International Services</h3>
             {renderLinks(internationalServices)}
           </div>
@@ -104,6 +120,12 @@ const Footer: React.FC = () => {
                 <Phone size={20} className="text-dexRed shrink-0 mr-3" />
                 <a href={`tel:${BUSINESS_INFO.phoneHref}`} className="text-gray-400 hover:text-white transition-colors">
                   {BUSINESS_INFO.phone}
+                </a>
+              </li>
+              <li className="flex items-center">
+                <MessageCircle size={20} className="text-dexRed shrink-0 mr-3" />
+                <a href={getWhatsAppUrl(whatsappMessages.homepage)} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                  WhatsApp
                 </a>
               </li>
               <li className="flex items-center">

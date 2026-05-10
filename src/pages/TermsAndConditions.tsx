@@ -27,7 +27,7 @@ const TermsAndConditions = () => {
     type: 'website',
   });
 
-  const currentDate = 'May 9, 2026';
+  const currentDate = 'May 10, 2026';
 
   return (
     <div className="bg-background text-foreground min-h-screen">
@@ -378,7 +378,7 @@ const TermsAndConditions = () => {
                         <a href="tel:+94705588789" className="text-dexRed hover:underline">+94 70 558 8789</a>
                       </p>
                       <p>
-                        <strong className="text-white">Address:</strong> Meegoda, Homagama, Sri Lanka
+                        <strong className="text-white">Address:</strong> {BUSINESS_INFO.location}
                       </p>
                     </div>
                   </div>

@@ -17,7 +17,7 @@ import {
   SupportPromiseSection,
   TrustBar,
 } from '@/components/MarketingSections';
-import { BUSINESS_INFO, getServicePageByPath, whatsappUrl } from '@/data/site';
+import { BUSINESS_INFO, getServicePageByPath, getWhatsAppUrl, whatsappMessages } from '@/data/site';
 import { useSEO } from '@/hooks/useSEO';
 
 const ServiceLandingPage = () => {
@@ -64,13 +64,13 @@ const ServiceLandingPage = () => {
         name={page.heading}
         description={page.metaDescription}
         url={page.path}
-        areaServed={page.kind === 'local' ? 'Sri Lanka' : ['Sri Lanka', 'International']}
+        areaServed={page.kind === 'international' ? ['Sri Lanka', 'International'] : 'Sri Lanka'}
       />
       <FAQSchema items={page.faqs} id={`faq-${page.slug}`} />
       <BreadcrumbSchema
         items={[
           { name: 'Home', url: '/' },
-          { name: page.kind === 'local' ? 'Sri Lanka Services' : 'International Services', url: '/services' },
+          { name: page.kind === 'international' ? 'International Services' : page.kind === 'industry' ? 'Industry Websites' : 'Sri Lanka Services', url: '/services' },
           { name: page.heading, url: page.path },
         ]}
       />
@@ -84,7 +84,7 @@ const ServiceLandingPage = () => {
             <AnimatedText text={page.summary} animation="slide-up" delay={200} className="text-gray-300 text-lg" />
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href={whatsappUrl}
+                href={getWhatsAppUrl(page.whatsappMessage || (page.kind === 'international' ? whatsappMessages.international : whatsappMessages.website))}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
@@ -125,6 +125,29 @@ const ServiceLandingPage = () => {
               <p className="text-gray-300 leading-relaxed mb-6">{page.summary}</p>
               <p className="text-gray-300 leading-relaxed">
                 Contact {BUSINESS_INFO.name} to clarify scope, pages, features, integrations, timeline, and launch support.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-darkBlue">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="glass rounded-2xl p-8">
+              <span className="inline-block text-xl text-dexRed font-medium mb-4">The Problem</span>
+              <h2 className="text-3xl font-bold mb-6">What This Solves</h2>
+              <p className="text-gray-300 leading-relaxed">
+                {page.problem ||
+                  'Many businesses lose leads when their website, social media, stock process, booking flow, or internal workflow is unclear, slow, difficult to manage, or not connected to customer contact channels.'}
+              </p>
+            </div>
+            <div className="glass rounded-2xl p-8">
+              <span className="inline-block text-xl text-dexRed font-medium mb-4">Our Solution</span>
+              <h2 className="text-3xl font-bold mb-6">How DexLanka Helps</h2>
+              <p className="text-gray-300 leading-relaxed">
+                {page.solution ||
+                  'DexLanka plans and builds a practical digital solution with clear content, mobile-friendly UX, conversion CTAs, SEO-ready structure, maintainable technology, and launch support.'}
               </p>
             </div>
           </div>
@@ -186,6 +209,33 @@ const ServiceLandingPage = () => {
         </div>
       </section>
 
+      {page.kind === 'international' && (
+        <section className="section-padding bg-darkBlue">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="glass rounded-2xl p-6">
+                <h2 className="text-2xl font-bold mb-4">Timezone and Communication</h2>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  DexLanka works remotely from Sri Lanka with async updates, planned calls, demos, and written scope so international clients can collaborate clearly across time zones.
+                </p>
+              </div>
+              <div className="glass rounded-2xl p-6">
+                <h2 className="text-2xl font-bold mb-4">Milestones</h2>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Projects can be split into discovery, UI design, development milestones, testing, launch, and post-launch support to reduce risk and keep delivery visible.
+                </p>
+              </div>
+              <div className="glass rounded-2xl p-6">
+                <h2 className="text-2xl font-bold mb-4">Payment Process</h2>
+                <p className="text-gray-300 text-sm leading-relaxed">
+                  Payment terms are confirmed in the proposal. For larger builds, phased payments can be aligned with approved milestones and handover points.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       <ProcessTimeline />
       <CaseStudiesSection projectIds={page.relatedProjectIds} limit={3} />
 
@@ -198,13 +248,14 @@ const ServiceLandingPage = () => {
         </div>
       </section>
 
-      {page.kind === 'local' && <ServiceAreasSection />}
+      {page.kind !== 'international' && <ServiceAreasSection />}
       <PackagesGuidanceSection compact />
       <SupportPromiseSection />
       <FAQSection faqs={page.faqs} />
       <FinalCTA
         title={page.kind === 'international' ? 'Request a free project audit.' : "Tell us your project idea. We'll reply within 24 hours."}
         primaryLabel={page.kind === 'international' ? 'Request a Free Project Audit' : page.ctaLabel}
+        whatsappMessage={page.whatsappMessage || (page.kind === 'international' ? whatsappMessages.international : whatsappMessages.website)}
       />
       <Footer />
     </div>

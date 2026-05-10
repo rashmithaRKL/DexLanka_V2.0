@@ -23,7 +23,7 @@ const defaultSEO: Required<Omit<SEOProps, 'publishedTime' | 'modifiedTime' | 'au
   canonical?: string;
 } = {
   title: 'DexLanka Software Solutions | Web, Mobile & Business Software in Sri Lanka',
-  description: 'DexLanka builds modern websites, e-commerce stores, mobile apps, POS systems, inventory systems, and custom business software for Sri Lankan SMEs and global startups.',
+  description: 'DexLanka builds websites, e-commerce platforms, mobile apps, POS systems, inventory systems, and custom software for Sri Lankan businesses and global startups.',
   keywords: 'DexLanka Software Solutions, Web Development Sri Lanka, Mobile App Development Sri Lanka, POS System Sri Lanka, Inventory Management System Sri Lanka, E-Commerce Website Development, React Development, Supabase Developer, Custom Software Sri Lanka',
   image: '/og-image.png',
   url: typeof window !== 'undefined' ? window.location.pathname : '/',
@@ -103,6 +103,8 @@ export const useSEO = (seo: SEOProps = {}) => {
     upsertMetaTag('og:title', fullTitle, true);
     upsertMetaTag('og:description', description, true);
     upsertMetaTag('og:image', fullImage, true);
+    upsertMetaTag('og:image:width', '1200', true);
+    upsertMetaTag('og:image:height', '630', true);
     upsertMetaTag('og:image:alt', fullTitle, true);
     upsertMetaTag('og:url', fullUrl, true);
     upsertMetaTag('og:type', type, true);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, MessageCircle } from 'lucide-react';
-import { trustTechnologies, whatsappUrl } from '@/data/site';
+import { getWhatsAppUrl, heroTrustItems, whatsappMessages } from '@/data/site';
 
 const HeroSection: React.FC = () => {
   return (
@@ -31,7 +31,7 @@ const HeroSection: React.FC = () => {
           width='100%' 
           height='100%'
           title="Spline Animation Desktop"
-          loading="eager"
+          loading="lazy"
           className="touch-none"
           tabIndex={-1}
           style={{ 
@@ -100,7 +100,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto md:mx-0 pointer-events-none"
           >
-            Modern web development, mobile apps, e-commerce stores, POS systems, inventory systems, and custom software for Sri Lankan businesses and global startups.
+            Modern websites, e-commerce stores, mobile apps, POS systems, inventory systems, and custom software for Sri Lankan businesses and international startups.
           </motion.p>
 
           <motion.div
@@ -110,7 +110,7 @@ const HeroSection: React.FC = () => {
             className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pointer-events-none justify-center md:justify-start"
           >
             <a
-              href={whatsappUrl}
+              href={getWhatsAppUrl(whatsappMessages.homepage)}
               target="_blank"
               rel="noopener noreferrer"
               className="px-5 sm:px-6 py-2.5 sm:py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px] flex items-center justify-center pointer-events-auto touch-manipulation"
@@ -123,7 +123,7 @@ const HeroSection: React.FC = () => {
               href="/gallery"
               className="px-5 sm:px-6 py-2.5 sm:py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-all pointer-events-auto touch-manipulation justify-center flex items-center"
             >
-              View Projects
+              View Our Projects
               <ArrowRight size={16} className="ml-2" />
             </a>
           </motion.div>
@@ -133,9 +133,9 @@ const HeroSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.9 }}
             className="mt-6 flex flex-wrap gap-2 justify-center md:justify-start pointer-events-auto"
-            aria-label="DexLanka trust technologies"
+            aria-label="DexLanka core services"
           >
-            {trustTechnologies.map((tech) => (
+            {heroTrustItems.map((tech) => (
               <span key={tech} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs sm:text-sm text-gray-100">
                 {tech}
               </span>

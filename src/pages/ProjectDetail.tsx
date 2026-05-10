@@ -9,9 +9,9 @@ import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import { BreadcrumbSchema } from '@/components/StructuredData';
+import { BreadcrumbSchema, StructuredData } from '@/components/StructuredData';
 import { RelatedServiceLinks } from '@/components/MarketingSections';
-import { whatsappUrl } from '@/data/site';
+import { getWhatsAppUrl } from '@/data/site';
 import { useSEO } from '@/hooks/useSEO';
 
 const getRelatedServices = (category: string, title: string) => {
@@ -135,6 +135,21 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <StructuredData
+        type="CreativeWork"
+        id={`project-${project.id}`}
+        data={{
+          name: project.title,
+          description: project.description,
+          image: project.imageUrl,
+          creator: {
+            '@type': 'Organization',
+            name: 'DexLanka Software Solutions',
+          },
+          about: project.category,
+          keywords: project.technologies.join(', '),
+        }}
+      />
       <BreadcrumbSchema items={[
         { name: 'Home', url: '/' },
         { name: 'Projects', url: '/gallery' },
@@ -394,7 +409,7 @@ const ProjectDetail = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href={whatsappUrl}
+                  href={getWhatsAppUrl(`Hi DexLanka, I saw the ${project.title} case study and I want a similar website, app, or business system.`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/80 transition-colors"

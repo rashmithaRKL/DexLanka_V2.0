@@ -3,8 +3,8 @@ export const SITE_URL = 'https://dexlanka.com';
 export const BUSINESS_INFO = {
   name: 'DexLanka Software Solutions',
   shortName: 'DexLanka',
-  location: 'Meegoda, Homagama, Sri Lanka',
-  addressLocality: 'Meegoda',
+  location: 'Homagama, Sri Lanka',
+  addressLocality: 'Homagama',
   addressRegion: 'Western Province',
   addressCountry: 'LK',
   phone: '+94 70 558 8789',
@@ -13,93 +13,113 @@ export const BUSINESS_INFO = {
   hours: 'Monday to Saturday, 9:00 AM to 6:00 PM',
   website: SITE_URL,
   whatsappMessage:
-    'Hi DexLanka, I am interested in building a website/app/software system for my business. Can I get a free quote?',
+    'Hi DexLanka, I visited your website and I need a free quote for my project.',
 };
 
-export const whatsappUrl = `https://wa.me/${BUSINESS_INFO.phoneHref.replace('+', '')}?text=${encodeURIComponent(
-  BUSINESS_INFO.whatsappMessage
-)}`;
+export const getWhatsAppUrl = (message = BUSINESS_INFO.whatsappMessage) =>
+  `https://wa.me/${BUSINESS_INFO.phoneHref.replace('+', '')}?text=${encodeURIComponent(message)}`;
+
+export const whatsappUrl = getWhatsAppUrl();
+
+export const whatsappMessages = {
+  homepage: 'Hi DexLanka, I visited your website and I need a free quote for my project.',
+  restaurant: 'Hi DexLanka, I need a restaurant website with menu and WhatsApp ordering.',
+  ecommerce: 'Hi DexLanka, I need an e-commerce website for my shop.',
+  pos: 'Hi DexLanka, I need a POS or inventory management system.',
+  website: 'Hi DexLanka, I need a business website. Can I get package details?',
+  mobile: 'Hi DexLanka, I need a mobile app for my business. Can I get a quote?',
+  international: 'Hi DexLanka, I need a free project audit for my startup/software project.',
+  audit: 'Hi DexLanka, I would like to request a free website audit.',
+};
 
 export const serviceAreas = [
-  'Homagama',
-  'Meegoda',
-  'Kottawa',
-  'Maharagama',
-  'Nugegoda',
+  'Sri Lanka',
   'Colombo',
+  'Homagama',
+  'Maharagama',
+  'Kottawa',
+  'Nugegoda',
   'Gampaha',
-  'Negombo',
   'Kandy',
   'Galle',
+  'Negombo',
   'Kurunegala',
-  'All Sri Lanka',
+  'International',
 ];
 
 export const trustTechnologies = ['React', 'Supabase', 'Next.js', 'Cloudflare', 'UI/UX', 'SEO', 'Mobile Responsive'];
+export const heroTrustItems = ['Web Development', 'E-Commerce', 'Mobile Apps', 'POS Systems', 'Inventory Systems', 'Custom Software'];
 
 export const whyDexLanka = [
-  'Modern mobile-responsive design',
+  'Modern business-focused designs',
+  'Mobile-friendly websites',
+  'Affordable packages',
+  'Fast communication',
+  'WhatsApp support',
+  'Domain and hosting guidance',
   'Local Sri Lankan support',
-  'Clear communication',
-  'Business-focused software',
-  'SEO-ready website structure',
-  'Ongoing maintenance and support',
-  'International-ready development quality',
+  'International-ready development',
+  'Custom software capability',
+  'Maintenance after launch',
 ];
 
 export const processSteps = [
   {
     title: 'Free consultation',
-    description: 'We clarify your business goal, target customers, must-have features, budget, and launch timeline.',
+    description: 'We understand your business, customers, goals, required features, budget, and launch timeline.',
   },
   {
-    title: 'Design',
-    description: 'We plan the content, user journey, UI structure, and conversion points before development starts.',
+    title: 'Proposal and quotation',
+    description: 'You receive a clear scope, timeline, starting price, included items, and next steps before work begins.',
+  },
+  {
+    title: 'UI design',
+    description: 'We design the main pages or screens first so the layout, content flow, and user journey are agreed early.',
   },
   {
     title: 'Development',
-    description: 'We build the website, app, dashboard, POS, inventory system, or custom software using modern tools.',
+    description: 'We build the website, app, POS system, inventory system, dashboard, or custom software using modern tools.',
   },
   {
     title: 'Testing',
-    description: 'We test mobile responsiveness, forms, speed, browser behavior, SEO basics, and key business flows.',
+    description: 'We test mobile, desktop, forms, speed, UX, browser behavior, SEO basics, and important business flows.',
   },
   {
     title: 'Launch',
-    description: 'We help deploy the project, connect domains, set up analytics, and prepare the handover.',
+    description: 'We help with domain, hosting, deployment, analytics setup, Search Console readiness, and handover.',
   },
   {
     title: 'Support',
-    description: 'After launch, DexLanka can help with updates, backups, bug fixes, hosting checks, and improvements.',
+    description: 'After launch, DexLanka can help with maintenance, updates, backups, bug fixes, and future improvements.',
   },
 ];
 
 export const packageGuidance = [
   {
     title: 'Starter Website',
-    price: 'LKR 45,000-85,000',
-    features: ['5 pages', 'Mobile responsive design', 'WhatsApp button', 'Contact form', 'Google Map', 'Basic SEO'],
+    price: 'From Rs 25,000',
+    bestFor: 'Personal brands, small shops, restaurants, cafes, and basic service businesses.',
+    features: ['1-3 pages', 'Mobile responsive design', 'Contact section', 'WhatsApp button', 'Basic SEO setup', 'Social media links', 'Free domain for 1 year if included in offer'],
+    notIncluded: ['E-commerce', 'Payment gateway', 'Custom dashboard', 'Advanced SEO', 'Custom booking system', 'Large content writing', 'Advanced animations', 'Complex integrations'],
   },
   {
     title: 'Business Website',
-    price: 'LKR 120,000-250,000',
-    features: ['10 pages', 'CMS/admin panel', 'Blog', 'SEO setup', 'Analytics', 'Social integration'],
+    price: 'From Rs 75,000 / Rs 120,000',
+    bestFor: 'Growing businesses that need more pages, service sections, gallery, forms, Google Maps, and SEO setup.',
+    features: ['Multiple business pages', 'Service sections', 'Gallery/portfolio', 'Contact forms', 'Google Maps', 'SEO setup', 'WhatsApp integration', 'Mobile responsive design'],
     isPopular: true,
   },
   {
     title: 'E-commerce Website',
-    price: 'LKR 250,000-600,000+',
-    features: ['Products', 'Cart', 'Checkout', 'Payment/COD', 'Order dashboard', 'WhatsApp order alerts'],
+    price: 'From Rs 180,000 / Rs 250,000',
+    bestFor: 'Shops and online stores that need product display, orders, checkout, and admin management.',
+    features: ['Product categories', 'Product pages', 'Cart', 'Checkout', 'Order management', 'Admin panel', 'WhatsApp order option', 'COD/payment options depending on requirement'],
   },
   {
-    title: 'POS / Inventory System',
-    price: 'LKR 300,000-1,200,000+',
-    features: ['Products', 'Stock control', 'Invoices', 'Staff login', 'Reports', 'Suppliers and customers'],
-  },
-  {
-    title: 'Maintenance',
-    price: 'LKR 10,000-50,000/month',
-    features: ['Updates', 'Backups', 'Content changes', 'Support', 'Hosting monitoring', 'Bug fixes'],
+    title: 'Custom Business Software',
+    price: 'Quote Based',
+    bestFor: 'POS systems, inventory systems, employee systems, booking systems, dashboards, and business automation.',
+    features: ['Admin dashboard', 'Staff login', 'Customer management', 'Sales management', 'Stock management', 'Reports', 'Invoices', 'Business automation'],
   },
 ];
 
@@ -107,22 +127,71 @@ export const homepageFaqs = [
   {
     question: 'How much does a website cost in Sri Lanka?',
     answer:
-      'A basic business website usually starts from LKR 45,000, while CMS, e-commerce, POS, inventory, and custom software projects depend on features, integrations, and timeline.',
+      'A starter website can begin from Rs 25,000 when the scope is simple. Business websites, e-commerce stores, POS systems, inventory systems, and custom software depend on pages, features, integrations, timeline, content, and support needs.',
   },
   {
-    question: 'Can DexLanka build websites for businesses outside Sri Lanka?',
+    question: 'How long does website development take?',
     answer:
-      'Yes. DexLanka works with Sri Lankan SMEs and international startups on React, Supabase, Next.js, SaaS, dashboard, and custom web app projects.',
+      'A simple website can often be planned and launched faster than a custom system. Timelines depend on page count, content readiness, feedback speed, integrations, and whether the project needs design, e-commerce, or admin features.',
   },
   {
-    question: 'Do you provide support after launch?',
+    question: 'Do you provide domain and hosting?',
     answer:
-      'Yes. DexLanka can help with updates, backups, content changes, bug fixes, hosting monitoring, SEO improvements, and ongoing maintenance.',
+      'Yes. DexLanka can guide domain, hosting, SSL, email, DNS, Cloudflare, deployment, and launch setup. Some offers may include a free domain for one year when confirmed in the quotation.',
   },
   {
-    question: 'Can I request a free quote on WhatsApp?',
+    question: 'Can you connect WhatsApp to my website?',
     answer:
-      'Yes. Use the WhatsApp quote button and share your project idea, business type, needed features, and preferred timeline.',
+      'Yes. Websites can include WhatsApp buttons, sticky WhatsApp CTAs, page-specific pre-filled messages, phone links, and contact forms so customers can reach you faster.',
+  },
+  {
+    question: 'Do you build e-commerce websites?',
+    answer:
+      'Yes. DexLanka builds e-commerce websites with products, categories, cart, checkout, order management, admin panels, COD/payment planning, and WhatsApp order options.',
+  },
+  {
+    question: 'Do you provide maintenance?',
+    answer:
+      'Yes. Monthly maintenance can include small updates, backups, security checks, SEO monitoring, performance checks, bug fixes, analytics reports, and ongoing improvements depending on the plan.',
+  },
+  {
+    question: 'Can international clients work with DexLanka?',
+    answer:
+      'Yes. DexLanka works with international startups and small businesses remotely using clear scope, milestones, online communication, demos, and staged delivery.',
+  },
+  {
+    question: 'Do you build POS and inventory systems?',
+    answer:
+      'Yes. DexLanka builds POS systems, inventory systems, sales management, invoices, stock reports, staff logins, dashboards, and custom business workflows.',
+  },
+  {
+    question: 'Can you redesign my old website?',
+    answer:
+      'Yes. DexLanka can review your existing website, improve content, structure, mobile usability, SEO basics, speed, trust sections, and conversion CTAs while keeping the brand direction where needed.',
+  },
+  {
+    question: 'Can I request custom features?',
+    answer:
+      'Yes. Custom features can be scoped for booking systems, dashboards, payment flows, customer portals, reports, staff accounts, inventory logic, and other business requirements.',
+  },
+];
+
+export const maintenancePlans = [
+  {
+    title: 'Basic Maintenance',
+    price: 'Rs 10,000/month',
+    features: ['Small updates', 'Backup checks', 'Security checks', 'Minor content changes'],
+  },
+  {
+    title: 'Business Maintenance',
+    price: 'Rs 25,000/month',
+    features: ['Priority support', 'Monthly updates', 'Performance checks', 'SEO monitoring', 'Bug fixes'],
+    isPopular: true,
+  },
+  {
+    title: 'Premium Maintenance',
+    price: 'Rs 50,000+/month',
+    features: ['Ongoing improvements', 'New features', 'Analytics reports', 'Conversion optimization', 'Technical support'],
   },
 ];
 
@@ -150,12 +219,14 @@ export const testimonials = [
 export interface MarketingPage {
   slug: string;
   path: string;
-  kind: 'local' | 'international';
+  kind: 'local' | 'industry' | 'international';
   title: string;
   metaDescription: string;
   eyebrow: string;
   heading: string;
   summary: string;
+  problem?: string;
+  solution?: string;
   whoFor: string[];
   features: string[];
   benefits: string[];
@@ -165,6 +236,7 @@ export interface MarketingPage {
   relatedServicePaths: string[];
   faqs: Array<{ question: string; answer: string }>;
   ctaLabel: string;
+  whatsappMessage?: string;
 }
 
 export const localServicePages: MarketingPage[] = [
@@ -189,7 +261,7 @@ export const localServicePages: MarketingPage[] = [
     faqs: [
       {
         question: 'Do you build websites for businesses near Homagama and Colombo?',
-        answer: 'Yes. DexLanka supports businesses in Homagama, Meegoda, Colombo, nearby areas, and all Sri Lanka.',
+        answer: 'Yes. DexLanka supports businesses in Homagama, Colombo, nearby areas, and all Sri Lanka.',
       },
       {
         question: 'Will my website include WhatsApp and Google Map?',
@@ -197,6 +269,7 @@ export const localServicePages: MarketingPage[] = [
       },
     ],
     ctaLabel: 'Get Free Website Quote',
+    whatsappMessage: whatsappMessages.website,
   },
   {
     slug: 'mobile-app-development-sri-lanka',
@@ -227,6 +300,7 @@ export const localServicePages: MarketingPage[] = [
       },
     ],
     ctaLabel: 'Talk to DexLanka on WhatsApp',
+    whatsappMessage: whatsappMessages.mobile,
   },
   {
     slug: 'ecommerce-website-development-sri-lanka',
@@ -257,6 +331,7 @@ export const localServicePages: MarketingPage[] = [
       },
     ],
     ctaLabel: 'Start Your E-commerce Project',
+    whatsappMessage: whatsappMessages.ecommerce,
   },
   {
     slug: 'pos-system-sri-lanka',
@@ -287,6 +362,7 @@ export const localServicePages: MarketingPage[] = [
       },
     ],
     ctaLabel: 'Request POS Consultation',
+    whatsappMessage: whatsappMessages.pos,
   },
   {
     slug: 'inventory-management-system-sri-lanka',
@@ -317,12 +393,13 @@ export const localServicePages: MarketingPage[] = [
       },
     ],
     ctaLabel: 'Get Inventory System Quote',
+    whatsappMessage: whatsappMessages.pos,
   },
   {
     slug: 'restaurant-website-design-sri-lanka',
     path: '/restaurant-website-design-sri-lanka',
     kind: 'local',
-    title: 'Restaurant Website Design in Sri Lanka | DexLanka',
+    title: 'Restaurant Website Design Sri Lanka | DexLanka',
     metaDescription:
       'Restaurant website design in Sri Lanka with menu pages, online ordering, WhatsApp orders, reservation forms, Google Map, SEO, and mobile responsive layouts.',
     eyebrow: 'Restaurant Websites',
@@ -333,7 +410,7 @@ export const localServicePages: MarketingPage[] = [
     features: ['Digital menu', 'WhatsApp orders', 'Reservation form', 'Google Map', 'Gallery', 'Local SEO setup'],
     benefits: ['More food inquiries', 'Better mobile menu access', 'Fewer repeated phone questions', 'Stronger local credibility'],
     techStack: ['React', 'Next.js', 'Cloudflare', 'SEO', 'Google Map', 'UI/UX'],
-    pricing: 'Restaurant websites can start from the starter website range, with online ordering scoped separately.',
+    pricing: 'Restaurant websites can start from Rs 25,000 for a simple website. Digital menu, WhatsApp ordering, booking, and advanced order flows are scoped separately.',
     relatedProjectIds: [2],
     relatedServicePaths: ['/web-development-sri-lanka', '/ecommerce-website-development-sri-lanka', '/custom-software-development-sri-lanka'],
     faqs: [
@@ -347,6 +424,7 @@ export const localServicePages: MarketingPage[] = [
       },
     ],
     ctaLabel: 'Get Restaurant Website Quote',
+    whatsappMessage: whatsappMessages.restaurant,
   },
   {
     slug: 'hotel-booking-website-sri-lanka',
@@ -565,7 +643,7 @@ export const internationalServicePages: MarketingPage[] = [
     slug: 'laravel-to-react-migration',
     path: '/laravel-to-react-migration',
     kind: 'international',
-    title: 'Laravel to React Migration | DexLanka',
+    title: 'Laravel to React Migration Services | DexLanka',
     metaDescription:
       'Migrate Laravel Blade interfaces to modern React frontends with DexLanka. Improve UI structure, dashboards, API integration, and frontend maintainability.',
     eyebrow: 'Laravel to React',
@@ -653,7 +731,172 @@ export const internationalServicePages: MarketingPage[] = [
   },
 ];
 
-export const servicePages = [...localServicePages, ...internationalServicePages];
+const localPageBySlug = (slug: string) => localServicePages.find((page) => page.slug === slug) as MarketingPage;
+
+export const requiredServiceAliasPages: MarketingPage[] = [
+  {
+    ...localPageBySlug('web-development-sri-lanka'),
+    slug: 'website-development-sri-lanka',
+    path: '/website-development-sri-lanka',
+    title: 'Website Development Company in Sri Lanka | DexLanka',
+    eyebrow: 'Website Development Sri Lanka',
+    heading: 'Website Development Company in Sri Lanka',
+    summary:
+      'DexLanka builds mobile-friendly websites that help Sri Lankan customers find your business, understand your services, and contact you faster through WhatsApp, phone, or forms.',
+    pricing: 'Starter websites begin from Rs 25,000 when the scope is simple. Business websites start from Rs 75,000 / Rs 120,000 depending on pages and features.',
+    whatsappMessage: whatsappMessages.website,
+  },
+  {
+    ...localPageBySlug('react-development-agency-sri-lanka'),
+    slug: 'react-development-sri-lanka',
+    path: '/react-development-sri-lanka',
+    title: 'React Development Company in Sri Lanka | DexLanka',
+    eyebrow: 'React Development Sri Lanka',
+    heading: 'React Development Company in Sri Lanka',
+    summary:
+      'DexLanka builds modern React websites, dashboards, SaaS interfaces, admin panels, and custom web apps for Sri Lankan businesses and international startup teams.',
+    whatsappMessage: whatsappMessages.international,
+  },
+  {
+    ...localPageBySlug('supabase-developer-sri-lanka'),
+    slug: 'supabase-development-sri-lanka',
+    path: '/supabase-development-sri-lanka',
+    title: 'Supabase Development Services in Sri Lanka | DexLanka',
+    eyebrow: 'Supabase Development Sri Lanka',
+    heading: 'Supabase Development Services in Sri Lanka',
+    summary:
+      'DexLanka builds Supabase-powered apps with authentication, PostgreSQL databases, storage, dashboards, APIs, and secure business workflows.',
+    whatsappMessage: whatsappMessages.international,
+  },
+];
+
+const industryBaseFaqs = (industry: string) => [
+  {
+    question: `How much does a ${industry.toLowerCase()} website cost?`,
+    answer:
+      'A simple website can start from Rs 25,000, while advanced booking, ordering, e-commerce, dashboard, or content-heavy websites are quoted after confirming the scope.',
+  },
+  {
+    question: 'Can DexLanka connect WhatsApp and Google Maps?',
+    answer:
+      'Yes. Industry websites can include WhatsApp CTAs, Google Maps, phone links, inquiry forms, reviews, galleries, and local SEO wording.',
+  },
+  {
+    question: 'Can the website be improved later?',
+    answer:
+      'Yes. You can start with the essentials and later add e-commerce, booking, blog, SEO pages, dashboards, analytics, or maintenance support.',
+  },
+];
+
+const makeIndustryPage = ({
+  slug,
+  path,
+  industry,
+  features,
+  problems,
+  projectIds = [2, 7, 9],
+}: {
+  slug: string;
+  path: string;
+  industry: string;
+  features: string[];
+  problems: string;
+  projectIds?: number[];
+}): MarketingPage => ({
+  slug,
+  path,
+  kind: 'industry',
+  title: `${industry} Websites | DexLanka`,
+  metaDescription: `DexLanka builds ${industry.toLowerCase()} websites in Sri Lanka with mobile-friendly design, WhatsApp CTAs, Google Maps, local SEO, pricing guidance, and inquiry forms.`,
+  eyebrow: `${industry} Websites`,
+  heading: `${industry} Website Design for Sri Lankan Businesses`,
+  summary: `DexLanka builds ${industry.toLowerCase()} websites that help customers understand your offer, trust your business, and contact you faster through WhatsApp, phone, forms, and maps.`,
+  problem: problems,
+  solution: `We create a clear mobile-first website with service/product details, trust sections, local SEO wording, WhatsApp lead capture, contact options, and room to add advanced features later.`,
+  whoFor: [industry, 'Sri Lankan SMEs', 'service businesses', 'shops', 'local business owners'],
+  features,
+  benefits: ['More local inquiries', 'Professional online trust', 'Better Google visibility', 'Faster WhatsApp leads', 'Clearer service presentation'],
+  techStack: ['React', 'Tailwind CSS', 'SEO', 'Google Maps', 'WhatsApp', 'Analytics-ready setup'],
+  pricing: 'Starter industry websites can begin from Rs 25,000. Final pricing depends on pages, content, features, integrations, and support requirements.',
+  relatedProjectIds: projectIds,
+  relatedServicePaths: ['/website-development-sri-lanka', '/ecommerce-website-development-sri-lanka', '/custom-software-development-sri-lanka'],
+  faqs: industryBaseFaqs(industry),
+  ctaLabel: `Get ${industry} Website Quote`,
+  whatsappMessage: `Hi DexLanka, I need a ${industry.toLowerCase()} website. Can I get package details?`,
+});
+
+export const industryPages: MarketingPage[] = [
+  {
+    ...makeIndustryPage({
+      slug: 'restaurant-websites',
+      path: '/restaurant-websites',
+      industry: 'Restaurant',
+      problems: 'Restaurants often lose orders when menus are hard to view on mobile, locations are unclear, food photos are scattered on social media, and customers cannot quickly order or book a table.',
+      features: ['Digital menu', 'WhatsApp orders', 'Table booking', 'Google Maps', 'Food gallery', 'Customer reviews', 'Mobile-friendly design', 'SEO setup', 'Delivery platform links', 'Starting price guidance'],
+      projectIds: [2],
+    }),
+    title: 'Restaurant Websites in Sri Lanka | DexLanka',
+    metaDescription:
+      'Restaurant websites in Sri Lanka by DexLanka with digital menus, WhatsApp orders, table booking, Google Maps, food galleries, reviews, SEO, and quote CTAs.',
+    heading: 'Restaurant Websites with Menus, WhatsApp Orders, and Table Booking',
+    relatedServicePaths: ['/restaurant-website-design-sri-lanka', '/ecommerce-website-development-sri-lanka', '/website-development-sri-lanka'],
+    faqs: [
+      ...industryBaseFaqs('Restaurant'),
+      {
+        question: 'Can my restaurant website include delivery platform links?',
+        answer: 'Yes. We can add links to Uber Eats, PickMe Food, direct WhatsApp ordering, phone ordering, and delivery information where relevant.',
+      },
+    ],
+    whatsappMessage: whatsappMessages.restaurant,
+  },
+  makeIndustryPage({
+    slug: 'shop-websites',
+    path: '/shop-websites',
+    industry: 'Shop',
+    problems: 'Retail shops can lose sales when products, opening hours, location, stock details, and order options are only visible on social media posts.',
+    features: ['Product highlights', 'WhatsApp inquiry buttons', 'Shop location map', 'Opening hours', 'Gallery', 'Product category pages', 'Customer trust sections', 'Local SEO'],
+    projectIds: [8],
+  }),
+  makeIndustryPage({
+    slug: 'salon-websites',
+    path: '/salon-websites',
+    industry: 'Salon',
+    problems: 'Salons need customers to quickly see services, prices, styles, location, and booking options before they choose where to visit.',
+    features: ['Service list', 'Price guidance', 'Gallery', 'WhatsApp booking', 'Google Maps', 'Opening hours', 'Reviews placeholder', 'Local SEO'],
+  }),
+  makeIndustryPage({
+    slug: 'clinic-websites',
+    path: '/clinic-websites',
+    industry: 'Clinic',
+    problems: 'Clinics need clear service information, doctor schedules, location details, appointment options, and trust content for patients searching on mobile.',
+    features: ['Service pages', 'Appointment inquiry', 'Doctor/profile sections', 'Location map', 'Opening hours', 'FAQ', 'Mobile-friendly design', 'Local SEO'],
+  }),
+  makeIndustryPage({
+    slug: 'travel-agency-websites',
+    path: '/travel-agency-websites',
+    industry: 'Travel Agency',
+    problems: 'Travel agencies need to present tour packages, destinations, inquiry options, galleries, and trust details beyond scattered social media posts.',
+    features: ['Tour package pages', 'Inquiry forms', 'WhatsApp quote buttons', 'Destination gallery', 'Itinerary sections', 'Reviews placeholder', 'SEO setup'],
+    projectIds: [3],
+  }),
+  makeIndustryPage({
+    slug: 'cake-shop-websites',
+    path: '/cake-shop-websites',
+    industry: 'Cake Shop',
+    problems: 'Cake shops need customers to browse designs, understand order options, send references, and contact quickly for custom cake requests.',
+    features: ['Cake gallery', 'Custom order inquiry', 'WhatsApp orders', 'Price guidance', 'Delivery area details', 'Reference upload placeholder', 'Local SEO'],
+  }),
+  makeIndustryPage({
+    slug: 'personal-brand-websites',
+    path: '/personal-brand-websites',
+    industry: 'Personal Brand',
+    problems: 'Personal brands need a professional website that organizes services, portfolio, social links, contact options, and credibility in one place.',
+    features: ['Bio/about section', 'Portfolio', 'Services', 'Testimonials placeholder', 'Contact form', 'Social links', 'Blog-ready structure', 'SEO setup'],
+    projectIds: [1, 7],
+  }),
+];
+
+export const servicePages = [...localServicePages, ...requiredServiceAliasPages, ...industryPages, ...internationalServicePages];
 
 export interface BlogPost {
   slug: string;
@@ -687,7 +930,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         heading: 'Why location still matters',
-        body: 'For businesses in Homagama, Meegoda, Kottawa, Maharagama, and Colombo, local wording, map details, service pages, and trust sections can help users understand that support is nearby.',
+        body: 'For businesses in Homagama, Kottawa, Maharagama, Nugegoda, Gampaha, Kandy, Galle, and Colombo, local wording, map details, service pages, and trust sections can help users understand the service area.',
       },
       {
         heading: 'How DexLanka helps',
@@ -700,8 +943,8 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: 'business-website-cost-sri-lanka',
-    title: 'How Much Does a Business Website Cost in Sri Lanka?',
+    slug: 'website-cost-sri-lanka',
+    title: 'How Much Does a Website Cost in Sri Lanka?',
     metaDescription:
       'Understand website pricing in Sri Lanka for starter, business, e-commerce, and custom website projects, including what affects the final cost.',
     category: 'Local SEO',
@@ -712,8 +955,8 @@ export const blogPosts: BlogPost[] = [
     sections: [
       {
         heading: 'Typical website price ranges',
-        body: 'A starter website may range from LKR 45,000-85,000, while business websites, e-commerce stores, and custom systems cost more based on functionality.',
-        bullets: ['Starter Website: LKR 45,000-85,000', 'Business Website: LKR 120,000-250,000', 'E-commerce Website: LKR 250,000-600,000+'],
+        body: 'A simple starter website can begin from Rs 25,000 when the project only needs a few pages and basic features. Business websites, e-commerce stores, POS systems, and custom software cost more based on functionality.',
+        bullets: ['Starter Website: From Rs 25,000', 'Business Website: From Rs 75,000 / Rs 120,000', 'E-commerce Website: From Rs 180,000 / Rs 250,000'],
       },
       {
         heading: 'What changes the price',
@@ -788,8 +1031,8 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: 'start-ecommerce-website-sri-lanka',
-    title: 'How to Start an E-commerce Website in Sri Lanka',
+    slug: 'start-online-store-sri-lanka',
+    title: 'How to Start an Online Store in Sri Lanka',
     metaDescription:
       'A simple guide to starting an e-commerce website in Sri Lanka with products, COD, payments, delivery, inventory, and SEO.',
     category: 'Local SEO',
@@ -901,6 +1144,239 @@ export const blogPosts: BlogPost[] = [
     faqs: [
       { question: 'Should WhatsApp be sticky?', answer: 'A sticky WhatsApp button can help mobile users contact you without searching for details.' },
       { question: 'Can DexLanka add this to my website?', answer: 'Yes. DexLanka can add conversion-focused CTAs and WhatsApp flows.' },
+    ],
+  },
+  {
+    slug: 'why-every-sri-lankan-business-needs-website',
+    title: 'Why Every Sri Lankan Business Needs a Website',
+    metaDescription:
+      'Learn why Sri Lankan businesses need websites for Google visibility, trust, WhatsApp leads, service presentation, and long-term brand value.',
+    category: 'Local SEO',
+    excerpt: 'A business website gives Sri Lankan customers one trusted place to understand your services and contact you.',
+    date: '2026-05-10',
+    readingTime: '4 min read',
+    relatedServicePaths: ['/website-development-sri-lanka', '/restaurant-websites', '/shop-websites'],
+    sections: [
+      {
+        heading: 'A website builds trust beyond social media',
+        body: 'Customers may find you on Facebook, Instagram, TikTok, or Google, but a website gives your business a professional home with your services, location, contact details, portfolio, and proof in one place.',
+      },
+      {
+        heading: 'Google visibility creates long-term value',
+        body: 'A properly structured website can rank for service, location, and industry searches in Sri Lanka, helping customers find you even when they are not following your social pages.',
+      },
+      {
+        heading: 'WhatsApp lead capture becomes easier',
+        body: 'Clear website CTAs can send customers directly to WhatsApp with useful pre-filled messages, reducing friction and making inquiries easier to track.',
+      },
+    ],
+    faqs: [
+      { question: 'Is a Facebook page enough for a small business?', answer: 'A Facebook page helps, but a website gives stronger control, search visibility, structure, and professional trust.' },
+      { question: 'Can I start with a simple website?', answer: 'Yes. Many businesses start with a focused 1-3 page website and improve it later.' },
+    ],
+  },
+  {
+    slug: 'website-vs-facebook-page-business-sri-lanka',
+    title: 'Website vs Facebook Page: What Is Better for Your Business?',
+    metaDescription:
+      'Compare websites and Facebook pages for Sri Lankan businesses, including trust, Google visibility, control, WhatsApp leads, and long-term growth.',
+    category: 'Local SEO',
+    excerpt: 'A Facebook page can support marketing, but a website gives your business more control and search visibility.',
+    date: '2026-05-10',
+    readingTime: '4 min read',
+    relatedServicePaths: ['/website-development-sri-lanka', '/shop-websites', '/personal-brand-websites'],
+    sections: [
+      {
+        heading: 'Facebook is useful, but you do not control the platform',
+        body: 'Social platforms can change reach, layouts, rules, and visibility. A website gives your business a stable place to present services, pricing, FAQs, contact options, and proof.',
+      },
+      {
+        heading: 'Websites work better for Google search',
+        body: 'Customers searching for restaurants, shops, clinics, salons, software companies, and local services often use Google. A website gives Google structured pages to understand and index.',
+      },
+      {
+        heading: 'Use both together',
+        body: 'The best setup is often a website for trust and search, with Facebook and Instagram used for updates, community, ads, and retargeting.',
+      },
+    ],
+    faqs: [
+      { question: 'Should I close my Facebook page after building a website?', answer: 'No. Keep social pages active and link them to your website for a stronger overall presence.' },
+      { question: 'Can DexLanka turn my Facebook page into a website?', answer: 'Yes. DexLanka can use your existing content, photos, services, and contact details to plan a professional website.' },
+    ],
+  },
+  {
+    slug: 'restaurant-website-features-sri-lanka',
+    title: 'Best Features for a Restaurant Website in Sri Lanka',
+    metaDescription:
+      'Important restaurant website features in Sri Lanka, including digital menus, WhatsApp orders, table booking, Google Maps, food galleries, reviews, and SEO.',
+    category: 'Local SEO',
+    excerpt: 'Restaurant websites should help mobile visitors see the menu, order, book, find the location, and trust the food experience.',
+    date: '2026-05-10',
+    readingTime: '4 min read',
+    relatedServicePaths: ['/restaurant-website-design-sri-lanka', '/restaurant-websites', '/ecommerce-website-development-sri-lanka'],
+    sections: [
+      {
+        heading: 'Start with the mobile menu',
+        body: 'Customers often check menus from phones. A restaurant website should load quickly, show food categories clearly, and make it easy to call or message before ordering.',
+        bullets: ['Digital menu', 'Food gallery', 'Price guidance', 'WhatsApp order CTA'],
+      },
+      {
+        heading: 'Make location and booking easy',
+        body: 'Google Maps, opening hours, table booking, phone links, and parking or delivery notes reduce repeated questions and help customers decide faster.',
+      },
+      {
+        heading: 'Add trust and local SEO',
+        body: 'Reviews, real food photos, delivery platform links, schema, metadata, and area wording can help the restaurant look more credible and searchable.',
+      },
+    ],
+    faqs: [
+      { question: 'Can a restaurant website start without online payments?', answer: 'Yes. Many restaurants start with WhatsApp ordering and table booking before adding checkout or payments.' },
+      { question: 'Can DexLanka add menu updates later?', answer: 'Yes. Updates can be handled through maintenance or a content/admin setup.' },
+    ],
+  },
+  {
+    slug: 'what-is-pos-system-shops-sri-lanka',
+    title: 'What Is a POS System and Why Shops Need It?',
+    metaDescription:
+      'Understand what a POS system does for Sri Lankan shops, including billing, sales, stock, customers, invoices, staff access, and reports.',
+    category: 'Local SEO',
+    excerpt: 'A POS system helps shops bill faster, track stock, manage customers, and understand daily sales.',
+    date: '2026-05-10',
+    readingTime: '4 min read',
+    relatedServicePaths: ['/pos-system-sri-lanka', '/inventory-management-system-sri-lanka', '/custom-software-development-sri-lanka'],
+    sections: [
+      {
+        heading: 'A POS system connects sales and stock',
+        body: 'Instead of writing bills manually, a POS system records products, sales, discounts, returns, invoices, staff actions, and stock movement in one place.',
+      },
+      {
+        heading: 'Shops need clearer reports',
+        body: 'Daily sales, best-selling items, low-stock products, customer records, and staff activity reports help owners make better decisions.',
+      },
+      {
+        heading: 'Custom POS can match your workflow',
+        body: 'Some shops need branch support, product variants, barcode flows, supplier records, repair jobs, or Sinhala/Tamil/English data. Custom development can fit those needs.',
+      },
+    ],
+    faqs: [
+      { question: 'Can POS and inventory work together?', answer: 'Yes. Sales can reduce stock automatically when POS and inventory are connected.' },
+      { question: 'Can DexLanka build a POS system for small shops?', answer: 'Yes. DexLanka builds POS and inventory systems based on business workflow and scope.' },
+    ],
+  },
+  {
+    slug: 'inventory-management-software-small-businesses',
+    title: 'How Inventory Management Software Helps Small Businesses',
+    metaDescription:
+      'Learn how inventory management software helps small businesses track stock, suppliers, purchases, sales, low-stock alerts, and reports.',
+    category: 'Local SEO',
+    excerpt: 'Inventory software helps business owners reduce stock confusion and get clearer reports.',
+    date: '2026-05-10',
+    readingTime: '4 min read',
+    relatedServicePaths: ['/inventory-management-system-sri-lanka', '/pos-system-sri-lanka', '/custom-software-development-sri-lanka'],
+    sections: [
+      {
+        heading: 'Spreadsheets become hard to manage',
+        body: 'As products, suppliers, staff, and branches increase, spreadsheets can become slow, error-prone, and difficult to keep updated.',
+      },
+      {
+        heading: 'Inventory software creates one source of truth',
+        body: 'Stock levels, purchases, sales, adjustments, suppliers, product costs, and low-stock alerts can be managed from a central system.',
+      },
+      {
+        heading: 'Reports help owners act faster',
+        body: 'Clear reports can show stock value, fast-moving products, slow-moving products, reorder needs, and branch-level performance.',
+      },
+    ],
+    faqs: [
+      { question: 'Can existing spreadsheet data be imported?', answer: 'Yes, when the data is clean enough to map into the new system.' },
+      { question: 'Can inventory software include staff access?', answer: 'Yes. User roles can control what each staff member can see or change.' },
+    ],
+  },
+  {
+    slug: 'react-vs-wordpress-business-websites',
+    title: 'React vs WordPress: Which Is Better for Business Websites?',
+    metaDescription:
+      'Compare React and WordPress for business websites, including performance, SEO, admin editing, custom features, cost, and maintenance.',
+    category: 'Local SEO',
+    excerpt: 'React and WordPress can both work for business websites, but the better choice depends on content, features, budget, and support.',
+    date: '2026-05-10',
+    readingTime: '5 min read',
+    relatedServicePaths: ['/react-development-sri-lanka', '/website-development-sri-lanka', '/custom-software-development-sri-lanka'],
+    sections: [
+      {
+        heading: 'WordPress is strong for content editing',
+        body: 'WordPress can be a good fit when a business needs frequent content edits, many blog posts, and familiar CMS workflows.',
+      },
+      {
+        heading: 'React is strong for custom interfaces',
+        body: 'React works well for custom websites, dashboards, SaaS products, interactive experiences, and web apps that need tailored UI and app-like behavior.',
+      },
+      {
+        heading: 'Choose based on business needs',
+        body: 'The best choice depends on admin editing needs, performance goals, SEO plan, design complexity, custom features, hosting, and maintenance expectations.',
+      },
+    ],
+    faqs: [
+      { question: 'Is React good for SEO?', answer: 'React can be SEO-ready when metadata, prerendering/static generation, sitemap, schema, and content structure are handled properly.' },
+      { question: 'Can DexLanka help choose the stack?', answer: 'Yes. DexLanka can review your goals and recommend a practical stack.' },
+    ],
+  },
+  {
+    slug: 'choose-software-company-sri-lanka',
+    title: 'How to Choose a Software Company in Sri Lanka',
+    metaDescription:
+      'Learn how to choose a software company in Sri Lanka for websites, apps, POS systems, inventory systems, dashboards, and custom software.',
+    category: 'Local SEO',
+    excerpt: 'Choose a software company based on clarity, process, relevant work, communication, scope, support, and business understanding.',
+    date: '2026-05-10',
+    readingTime: '5 min read',
+    relatedServicePaths: ['/custom-software-development-sri-lanka', '/website-development-sri-lanka', '/mobile-app-development-sri-lanka'],
+    sections: [
+      {
+        heading: 'Look for clear scope and business understanding',
+        body: 'A good software company should ask about your workflow, customers, staff roles, reporting needs, budget, and timeline before giving a serious quote.',
+      },
+      {
+        heading: 'Review communication and support',
+        body: 'Fast communication, documented scope, staged delivery, testing, maintenance, and launch support matter as much as design and code.',
+      },
+      {
+        heading: 'Avoid choosing by lowest price only',
+        body: 'Very low pricing can lead to missing features, weak support, poor security, or a rebuild later. Compare what is included and excluded.',
+      },
+    ],
+    faqs: [
+      { question: 'Should I request a proposal?', answer: 'Yes. A proposal should explain scope, timeline, price, deliverables, support, and assumptions.' },
+      { question: 'Can DexLanka provide a scoped quote?', answer: 'Yes. DexLanka can prepare a quote after understanding the project requirements.' },
+    ],
+  },
+  {
+    slug: 'mobile-friendly-websites-get-more-customers',
+    title: 'Why Mobile-Friendly Websites Get More Customers',
+    metaDescription:
+      'See why mobile-friendly websites improve inquiries, trust, SEO, WhatsApp clicks, speed, and user experience for Sri Lankan businesses.',
+    category: 'Local SEO',
+    excerpt: 'Most customers check businesses from phones, so mobile layout directly affects trust and inquiries.',
+    date: '2026-05-10',
+    readingTime: '4 min read',
+    relatedServicePaths: ['/website-development-sri-lanka', '/restaurant-websites', '/ecommerce-website-development-sri-lanka'],
+    sections: [
+      {
+        heading: 'Mobile visitors decide quickly',
+        body: 'If text is hard to read, buttons are too small, images are slow, or contact details are hidden, visitors may leave before sending a WhatsApp message.',
+      },
+      {
+        heading: 'Mobile UX supports SEO and conversions',
+        body: 'Fast pages, stable layouts, readable content, clear headings, and visible CTAs help both users and search engines understand the site.',
+      },
+      {
+        heading: 'WhatsApp should be easy to reach',
+        body: 'Mobile websites should place WhatsApp, phone, forms, and map links in predictable places so customers can contact without hunting.',
+      },
+    ],
+    faqs: [
+      { question: 'Can DexLanka improve an old mobile layout?', answer: 'Yes. DexLanka can redesign or optimize existing pages for mobile usability and conversions.' },
+      { question: 'Does mobile speed matter?', answer: 'Yes. Slow mobile pages can reduce inquiries and affect Core Web Vitals.' },
     ],
   },
   {
