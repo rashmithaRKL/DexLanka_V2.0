@@ -46,12 +46,13 @@ const Packages = () => {
     websites: [
       {
         title: 'Starter Website',
-        price: 'LKR 45,000-85,000',
+        price: 'LKR 12,000-45,000',
         description: 'Ideal for a clean local business website with the essentials',
         features: [
           '5 pages',
           'Mobile responsive design',
           'WhatsApp button',
+          'Free Domain (1 Year)',
           'Contact form',
           'Google Map',
           'Basic SEO'
@@ -61,12 +62,15 @@ const Packages = () => {
       },
       {
         title: 'Business Website',
-        price: 'LKR 120,000-250,000',
+        price: 'LKR 50,000-250,000',
         description: 'For SMEs that need more pages, content control, and lead generation',
         features: [
           '10 pages',
           'CMS/admin panel',
           'Blog',
+          'Free Domain (1 Year)',
+          'Free SSL',
+          'Free Hostings',
           'SEO setup',
           'Analytics',
           'Social integration'
@@ -102,14 +106,14 @@ const Packages = () => {
           'API development',
           'Payment gateway integration',
           'Cloud deployment',
-          '3 months support'
+          '1 Year Support'
         ],
         isPopular: false,
         category: 'web_application',
       },
       {
         title: 'E-commerce Website',
-        price: 'LKR 250,000-600,000+',
+        price: 'LKR 50,000-200,000+',
         description: 'Online store with product, order, checkout, and admin features',
         features: [
           'Products',
@@ -118,14 +122,19 @@ const Packages = () => {
           'Payment/COD',
           'Order dashboard',
           'Invoice',
-          'WhatsApp order alerts'
+          'Email/WhatsApp order alerts',
+          'Free Domain (1 Year)',
+          'Free SSL',
+          'Free Hostings',
+          '1 Year Support',
+          'Training'
         ],
         isPopular: true,
         category: 'web_application',
       },
       {
         title: 'POS / Inventory System',
-        price: 'LKR 300,000-1,200,000+',
+        price: 'LKR 30,000-1,200,000+',
         description: 'Business system for sales, stock, reports, staff, and suppliers',
         features: [
           'Products',
@@ -134,7 +143,9 @@ const Packages = () => {
           'Staff login',
           'Reports',
           'Suppliers',
-          'Customers'
+          'Customers',
+          '2 Year Support',
+          'Training'
         ],
         isPopular: false,
         category: 'desktop_system',
@@ -151,7 +162,7 @@ const Packages = () => {
           'Basic API integration',
           'Push notifications',
           'App store submission',
-          '3 months support'
+          '6 months support'
         ],
         isPopular: false,
         category: 'mobile_app',
@@ -168,7 +179,7 @@ const Packages = () => {
           'Offline mode',
           'In-app purchases',
           'Analytics integration',
-          '6 months support'
+          '1 Year Support'
         ],
         isPopular: true,
         category: 'mobile_app',
@@ -185,7 +196,7 @@ const Packages = () => {
           'Order tracking',
           'Push notifications',
           'Admin dashboard',
-          '12 months support'
+          '2 Year Support',
         ],
         isPopular: false,
         category: 'mobile_app',
@@ -321,7 +332,7 @@ const Packages = () => {
 
           <div className="text-center mt-16">
             <p className="text-gray-300 mb-6">Don't see a package that fits your needs? We offer custom solutions.</p>
-            <button 
+            <button
               onClick={handleRequestQuote}
               className="inline-block px-6 py-3 border border-dexRed text-dexRed rounded-lg text-sm sm:text-base hover:bg-dexRed/10 transition-colors"
             >
@@ -385,9 +396,9 @@ const Packages = () => {
         onClose={() => setIsQuoteModalOpen(false)}
         initialCategory={
           currentTab === 'websites' ? 'website' :
-          currentTab === 'applications' ? 'web_application' :
-          currentTab === 'mobile' ? 'mobile_app' :
-          currentTab === 'enterprise' ? 'enterprise_application' : 'website'
+            currentTab === 'applications' ? 'web_application' :
+              currentTab === 'mobile' ? 'mobile_app' :
+                currentTab === 'enterprise' ? 'enterprise_application' : 'website'
         }
       />
     </div>
