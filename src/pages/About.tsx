@@ -13,11 +13,12 @@ import { BreadcrumbSchema } from '@/components/StructuredData';
 const About = () => {
   // SEO Optimization
   useSEO({
-    title: 'About Us - DexLanka Team & Story',
-    description: 'Learn about DexLanka - a leading IT services company in Sri Lanka. Meet our expert team, discover our journey, and see how we deliver premium web development, mobile apps, and digital solutions.',
-    keywords: 'about DexLanka, DexLanka team, IT company Sri Lanka, software development company, web development team, our story',
+    title: 'About DexLanka Software Solutions | Homagama, Sri Lanka',
+    description: 'Learn about DexLanka Software Solutions, a Sri Lankan software studio based near Homagama building websites, apps, POS systems, inventory systems, and custom software.',
+    keywords: 'about DexLanka Software Solutions, software company Homagama, Sri Lanka web development team, custom software Sri Lanka',
     image: '/about-og.png',
     url: '/about',
+    canonical: '/about',
     type: 'website',
   });
   const [teamRef, teamInView] = useInView({
@@ -92,7 +93,7 @@ const About = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             />
             <AnimatedText
-              text="A passionate team of designers, developers, and digital strategists dedicated to creating exceptional software solutions that drive business growth and deliver outstanding user experiences."
+              text="A Sri Lankan software studio helping SMEs and startups build websites, apps, POS systems, inventory systems, dashboards, and custom business software."
               animation="slide-up"
               delay={200}
               className="text-gray-300 text-lg"
@@ -138,18 +139,18 @@ const About = () => {
               className="lg:w-1/2"
             >
               <span className="inline-block text-xl text-dexRed font-medium mb-4">Our Mission</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Empowering Businesses Through Technology</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Helping Businesses Launch Useful Digital Systems</h2>
               <p className="text-gray-300 mb-6">
-                At DexLanka, we're dedicated to empowering businesses with innovative technology solutions that drive growth, enhance efficiency, and create exceptional user experiences. We believe that the right technology can transform any business, and we're committed to making that transformation as seamless and effective as possible.
+                At DexLanka, we help Sri Lankan SMEs and international startups plan, design, build, and maintain practical software that supports real business goals. Our work includes websites, e-commerce stores, mobile apps, POS systems, inventory systems, admin dashboards, and custom software.
               </p>
               <p className="text-gray-300 mb-6">
-                With a team of passionate experts across various technology domains, we bring creativity, technical excellence, and strategic thinking to every project we undertake. Our collaborative approach ensures that we understand your unique challenges and opportunities, allowing us to deliver solutions that not only meet but exceed your expectations.
+                We focus on clear communication, mobile-responsive design, SEO-ready structure, maintainable technology, and support after launch so clients can keep improving their digital presence and internal workflows.
               </p>
               <div className="bg-darkBlue p-6 rounded-lg border-l-4 border-dexRed">
                 <p className="text-gray-300 italic">
-                  "Our vision is to be the go-to partner for businesses seeking to leverage technology for transformative growth. We don't just build software; we build relationships and solutions that last."
+                  "Our goal is to build software that is clear, useful, and realistic for the business using it. Good technology should make customer communication and daily operations easier."
                 </p>
-                <p className="text-white font-medium mt-3">— Alex Rivera, CEO & Founder</p>
+                <p className="text-white font-medium mt-3">- Rashmitha Kalhara, Founder</p>
               </div>
             </motion.div>
 
@@ -162,7 +163,11 @@ const About = () => {
               <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg">
                 <img
                   src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1920"
-                  alt="DexLanka Team"
+                  alt="DexLanka software development team collaboration"
+                  width={960}
+                  height={540}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-darkBg/30 flex items-center justify-center">

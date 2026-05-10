@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnimatedText from '@/components/AnimatedText';
@@ -6,16 +7,18 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Code, Smartphone, PenTool, ShoppingCart, Database, BarChart, CheckCircle, Monitor, Globe, Server, Shield, Headphones } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
-import { BreadcrumbSchema } from '@/components/StructuredData';
+import { BreadcrumbSchema, ServiceSchema } from '@/components/StructuredData';
+import { FinalCTA, PackagesGuidanceSection, SupportPromiseSection } from '@/components/MarketingSections';
 
 const Services = () => {
   // SEO Optimization
   useSEO({
-    title: 'Our Services - IT Solutions & Digital Services | DexLanka',
-    description: 'Comprehensive IT services including web development, mobile apps, UI/UX design, e-commerce solutions, desktop applications, and digital marketing. Expert solutions for your business in Sri Lanka.',
-    keywords: 'web development services, mobile app development, UI/UX design, e-commerce solutions, digital marketing, IT services Sri Lanka, software development services',
+    title: 'Web Development, Mobile Apps & POS Systems in Sri Lanka | DexLanka',
+    description: "Explore DexLanka's website development, mobile app development, e-commerce, POS, inventory, UI/UX, branding, SEO, and custom software services.",
+    keywords: 'web development Sri Lanka, mobile app development Sri Lanka, POS system Sri Lanka, inventory system Sri Lanka, custom software Sri Lanka, e-commerce website Sri Lanka, UI UX SEO Sri Lanka',
     image: '/services-og.png',
     url: '/services',
+    canonical: '/services',
     type: 'website',
   });
   const [servicesRef, servicesInView] = useInView({
@@ -40,6 +43,7 @@ const Services = () => {
         'SEO-friendly architecture',
         'Content management systems',
       ],
+      path: '/web-development-sri-lanka',
     },
     {
       icon: <Smartphone size={40} />,
@@ -52,6 +56,7 @@ const Services = () => {
         'App Store optimization',
         'Maintenance and updates',
       ],
+      path: '/mobile-app-development-sri-lanka',
     },
     {
       icon: <PenTool size={40} />,
@@ -64,6 +69,7 @@ const Services = () => {
         'Usability testing',
         'Design systems creation',
       ],
+      path: '/services',
     },
     {
       icon: <ShoppingCart size={40} />,
@@ -76,30 +82,33 @@ const Services = () => {
         'Mobile commerce optimization',
         'Analytics and reporting',
       ],
+      path: '/ecommerce-website-development-sri-lanka',
     },
     {
       icon: <Database size={40} />,
-      title: 'Desktop Applications',
-      description: 'High-performance desktop applications for Windows, macOS, and Linux platforms.',
+      title: 'POS & Inventory Systems',
+      description: 'Custom POS, stock, invoice, customer, supplier, staff login, and reporting systems for Sri Lankan businesses.',
       features: [
-        'Cross-platform applications',
-        'Electron.js development',
-        'System integration capabilities',
-        'Offline functionality',
-        'Automated updates',
+        'Billing and invoices',
+        'Stock management',
+        'Staff roles',
+        'Supplier and customer records',
+        'Daily reports',
       ],
+      path: '/pos-system-sri-lanka',
     },
     {
       icon: <BarChart size={40} />,
-      title: 'Digital Marketing',
-      description: 'Strategic digital marketing solutions to boost your online presence and drive business growth.',
+      title: 'SEO & Digital Growth',
+      description: 'SEO-ready website structure, conversion copy, analytics setup, and local search improvements for business inquiries.',
       features: [
         'SEO and content strategy',
-        'Social media marketing',
-        'PPC and display advertising',
-        'Email marketing campaigns',
+        'Local service pages',
+        'Conversion CTA planning',
+        'Analytics setup',
         'Analytics and performance tracking',
       ],
+      path: '/web-development-sri-lanka',
     },
     {
       icon: <Monitor size={40} />,
@@ -112,6 +121,7 @@ const Services = () => {
         'Real-time applications',
         'API development and integration',
       ],
+      path: '/saas-mvp-development',
     },
     {
       icon: <Globe size={40} />,
@@ -124,6 +134,7 @@ const Services = () => {
         'Digital workflow optimization',
         'Technology stack evaluation',
       ],
+      path: '/custom-software-development-sri-lanka',
     },
     {
       icon: <Server size={40} />,
@@ -136,6 +147,7 @@ const Services = () => {
         'Cloud infrastructure management',
         'Performance monitoring',
       ],
+      path: '/react-supabase-development-agency',
     },
   ];
 
@@ -197,6 +209,12 @@ const Services = () => {
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <ServiceSchema
+        name="Web Development, Mobile Apps, POS Systems, Inventory Systems, and Custom Software"
+        description="DexLanka Software Solutions provides web development, mobile app development, e-commerce, POS, inventory, UI/UX, SEO, dashboards, and custom software services."
+        url="/services"
+        areaServed={['Sri Lanka', 'International']}
+      />
       <BreadcrumbSchema items={[
         { name: 'Home', url: '/' },
         { name: 'Services', url: '/services' },
@@ -213,13 +231,13 @@ const Services = () => {
               className="inline-block text-xl text-dexRed font-medium mb-4"
             />
             <AnimatedText
-              text="Comprehensive Software Solutions"
+              text="Websites, Mobile Apps, POS Systems & Business Software"
               animation="slide-up"
               delay={100}
               className="text-4xl md:text-5xl font-bold mb-6"
             />
             <AnimatedText
-              text="From web and mobile development to UI/UX design and digital marketing, we offer end-to-end services to help businesses thrive in the digital landscape."
+              text="Explore website development, mobile app development, e-commerce, POS, inventory, dashboards, UI/UX, SEO, and custom software services for Sri Lankan SMEs and international startups."
               animation="slide-up"
               delay={200}
               className="text-gray-300 text-lg"
@@ -255,6 +273,13 @@ const Services = () => {
                         </li>
                       ))}
                     </ul>
+                    <Link
+                      to={service.path}
+                      className="inline-flex items-center text-dexRed font-medium mt-6 group"
+                    >
+                      Learn more
+                      <CheckCircle size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </div>
                 </div>
               </motion.div>
@@ -262,6 +287,8 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      <PackagesGuidanceSection compact />
       
       {/* Our Process */}
       <section ref={processRef} className="section-padding bg-darkBlue">
@@ -340,24 +367,10 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      <SupportPromiseSection />
       
-      {/* Call to Action */}
-      <section className="py-24 bg-gradient-to-b from-darkBlue to-background">
-        <div className="container mx-auto px-6">
-          <div className="glass p-12 rounded-2xl text-center max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Discuss Your Project?</h2>
-            <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-              Let's talk about how our services can help you achieve your business goals. Schedule a consultation with our team today.
-            </p>
-            <a
-              href="/contact"
-              className="inline-block px-8 py-4 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
-            >
-              Get in Touch
-            </a>
-          </div>
-        </div>
-      </section>
+      <FinalCTA />
       
       <Footer />
     </div>

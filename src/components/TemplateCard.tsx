@@ -67,7 +67,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template, delay = 0 }) => {
       {/* Featured Badge */}
       {template.isFeatured && (
         <div className="bg-dexRed text-white text-sm font-medium py-1 px-4 text-center">
-          ⭐ Featured Template
+          Featured Template
         </div>
       )}
 
@@ -77,7 +77,11 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template, delay = 0 }) => {
           <div className="aspect-video flex items-center justify-center">
             <img
               src={template.image || '/placeholder.svg'}
-              alt={template.title}
+              alt={`${template.title} template preview by DexLanka`}
+              width={640}
+              height={360}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -135,7 +139,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({ template, delay = 0 }) => {
               <Star size={14} className="fill-current" />
               <span className="ml-1 text-gray-300">{template.rating || 0}</span>
             </div>
-            <span className="text-gray-500">•</span>
+            <span className="text-gray-500">/</span>
             <span className="text-gray-400">{template.sales || 0} sales</span>
           </div>
         </div>

@@ -4,25 +4,48 @@ import Footer from '@/components/Footer';
 import ContactForm from '@/components/ContactForm';
 import AnimatedText from '@/components/AnimatedText';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, ExternalLink, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ExternalLink, Facebook, Twitter, Instagram, Linkedin, MessageCircle } from 'lucide-react';
 import { useSEO } from '@/hooks/useSEO';
-import { BreadcrumbSchema } from '@/components/StructuredData';
+import { BreadcrumbSchema, FAQSchema, LocalBusinessSchema } from '@/components/StructuredData';
+import { FinalCTA, ServiceAreasSection } from '@/components/MarketingSections';
+import { BUSINESS_INFO, whatsappUrl } from '@/data/site';
 
 const Contact = () => {
   // SEO Optimization
   useSEO({
-    title: 'Contact Us - Get in Touch | DexLanka',
-    description: 'Contact DexLanka for premium IT services, web development, mobile apps, and digital solutions in Sri Lanka. We\'d love to hear from you and discuss your project.',
-    keywords: 'contact DexLanka, IT services Sri Lanka, web development contact, software development Sri Lanka, get in touch',
+    title: 'Contact DexLanka Software Solutions | Homagama, Sri Lanka',
+    description: 'Contact DexLanka Software Solutions in Homagama, Sri Lanka for websites, mobile apps, e-commerce, POS systems, inventory systems, and custom software projects.',
+    keywords: 'contact DexLanka, Homagama software company, web development Homagama, software development Sri Lanka, info@dexlanka.com',
     image: '/contact-og.png',
     url: '/contact',
+    canonical: '/contact',
     type: 'website',
   });
 
   const [mapLoaded, setMapLoaded] = useState(false);
+  const contactFaqs = [
+    {
+      question: 'How soon can I expect a response?',
+      answer: 'DexLanka typically replies within 24 business hours. For urgent project inquiries, WhatsApp is the fastest option.',
+    },
+    {
+      question: 'Do you offer free consultations?',
+      answer: 'Yes. DexLanka offers a free initial consultation to understand your website, app, POS, inventory, or software project.',
+    },
+    {
+      question: 'Can we meet in person near Homagama?',
+      answer: 'Yes. In-person meetings can be scheduled near Meegoda, Homagama when suitable. Remote consultations are also available.',
+    },
+    {
+      question: 'Do you work with international clients?',
+      answer: 'Yes. DexLanka works remotely with international clients using clear milestones, demos, and online communication.',
+    },
+  ];
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <LocalBusinessSchema />
+      <FAQSchema items={contactFaqs} id="contact-faq" />
       <BreadcrumbSchema items={[
         { name: 'Home', url: '/' },
         { name: 'Contact', url: '/contact' },
@@ -45,7 +68,7 @@ const Contact = () => {
               className="text-4xl md:text-5xl font-bold mb-6"
             />
             <AnimatedText
-              text="Have a project in mind or questions about our services? We're here to help. Reach out to us and let's start a conversation."
+              text="Contact DexLanka Software Solutions for websites, mobile apps, e-commerce, POS systems, inventory systems, dashboards, and custom software projects."
               animation="slide-up"
               delay={200}
               className="text-gray-300 text-lg"
@@ -76,9 +99,7 @@ const Contact = () => {
                     <div className="ml-4">
                       <h3 className="font-medium mb-1">Our Office</h3>
                       <p className="text-gray-300">
-                        Meegoda,<br />
-                        Homagama,<br />
-                        Sri Lanka
+                        {BUSINESS_INFO.location}
                       </p>
                     </div>
                   </div>
@@ -91,7 +112,7 @@ const Contact = () => {
                       <h3 className="font-medium mb-1">Phone</h3>
                       <p className="text-gray-300">
                         <a href="tel:+94705588789" className="hover:text-white transition-colors">
-                          +94 70 558 8789
+                          {BUSINESS_INFO.phone}
                         </a>
                       </p>
                     </div>
@@ -105,7 +126,7 @@ const Contact = () => {
                       <h3 className="font-medium mb-1">Our Email</h3>
                       <p className="text-gray-300">
                         <a href="mailto:info@dexlanka.com" className="hover:text-white transition-colors">
-                        info@dexlanka.com
+                          {BUSINESS_INFO.email}
                         </a>
                       </p>
                     </div>
@@ -124,15 +145,25 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
+
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-8 w-full inline-flex items-center justify-center px-6 py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px]"
+                >
+                  <MessageCircle size={18} className="mr-2" />
+                  Talk to DexLanka on WhatsApp
+                </a>
               </div>
 
               <div className="glass p-8 rounded-2xl">
                 <h2 className="text-2xl font-semibold mb-6">Connect With Us</h2>
                 <div className="flex space-x-4">
                   {[
-                    { name: 'Facebook', href: 'https://facebook.com', Icon: Facebook },
-                    { name: 'Twitter', href: 'https://twitter.com', Icon: Twitter },
-                    { name: 'Instagram', href: 'https://instagram.com', Icon: Instagram },
+                    { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61574091291394', Icon: Facebook },
+                    { name: 'Twitter', href: 'https://x.com/dexlanka', Icon: Twitter },
+                    { name: 'Instagram', href: 'https://www.instagram.com/dex_lanka/', Icon: Instagram },
                     { name: 'LinkedIn', href: 'https://linkedin.com', Icon: Linkedin },
                   ].map(({ name, href, Icon }) => (
                     <a
@@ -162,6 +193,8 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      <ServiceAreasSection />
 
       {/* Google Map */}
       <section className="pb-20">
@@ -218,22 +251,7 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {[
-              {
-                question: 'How soon can I expect a response?',
-                answer: 'We typically respond to all inquiries within 24 business hours. For urgent matters, please call our office directly.'
-              },
-              {
-                question: 'Do you offer free consultations?',
-                answer: 'Yes, we provide a free 30-minute initial consultation to discuss your project requirements and how we can help.'
-              },
-              {
-                question: 'Can we meet in person?',
-                answer: 'Absolutely! We welcome in-person meetings at our office. Please schedule an appointment in advance so we can prepare for your visit.'
-              },
-              {
-                question: 'Do you work with international clients?',
-                answer: 'Yes, we work with clients globally. We use video conferencing and project management tools to ensure smooth communication across different time zones.'
-              },
+              ...contactFaqs,
             ].map((faq, index) => (
               <motion.div
                 key={index}
@@ -249,6 +267,8 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      <FinalCTA />
 
       <Footer />
     </div>

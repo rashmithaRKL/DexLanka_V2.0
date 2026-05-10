@@ -10,6 +10,7 @@ import { CheckCircle, XCircle } from 'lucide-react';
 import { useUserAuth } from '@/context/UserAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
+import { useSEO } from '@/hooks/useSEO';
 
 const Packages = () => {
   const [comparisonRef, comparisonInView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -18,14 +19,24 @@ const Packages = () => {
   const { isAuthenticated } = useUserAuth();
   const navigate = useNavigate();
 
+  useSEO({
+    title: 'Website, E-commerce, POS & Maintenance Packages | DexLanka',
+    description:
+      'View DexLanka package guidance for starter websites, business websites, e-commerce stores, POS and inventory systems, custom software, and maintenance support in Sri Lanka.',
+    keywords: 'website packages Sri Lanka, DexLanka pricing, e-commerce website price Sri Lanka, POS system price Sri Lanka, maintenance package Sri Lanka',
+    image: '/og-image.png',
+    url: '/packages',
+    canonical: '/packages',
+    type: 'website',
+  });
+
   const handleRequestQuote = () => {
     if (!isAuthenticated) {
       toast({
-        title: "Login Required",
-        description: "Please login to request a custom quote.",
-        variant: "destructive",
+        title: "Use the quote form",
+        description: "Send your project details through the contact form and DexLanka will reply within 24 hours.",
       });
-      navigate('/signin', { state: { from: '/packages' } });
+      navigate('/contact');
       return;
     }
     setIsQuoteModalOpen(true);
@@ -34,46 +45,46 @@ const Packages = () => {
   const packages = {
     websites: [
       {
-        title: 'One-Page Website',
-        price: '$25',
-        description: 'Perfect for landing pages or simple business sites',
+        title: 'Starter Website',
+        price: 'LKR 45,000-85,000',
+        description: 'Ideal for a clean local business website with the essentials',
         features: [
-          'One-page responsive design',
-          'Contact form integration',
-          'Basic SEO setup',
-          'Social media links',
-          '1 revision included'
+          '5 pages',
+          'Mobile responsive design',
+          'WhatsApp button',
+          'Contact form',
+          'Google Map',
+          'Basic SEO'
         ],
         isPopular: false,
         category: 'website',
       },
       {
-        title: '5-Page Website',
-        price: '$60',
-        description: 'Ideal for small businesses and personal brands',
+        title: 'Business Website',
+        price: 'LKR 120,000-250,000',
+        description: 'For SMEs that need more pages, content control, and lead generation',
         features: [
-          '5 custom designed pages',
-          'Responsive design for all devices',
-          'Contact form & Google Maps',
-          'Basic SEO optimization',
-          'CMS integration',
-          '2 revisions included'
+          '10 pages',
+          'CMS/admin panel',
+          'Blog',
+          'SEO setup',
+          'Analytics',
+          'Social integration'
         ],
         isPopular: true,
         category: 'website',
       },
       {
-        title: '10+ Page Website',
-        price: '$100',
-        description: 'Comprehensive solution for established businesses',
+        title: 'Maintenance',
+        price: 'LKR 10,000-50,000/month',
+        description: 'Ongoing support after launch for website and system improvements',
         features: [
-          '10 or more custom pages',
-          'Advanced responsive design',
-          'Blog/news section setup',
-          'Enhanced SEO package',
-          'Social media integration',
-          'CMS with training',
-          '3 revisions included'
+          'Updates',
+          'Backups',
+          'Content changes',
+          'Support',
+          'Hosting monitoring',
+          'Bug fixes'
         ],
         isPopular: false,
         category: 'website',
@@ -81,9 +92,9 @@ const Packages = () => {
     ],
     applications: [
       {
-        title: 'Web Application',
-        price: '$65',
-        description: 'Custom web application with advanced functionality',
+        title: 'Custom Software',
+        price: 'Scoped Quote',
+        description: 'Dashboards, portals, booking systems, and workflow software',
         features: [
           'Custom user accounts',
           'Database integration',
@@ -97,34 +108,33 @@ const Packages = () => {
         category: 'web_application',
       },
       {
-        title: 'E-Commerce Website',
-        price: '$100',
-        description: 'Complete online store with all necessary features',
+        title: 'E-commerce Website',
+        price: 'LKR 250,000-600,000+',
+        description: 'Online store with product, order, checkout, and admin features',
         features: [
-          'Product catalog with categories',
-          'Shopping cart and checkout',
-          'Payment gateway integration',
-          'Inventory management',
-          'Customer accounts & order history',
-          'SEO optimization',
-          'Analytics dashboard',
-          '6 months support'
+          'Products',
+          'Cart',
+          'Checkout',
+          'Payment/COD',
+          'Order dashboard',
+          'Invoice',
+          'WhatsApp order alerts'
         ],
         isPopular: true,
         category: 'web_application',
       },
       {
-        title: 'Desktop Application',
-        price: '$200',
-        description: 'Native desktop application for Windows/Mac/Linux',
+        title: 'POS / Inventory System',
+        price: 'LKR 300,000-1,200,000+',
+        description: 'Business system for sales, stock, reports, staff, and suppliers',
         features: [
-          'Cross-platform compatibility',
-          'Custom user interface',
-          'Offline functionality',
-          'Data synchronization',
-          'Automated updates',
-          'Advanced security features',
-          '12 months support'
+          'Products',
+          'Stock',
+          'Invoices',
+          'Staff login',
+          'Reports',
+          'Suppliers',
+          'Customers'
         ],
         isPopular: false,
         category: 'desktop_system',
@@ -133,8 +143,8 @@ const Packages = () => {
     mobile: [
       {
         title: 'Simple Mobile App',
-        price: '$30',
-        description: 'Basic mobile application for iOS or Android',
+        price: 'Scoped Quote',
+        description: 'Focused mobile app for core customer or staff workflows',
         features: [
           'Up to 5 screens/features',
           'User authentication',
@@ -147,9 +157,9 @@ const Packages = () => {
         category: 'mobile_app',
       },
       {
-        title: 'Advanced Mobile App',
-        price: '$80',
-        description: 'Feature-rich application for iOS and Android',
+        title: 'SaaS MVP',
+        price: 'Scoped Quote',
+        description: 'First version of a SaaS, marketplace, or dashboard product',
         features: [
           'Cross-platform (iOS & Android)',
           'Complex functionality',
@@ -164,9 +174,9 @@ const Packages = () => {
         category: 'mobile_app',
       },
       {
-        title: 'E-Commerce Mobile App',
-        price: '$150',
-        description: 'Complete shopping experience for mobile users',
+        title: 'Admin Dashboard',
+        price: 'Scoped Quote',
+        description: 'Internal tools, analytics panels, CRUD screens, and reporting',
         features: [
           'Product catalog and search',
           'Shopping cart & checkout',
@@ -202,7 +212,7 @@ const Packages = () => {
   };
 
   const comparisonData = {
-    headers: ['Features', 'One-Page', '5-Page', '10+ Pages', 'Web App', 'E-Commerce'],
+    headers: ['Features', 'Starter', 'Business', 'E-commerce', 'POS/Inventory', 'Maintenance'],
     rows: [
       {
         feature: 'Responsive Design',
@@ -218,55 +228,55 @@ const Packages = () => {
         fivePage: true,
         tenPage: true,
         webApp: true,
-        eCommerce: true,
+        eCommerce: false,
       },
       {
         feature: 'SEO Optimization',
         onePage: 'Basic',
         fivePage: 'Standard',
-        tenPage: 'Advanced',
-        webApp: 'Advanced',
-        eCommerce: 'Premium',
+        tenPage: 'Product SEO',
+        webApp: 'Optional',
+        eCommerce: 'Ongoing',
       },
       {
-        feature: 'User Accounts',
+        feature: 'Admin / Staff Login',
         onePage: false,
         fivePage: 'Optional',
-        tenPage: 'Optional',
+        tenPage: true,
         webApp: true,
-        eCommerce: true,
+        eCommerce: false,
       },
       {
-        feature: 'Payment Processing',
+        feature: 'Payments / COD',
         onePage: false,
         fivePage: false,
-        tenPage: 'Optional',
+        tenPage: true,
+        webApp: 'Optional',
+        eCommerce: false,
+      },
+      {
+        feature: 'Reports',
+        onePage: 'Minimal',
+        fivePage: 'Basic',
+        tenPage: 'Order reports',
+        webApp: 'Advanced',
+        eCommerce: 'Monthly',
+      },
+      {
+        feature: 'WhatsApp CTA',
+        onePage: true,
+        fivePage: true,
+        tenPage: true,
         webApp: 'Optional',
         eCommerce: true,
       },
       {
-        feature: 'Custom Functionality',
-        onePage: 'Minimal',
-        fivePage: 'Basic',
-        tenPage: 'Standard',
-        webApp: 'Advanced',
-        eCommerce: 'Advanced',
-      },
-      {
-        feature: 'Revisions Included',
-        onePage: 'Unlimited',
-        fivePage: 'Unlimited',
-        tenPage: 'Unlimited',
-        webApp: 'Unlimited',
-        eCommerce: 'Unlimited',
-      },
-      {
         feature: 'Support Period',
-        onePage: '2 days',
-        fivePage: '4 days',
-        tenPage: '1 week',
-        webApp: '1 month',
-        eCommerce: '1-2 months',
+        onePage: 'Launch support',
+        fivePage: 'Launch support',
+        tenPage: 'Launch support',
+        webApp: 'Launch support',
+        eCommerce: 'Monthly',
       },
     ],
   };
@@ -280,8 +290,8 @@ const Packages = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <AnimatedText text="Our Packages" animation="slide-up" className="inline-block text-xl text-dexRed font-medium mb-4" />
-            <AnimatedText text="Choose the Perfect Package" animation="slide-up" delay={100} className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" />
-            <AnimatedText text="We offer a range of packages to suit different business needs and budgets..." animation="slide-up" delay={200} className="text-gray-300 text-base sm:text-lg" />
+            <AnimatedText text="Website, Software, and Support Pricing Guidance" animation="slide-up" delay={100} className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6" />
+            <AnimatedText text="Use these ranges to plan your project budget. Final pricing depends on features, design complexity, integrations, timeline, and support requirements." animation="slide-up" delay={200} className="text-gray-300 text-base sm:text-lg" />
           </div>
         </div>
       </section>
@@ -326,8 +336,8 @@ const Packages = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="inline-block text-xl text-dexRed font-medium mb-4">Package Comparison</span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">Compare Our Website Packages</h2>
-            <p className="text-gray-300 text-sm sm:text-base">See which package is right for your business...</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">Compare Common Project Packages</h2>
+            <p className="text-gray-300 text-sm sm:text-base">Use this as a planning guide before the final scope is confirmed.</p>
           </div>
 
           <motion.div

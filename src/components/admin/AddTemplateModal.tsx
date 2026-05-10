@@ -31,7 +31,7 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ onTemplateAdded, te
     price: template?.price?.toString() || '',
     description: template?.description || '',
     full_description: template?.full_description || '',
-    image: template?.thumbnail_url || '',
+    image: template?.image || template?.thumbnail_url || '',
     screenshots: template?.screenshots || [] as string[],
     tags: template?.tags || [] as string[],
     preview_url: template?.preview_url || '',
@@ -100,6 +100,8 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ onTemplateAdded, te
         rating: parseFloat(formData.rating) || 0,
         demo_type: formData.demo_type,
         download_enabled: formData.download_enabled,
+        storage_type: formData.storage_type,
+        is_active: true,
         storage_path: template?.id ? `template-files/${template.id}/` : undefined,
       };
 

@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Check, Sparkles } from 'lucide-react';
 import { useUserAuth } from '@/context/UserAuthContext';
-import { useNavigate } from 'react-router-dom';
 import { toast } from '@/hooks/use-toast';
 import { createPackageRequest } from '@/lib/api';
+import { whatsappUrl } from '@/data/site';
 
 interface PackageCardProps {
   title: string;
@@ -33,17 +33,15 @@ const PackageCard: React.FC<PackageCardProps> = ({
   });
 
   const { isAuthenticated, user } = useUserAuth();
-  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleGetStarted = async () => {
     if (!isAuthenticated || !user) {
       toast({
-        title: "Login Required",
-        description: "Please login to purchase a package or request a quote.",
-        variant: "destructive",
+        title: "Opening WhatsApp quote",
+        description: "Send DexLanka your project details to get a free quote.",
       });
-      navigate('/signin', { state: { from: '/packages', package: { title, price, category } } });
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
       return;
     }
 
@@ -99,9 +97,9 @@ const PackageCard: React.FC<PackageCardProps> = ({
         <div className="relative bg-gradient-to-r from-dexRed via-red-500 to-dexRed text-white py-4 px-6 text-center overflow-hidden">
           <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,.15)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%,100%_100%] animate-[shimmer_3s_linear_infinite]"></div>
           <div className="relative flex items-center justify-center gap-2.5">
-            <span className="text-xl">⭐</span>
+            <Sparkles size={20} />
             <span className="text-lg font-bold tracking-wide uppercase">Popular Choice</span>
-            <span className="text-xl">⭐</span>
+            <Sparkles size={20} />
           </div>
         </div>
       )}
@@ -116,7 +114,7 @@ const PackageCard: React.FC<PackageCardProps> = ({
           <span className={`font-bold ${isPopular ? 'text-5xl text-dexRed' : 'text-4xl text-white'}`}>
             {price}
           </span>
-          {price !== 'Custom' && <span className="text-gray-500 ml-2 text-sm">/project</span>}
+          {price.startsWith('LKR') && <span className="text-gray-500 ml-2 text-sm">/project</span>}
         </div>
 
         <ul className="space-y-4 mb-8">

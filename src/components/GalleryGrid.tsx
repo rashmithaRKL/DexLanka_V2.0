@@ -78,7 +78,11 @@ const GalleryGrid = () => {
               <div className="relative overflow-hidden aspect-[16/10]">
                 <img
                   src={item.imageUrl}
-                  alt={item.title}
+                  alt={`${item.title} project screenshot by DexLanka`}
+                  width={640}
+                  height={400}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out"
                   style={{
                     transform: hoveredItem === item.id ? 'scale(1.05)' : 'scale(1)',

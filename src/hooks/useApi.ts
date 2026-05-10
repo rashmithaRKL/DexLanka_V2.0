@@ -111,9 +111,11 @@ export const useTemplates = () => {
   const fetchTemplates = async () => {
     try {
       setLoading(true)
+      setError(null)
       const data = await getTemplates()
       setTemplates(data)
     } catch (err) {
+      setTemplates([])
       setError(err instanceof Error ? err.message : 'Failed to fetch templates')
     } finally {
       setLoading(false)
@@ -143,9 +145,11 @@ export const useTemplate = (id: number | null) => {
     const fetchTemplate = async () => {
       try {
         setLoading(true)
+        setError(null)
         const data = await getTemplate(id)
         setTemplate(data)
       } catch (err) {
+        setTemplate(null)
         setError(err instanceof Error ? err.message : 'Failed to fetch template')
       } finally {
         setLoading(false)

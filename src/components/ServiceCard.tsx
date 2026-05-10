@@ -3,19 +3,22 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ServiceCardProps {
   icon: React.ReactNode;
   title: string;
   description: string;
   delay?: number;
+  href?: string;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ 
   icon, 
   title, 
   description,
-  delay = 0
+  delay = 0,
+  href = '/services'
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { ref, inView } = useInView({
@@ -55,10 +58,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               transition={{ duration: 0.2 }}
               className="mt-auto"
             >
-              <button className="group flex items-center text-dexRed">
+              <Link to={href} className="group flex items-center text-dexRed">
                 <span className="mr-2">Learn more</span>
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </button>
+              </Link>
             </motion.div>
           )}
         </AnimatePresence>

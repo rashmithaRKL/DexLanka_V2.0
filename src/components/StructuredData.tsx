@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
+import { BUSINESS_INFO, SITE_URL } from '@/data/site';
 
 export interface StructuredDataProps {
-  type: 'Organization' | 'WebSite' | 'WebPage' | 'Product' | 'BreadcrumbList' | 'Article' | 'Service';
-  data: Record<string, any>;
+  type: 'Organization' | 'LocalBusiness' | 'WebSite' | 'WebPage' | 'Product' | 'BreadcrumbList' | 'Article' | 'Service' | 'FAQPage';
+  data: Record<string, unknown>;
+  id?: string;
 }
 
-const StructuredData = ({ type, data }: StructuredDataProps) => {
+export const StructuredData = ({ type, data, id }: StructuredDataProps) => {
   useEffect(() => {
     const schema = {
       '@context': 'https://schema.org',
@@ -15,38 +17,45 @@ const StructuredData = ({ type, data }: StructuredDataProps) => {
 
     const script = document.createElement('script');
     script.type = 'application/ld+json';
-    script.id = `structured-data-${type.toLowerCase()}`;
+    script.id = `structured-data-${id || type.toLowerCase()}`;
     script.text = JSON.stringify(schema);
+
+    const existingScript = document.getElementById(script.id);
+    if (existingScript) {
+      existingScript.remove();
+    }
+
     document.head.appendChild(script);
 
     return () => {
-      const existingScript = document.getElementById(`structured-data-${type.toLowerCase()}`);
+      const existingScript = document.getElementById(`structured-data-${id || type.toLowerCase()}`);
       if (existingScript) {
         existingScript.remove();
       }
     };
-  }, [type, data]);
+  }, [type, data, id]);
 
   return null;
 };
 
 // Predefined structured data components
 export const OrganizationSchema = () => {
-  const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://dexlanka.com');
+  const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
   
   return (
     <StructuredData
       type="Organization"
       data={{
-        name: 'DexLanka',
+        name: BUSINESS_INFO.name,
+        alternateName: BUSINESS_INFO.shortName,
         url: siteUrl,
         logo: `${siteUrl}/logo.png`,
-        description: 'Premium IT, branding, and digital services provider in Sri Lanka. Specializing in web development, mobile apps, UI/UX design, and e-commerce solutions.',
+        description: 'DexLanka Software Solutions builds websites, e-commerce platforms, mobile apps, POS systems, inventory systems, dashboards, and custom business software for Sri Lankan SMEs and international startups.',
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+94-XXX-XXXXXX',
+          telephone: BUSINESS_INFO.phone,
           contactType: 'Customer Service',
-          email: 'dexlanka@gmail.com',
+          email: BUSINESS_INFO.email,
           areaServed: 'LK',
           availableLanguage: ['en', 'si'],
         },
@@ -58,32 +67,70 @@ export const OrganizationSchema = () => {
         address: {
           '@type': 'PostalAddress',
           addressCountry: 'LK',
-          addressLocality: 'Sri Lanka',
+          addressLocality: BUSINESS_INFO.addressLocality,
+          addressRegion: BUSINESS_INFO.addressRegion,
+          streetAddress: BUSINESS_INFO.location,
         },
       }}
     />
   );
 };
 
+export const LocalBusinessSchema = () => {
+  const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
+
+  return (
+    <StructuredData
+      type="LocalBusiness"
+      data={{
+        name: BUSINESS_INFO.name,
+        url: siteUrl,
+        image: `${siteUrl}/og-image.png`,
+        telephone: BUSINESS_INFO.phone,
+        email: BUSINESS_INFO.email,
+        priceRange: 'LKR 45,000+',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: BUSINESS_INFO.location,
+          addressLocality: BUSINESS_INFO.addressLocality,
+          addressRegion: BUSINESS_INFO.addressRegion,
+          addressCountry: BUSINESS_INFO.addressCountry,
+        },
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            opens: '09:00',
+            closes: '18:00',
+          },
+        ],
+        areaServed: ['Homagama', 'Meegoda', 'Colombo', 'Sri Lanka', 'International'],
+      }}
+      id="local-business"
+    />
+  );
+};
+
 export const WebSiteSchema = () => {
-  const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://dexlanka.com');
+  const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
   
   return (
     <StructuredData
       type="WebSite"
       data={{
-        name: 'DexLanka',
+        name: BUSINESS_INFO.name,
+        alternateName: BUSINESS_INFO.shortName,
         url: siteUrl,
-        description: 'Premium IT, branding, and digital services in Sri Lanka',
+        description: 'Web development, mobile app development, e-commerce, POS, inventory, dashboards, and custom software services in Sri Lanka.',
         publisher: {
           '@type': 'Organization',
-          name: 'DexLanka',
+          name: BUSINESS_INFO.name,
         },
         potentialAction: {
           '@type': 'SearchAction',
           target: {
             '@type': 'EntryPoint',
-            urlTemplate: `${siteUrl}/templates?search={search_term_string}`,
+            urlTemplate: `${siteUrl}/blog?search={search_term_string}`,
           },
           'query-input': 'required name=search_term_string',
         },
@@ -109,7 +156,7 @@ export const ProductSchema = ({
   availability?: string;
   url: string;
 }) => {
-  const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://dexlanka.com');
+  const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
   const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
   const fullUrl = url.startsWith('http') ? url : `${siteUrl}${url}`;
 
@@ -130,15 +177,16 @@ export const ProductSchema = ({
         },
         brand: {
           '@type': 'Brand',
-          name: 'DexLanka',
+          name: BUSINESS_INFO.shortName,
         },
       }}
+      id={`product-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
     />
   );
 };
 
 export const BreadcrumbSchema = ({ items }: { items: Array<{ name: string; url: string }> }) => {
-  const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://dexlanka.com');
+  const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
   
   return (
     <StructuredData
@@ -151,6 +199,61 @@ export const BreadcrumbSchema = ({ items }: { items: Array<{ name: string; url: 
           item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`,
         })),
       }}
+      id={`breadcrumb-${items.map((item) => item.name).join('-').toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+    />
+  );
+};
+
+export const ServiceSchema = ({
+  name,
+  description,
+  url,
+  areaServed = 'Sri Lanka',
+}: {
+  name: string;
+  description: string;
+  url: string;
+  areaServed?: string | string[];
+}) => {
+  const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
+
+  return (
+    <StructuredData
+      type="Service"
+      data={{
+        name,
+        description,
+        url: url.startsWith('http') ? url : `${siteUrl}${url}`,
+        provider: {
+          '@type': 'Organization',
+          name: BUSINESS_INFO.name,
+          url: siteUrl,
+        },
+        areaServed,
+        serviceType: name,
+      }}
+      id={`service-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+    />
+  );
+};
+
+export const FAQSchema = ({ items, id = 'faq' }: { items: Array<{ question: string; answer: string }>; id?: string }) => {
+  if (!items.length) return null;
+
+  return (
+    <StructuredData
+      type="FAQPage"
+      data={{
+        mainEntity: items.map((item) => ({
+          '@type': 'Question',
+          name: item.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.answer,
+          },
+        })),
+      }}
+      id={id}
     />
   );
 };

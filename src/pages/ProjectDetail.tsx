@@ -1,13 +1,55 @@
 
 import { useParams, Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ExternalLink, Play, Github, Calendar, User, Award, CheckCircle, AlertTriangle, Lightbulb, TrendingUp } from "lucide-react";
+import { ChevronLeft, Play, Github, Calendar, User, Award, CheckCircle, AlertTriangle, Lightbulb, TrendingUp, MessageCircle } from "lucide-react";
 import { useState, useEffect } from 'react';
 import { useProjectById } from '@/hooks/useProjects';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
+import { BreadcrumbSchema } from '@/components/StructuredData';
+import { RelatedServiceLinks } from '@/components/MarketingSections';
+import { whatsappUrl } from '@/data/site';
+import { useSEO } from '@/hooks/useSEO';
+
+const getRelatedServices = (category: string, title: string) => {
+  const label = `${category} ${title}`.toLowerCase();
+  if (label.includes('restaurant')) return ['/restaurant-website-design-sri-lanka', '/ecommerce-website-development-sri-lanka', '/web-development-sri-lanka'];
+  if (label.includes('resort') || label.includes('hotel')) return ['/hotel-booking-website-sri-lanka', '/web-development-sri-lanka', '/custom-software-development-sri-lanka'];
+  if (label.includes('mobile')) return ['/mobile-app-development-sri-lanka', '/admin-dashboard-development', '/custom-software-development-sri-lanka'];
+  if (label.includes('e-commerce') || label.includes('marketplace') || label.includes('store')) {
+    return ['/ecommerce-website-development-sri-lanka', '/inventory-management-system-sri-lanka', '/pos-system-sri-lanka'];
+  }
+  if (label.includes('dashboard') || label.includes('enterprise')) return ['/admin-dashboard-development', '/custom-software-development-sri-lanka', '/react-supabase-development-agency'];
+  return ['/web-development-sri-lanka', '/react-development-agency-sri-lanka', '/custom-software-development-sri-lanka'];
+};
+
+const getHonestResults = (category: string) => {
+  if (category === 'Mobile Applications') {
+    return [
+      'Built a mobile app experience designed to improve user convenience and business accessibility.',
+      'Created a scalable foundation for future app features, support, and customer engagement.',
+    ];
+  }
+  if (category === 'E-Commerce') {
+    return [
+      'Built an online selling experience designed to improve product discovery, order handling, and customer trust.',
+      'Prepared a structure that can support future payments, inventory, analytics, and marketing improvements.',
+    ];
+  }
+  if (category === 'UI/UX Design') {
+    return [
+      'Created a clearer interface structure designed to improve user task completion and dashboard usability.',
+      'Prepared reusable design patterns for more consistent future product development.',
+    ];
+  }
+  return [
+    'Built a modern digital presence designed to improve customer inquiries and online credibility.',
+    'Delivered a responsive project foundation that can support SEO, maintenance, and future feature improvements.',
+  ];
+};
 
 
 const ProjectDetail = () => {
@@ -17,6 +59,21 @@ const ProjectDetail = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
   const { toast } = useToast();
+
+  useSEO({
+    title: project ? `${project.title} Case Study | DexLanka Software Solutions` : 'Project Case Study | DexLanka Software Solutions',
+    description: project
+      ? `See how DexLanka helped ${project.client} with ${project.category.toLowerCase()}, including features, technology, solution, and results.`
+      : 'Explore DexLanka project case studies for websites, apps, dashboards, e-commerce, and custom software.',
+    keywords: project
+      ? `${project.title}, DexLanka case study, ${project.category}, ${project.technologies.join(', ')}`
+      : 'DexLanka case studies, web development projects Sri Lanka, software projects',
+    image: project?.imageUrl || '/og-image.png',
+    url: `/project/${projectId}`,
+    canonical: `/project/${projectId}`,
+    type: 'article',
+    noindex: !project && !loading,
+  });
 
   useEffect(() => {
     // Add animation delay
@@ -78,8 +135,14 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <BreadcrumbSchema items={[
+        { name: 'Home', url: '/' },
+        { name: 'Projects', url: '/gallery' },
+        { name: project.title, url: `/project/${project.id}` },
+      ]} />
+      <Navbar />
       <ScrollArea className="h-screen">
-        <div className="container mx-auto py-6 md:py-12 px-4">
+        <div className="container mx-auto pt-28 pb-6 md:pt-32 md:pb-12 px-4">
           <div className="mb-6 opacity-0 animate-fade-in" style={{ animationDelay: "100ms", animationFillMode: "forwards" }}>
             <Link to="/gallery">
               <Button variant="outline" className="mb-4 md:mb-6 hover-scale">
@@ -93,7 +156,10 @@ const ProjectDetail = () => {
             <div className={`relative overflow-hidden rounded-lg bg-muted opacity-0 transform ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "200ms", animationFillMode: "forwards" }}>
               <img
                 src={project.imageUrl}
-                alt={project.title}
+                alt={`${project.title} case study screenshot by DexLanka`}
+                width={900}
+                height={600}
+                decoding="async"
                 className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
                 style={{
                   objectFit: 'cover',
@@ -135,16 +201,16 @@ const ProjectDetail = () => {
               {/* Project Stats */}
               <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "600ms", animationFillMode: "forwards" }}>
                 <div className="flex items-center gap-3 p-3 bg-secondary/50 rounded-lg">
-                  <Calendar className="h-5 w-5 text-primary" />
-                  <div>
-                    <p className="text-sm text-foreground/70">Duration</p>
+                    <Calendar className="h-5 w-5 text-primary" />
+                    <div>
+                    <p className="text-sm text-foreground/70">Timeline</p>
                     <p className="font-semibold">{project.projectDuration}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-3 bg-secondary/50 rounded-lg">
                   <User className="h-5 w-5 text-primary" />
                   <div>
-                    <p className="text-sm text-foreground/70">Client</p>
+                    <p className="text-sm text-foreground/70">Client / Business Type</p>
                     <p className="font-semibold">{project.client}</p>
                   </div>
                 </div>
@@ -209,6 +275,28 @@ const ProjectDetail = () => {
             </div>
           </div>
 
+          <div className={`mt-8 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1050ms", animationFillMode: "forwards" }}>
+            <h3 className="text-lg md:text-xl font-semibold mb-4">Project Screenshots</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="relative overflow-hidden rounded-lg bg-muted aspect-video">
+                <img
+                  src={project.imageUrl}
+                  alt={`${project.title} current project screenshot`}
+                  width={640}
+                  height={360}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="bg-secondary/30 border border-white/10 rounded-lg p-6 flex items-center">
+                <p className="text-sm text-foreground/70">
+                  Before/after screenshots and verified performance metrics can be added here after client approval.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Key Features */}
           <div className={`mt-8 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1100ms", animationFillMode: "forwards" }}>
             <h3 className="text-lg md:text-xl font-semibold mb-4 flex items-center gap-2">
@@ -225,12 +313,12 @@ const ProjectDetail = () => {
             </div>
           </div>
 
-          {/* Challenges & Solutions */}
+          {/* Problem & Solution */}
           <div className={`mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1200ms", animationFillMode: "forwards" }}>
             <div>
               <h3 className="text-lg md:text-xl font-semibold mb-4 flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-yellow-400" />
-                Challenges
+                The Problem
               </h3>
               <div className="space-y-3">
                 {project.challenges.map((challenge, index) => (
@@ -245,7 +333,7 @@ const ProjectDetail = () => {
             <div>
               <h3 className="text-lg md:text-xl font-semibold mb-4 flex items-center gap-2">
                 <Lightbulb className="h-5 w-5 text-blue-400" />
-                Solutions
+                Our Solution
               </h3>
               <div className="space-y-3">
                 {project.solutions.map((solution, index) => (
@@ -262,10 +350,10 @@ const ProjectDetail = () => {
           <div className={`mt-8 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1300ms", animationFillMode: "forwards" }}>
             <h3 className="text-lg md:text-xl font-semibold mb-4 flex items-center gap-2">
               <TrendingUp className="h-5 w-5 text-green-400" />
-              Results & Impact
+              Result
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {project.results.map((result, index) => (
+              {getHonestResults(project.category).map((result, index) => (
                 <div key={index} className="flex items-start gap-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
                   <TrendingUp className="h-4 w-4 text-green-400 mt-0.5 flex-shrink-0" />
                   <span className="text-sm font-medium">{result}</span>
@@ -275,25 +363,54 @@ const ProjectDetail = () => {
           </div>
 
           {/* Testimonial */}
-          {project.testimonials && (
-            <div className={`mt-8 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1400ms", animationFillMode: "forwards" }}>
-              <h3 className="text-lg md:text-xl font-semibold mb-4">Client Testimonial</h3>
-              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-6 rounded-lg border border-primary/20">
-                <blockquote className="text-lg italic mb-4">
-                  "{project.testimonials.quote}"
-                </blockquote>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                    <User className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="font-semibold">{project.testimonials.author}</p>
-                    <p className="text-sm text-foreground/70">{project.testimonials.position}</p>
-                  </div>
+          <div className={`mt-8 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1400ms", animationFillMode: "forwards" }}>
+            <h3 className="text-lg md:text-xl font-semibold mb-4">Testimonial Placeholder</h3>
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-6 rounded-lg border border-primary/20">
+              <blockquote className="text-lg italic mb-4">
+                "Client testimonial pending approval. Verified feedback can be added here after project handover."
+              </blockquote>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                  <User className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold">DexLanka client</p>
+                  <p className="text-sm text-foreground/70">Feedback placeholder</p>
                 </div>
               </div>
             </div>
-          )}
+          </div>
+
+          <div className={`mt-8 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1500ms", animationFillMode: "forwards" }}>
+            <h3 className="text-lg md:text-xl font-semibold mb-4">Related Services</h3>
+            <RelatedServiceLinks paths={getRelatedServices(project.category, project.title)} />
+          </div>
+
+          <div className={`mt-8 mb-12 opacity-0 ${isLoaded ? 'animate-fade-in' : ''}`} style={{ animationDelay: "1600ms", animationFillMode: "forwards" }}>
+            <div className="glass rounded-lg p-6 md:p-8 text-center">
+              <h3 className="text-2xl font-bold mb-4">Want a similar website, app, or business system?</h3>
+              <p className="text-foreground/80 mb-6">
+                Contact DexLanka for a free consultation and we will help you plan the features, technology, timeline, and launch path.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-primary/80 transition-colors"
+                >
+                  <MessageCircle className="mr-2 h-4 w-4" />
+                  Start a Similar Project
+                </a>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white rounded-lg font-medium hover:bg-white/10 transition-colors"
+                >
+                  Contact DexLanka
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
         <Footer />
       </ScrollArea>

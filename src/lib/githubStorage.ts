@@ -10,7 +10,7 @@ import type { GitHubRepository, GitHubFile, GitHubUploadResult, GitHubConfig } f
 // Get GitHub configuration from environment variables
 const getGitHubConfig = (): GitHubConfig => {
     const token = import.meta.env.VITE_GITHUB_TOKEN;
-    const owner = import.meta.env.VITE_GITHUB_OWNER || 'dexlanka-templates';
+    const owner = getGitHubOwner();
 
     if (!token) {
         throw new Error('GitHub token not configured. Please set VITE_GITHUB_TOKEN in .env file');
@@ -23,6 +23,8 @@ const getGitHubConfig = (): GitHubConfig => {
     };
 };
 
+const getGitHubOwner = () => import.meta.env.VITE_GITHUB_OWNER || 'dexlanka-templates';
+
 // Initialize Octokit client
 const getOctokit = () => {
     const config = getGitHubConfig();
@@ -33,13 +35,12 @@ const getOctokit = () => {
  * Generate repository name from template ID and title
  */
 export function generateRepoName(templateId: number, templateTitle: string): string {
-    const config = getGitHubConfig();
     const slug = templateTitle
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '');
 
-    return `${config.repoPrefix}${templateId}-${slug}`;
+    return `template-${templateId}-${slug}`;
 }
 
 /**
@@ -151,16 +152,14 @@ export async function uploadFilesToGitHub(
  * Get raw file URL from GitHub
  */
 export function getGitHubRawUrl(repoName: string, filePath: string, branch: string = 'main'): string {
-    const config = getGitHubConfig();
-    return `https://raw.githubusercontent.com/${config.owner}/${repoName}/${branch}/${filePath}`;
+    return `https://raw.githubusercontent.com/${getGitHubOwner()}/${repoName}/${branch}/${filePath}`;
 }
 
 /**
  * Get repository URL
  */
 export function getGitHubRepoUrl(repoName: string): string {
-    const config = getGitHubConfig();
-    return `https://github.com/${config.owner}/${repoName}`;
+    return `https://github.com/${getGitHubOwner()}/${repoName}`;
 }
 
 /**

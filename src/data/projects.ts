@@ -136,7 +136,7 @@ export const projectDetails: ProjectDetails[] = [
     featured: false,
     overview: "Tranquil Haven Resort's website showcases luxury accommodations with stunning visuals and seamless booking functionality. The platform emphasizes the resort's unique amenities and personalized guest services.",
     keyFeatures: [
-      "Virtual tour with 360° room views",
+      "Virtual tour with 360-degree room views",
       "Real-time availability and pricing",
       "Guest service portal",
       "Event planning and booking",
@@ -149,7 +149,7 @@ export const projectDetails: ProjectDetails[] = [
       "Managing multiple property locations"
     ],
     solutions: [
-      "Implemented WebGL for 360° virtual tours",
+      "Implemented WebGL for 360-degree virtual tours",
       "Built dynamic pricing engine",
       "Created centralized property management system"
     ],

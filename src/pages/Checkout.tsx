@@ -627,7 +627,11 @@ const Checkout = () => {
                             <div className="w-16 h-16 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg overflow-hidden flex-shrink-0">
                               <img
                                 src={item.image || '/placeholder.svg'}
-                                alt={item.title}
+                                alt={`${item.title} checkout thumbnail`}
+                                width={64}
+                                height={64}
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
@@ -638,7 +642,7 @@ const Checkout = () => {
                             <div className="flex-1 min-w-0">
                               <h4 className="font-medium text-sm truncate">{item.title}</h4>
                               <p className="text-gray-400 text-xs">
-                                LKR {item.price.toFixed(2)} × {item.quantity}
+                                LKR {item.price.toFixed(2)} x {item.quantity}
                               </p>
                             </div>
                             <div className="text-sm font-medium">
@@ -673,9 +677,9 @@ const Checkout = () => {
                         {isProcessing
                           ? isFreeOrder
                             ? 'Processing Free Order...'
-                            : `Redirecting to ${paymentMethod === 'payhere' ? 'PayHere' : '2Checkout'}…`
+                            : `Redirecting to ${paymentMethod === 'payhere' ? 'PayHere' : '2Checkout'}...`
                           : isFreeOrder
-                            ? '🎉 Get Free Templates'
+                            ? 'Get Free Templates'
                             : paymentMethod === 'payhere'
                               ? `Pay LKR ${getTotalPrice().toFixed(2)} with PayHere`
                               : `Pay USD ${getTotalPrice().toFixed(2)} with 2Checkout`}

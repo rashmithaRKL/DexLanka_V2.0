@@ -35,22 +35,27 @@ const TemplatePreview = () => {
   const [isPreviewFullscreen, setIsPreviewFullscreen] = useState(false);
   const templateId = id ? parseInt(id) : null;
   const { template, loading } = useTemplate(templateId);
+  const templateImage = template
+    ? template.thumbnail_url || template.image || template.screenshots?.[0] || template.preview_url || '/placeholder.svg'
+    : '/og-image.png';
 
   const [detailsRef, detailsInView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  // SEO Optimization - Update when template loads
-  React.useEffect(() => {
-    if (template) {
-      document.title = `${template.title} - Premium Template | DexLanka`;
-      const metaDescription = document.querySelector('meta[name="description"]');
-      if (metaDescription) {
-        metaDescription.setAttribute('content', template.full_description || template.description);
-      }
-    }
-  }, [template]);
+  useSEO({
+    title: template ? `${template.title} Template | DexLanka Software Solutions` : 'Template Preview | DexLanka Software Solutions',
+    description: template
+      ? template.full_description || template.description
+      : 'Preview DexLanka website templates, e-commerce templates, dashboards, and landing page designs.',
+    keywords: template ? `${template.title}, ${template.category}, DexLanka templates, React templates` : 'DexLanka templates',
+    image: templateImage,
+    url: template ? `/template/${template.id}` : `/template/${id || ''}`,
+    canonical: template ? `/template/${template.id}` : `/template/${id || ''}`,
+    type: 'product',
+    noindex: !template && !loading,
+  });
 
   const handleAddToCart = () => {
     if (!template) return;
@@ -61,7 +66,7 @@ const TemplatePreview = () => {
       category: template.category,
       price: template.price,
       description: template.description,
-      image: template.thumbnail_url || template.preview_url || '',
+      image: template.thumbnail_url || template.image || template.preview_url || '/placeholder.svg',
       tags: template.tags || [],
     });
     toast({
@@ -143,11 +148,11 @@ const TemplatePreview = () => {
   }
 
   const images = template?.screenshots && template.screenshots.length > 0
-    ? template.thumbnail_url
-      ? [template.thumbnail_url, ...template.screenshots]
+    ? template.thumbnail_url || template.image
+      ? [template.thumbnail_url || template.image || '/placeholder.svg', ...template.screenshots]
       : template.screenshots
-    : template?.thumbnail_url
-      ? [template.thumbnail_url]
+    : template?.thumbnail_url || template?.image
+      ? [template.thumbnail_url || template.image || '/placeholder.svg']
       : template?.preview_url
         ? [template.preview_url]
         : ['/placeholder.svg'];
@@ -191,7 +196,7 @@ const TemplatePreview = () => {
           <ProductSchema
             name={template.title}
             description={template.full_description || template.description}
-            image={template.thumbnail_url || ''}
+            image={template.thumbnail_url || template.image || ''}
             price={template.price}
             currency="USD"
             url={`/template/${template.id}`}
@@ -229,7 +234,10 @@ const TemplatePreview = () => {
                 <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 aspect-video">
                   <img
                     src={images[currentImageIndex]}
-                    alt={template.title}
+                    alt={`${template.title} template screenshot`}
+                    width={900}
+                    height={506}
+                    decoding="async"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -239,7 +247,7 @@ const TemplatePreview = () => {
                   {template.is_featured && (
                     <div className="absolute top-4 right-4">
                       <Badge className="bg-dexRed text-white">
-                        ⭐ Featured
+                        Featured
                       </Badge>
                     </div>
                   )}
@@ -287,6 +295,10 @@ const TemplatePreview = () => {
                         <img
                           src={img}
                           alt={`${template.title} screenshot ${index + 1}`}
+                          width={240}
+                          height={135}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;

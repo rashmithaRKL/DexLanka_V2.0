@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { BUSINESS_INFO, SITE_URL } from '@/data/site';
 
 export interface SEOProps {
   title?: string;
@@ -21,18 +22,18 @@ const defaultSEO: Required<Omit<SEOProps, 'publishedTime' | 'modifiedTime' | 'au
   author?: string;
   canonical?: string;
 } = {
-  title: 'DexLanka - Premium IT, Branding & Digital Services in Sri Lanka',
-  description: 'DexLanka offers premium IT services, web development, mobile apps, UI/UX design, e-commerce solutions, and digital marketing services in Sri Lanka. Transform your business with our expert team.',
-  keywords: 'DexLanka, Software Development, Web Development, Mobile Apps, UI/UX Design, E-Commerce, Digital Marketing, Sri Lanka, IT Services, Branding, Web Design, React Development, TypeScript',
+  title: 'DexLanka Software Solutions | Web, Mobile & Business Software in Sri Lanka',
+  description: 'DexLanka builds modern websites, e-commerce stores, mobile apps, POS systems, inventory systems, and custom business software for Sri Lankan SMEs and global startups.',
+  keywords: 'DexLanka Software Solutions, Web Development Sri Lanka, Mobile App Development Sri Lanka, POS System Sri Lanka, Inventory Management System Sri Lanka, E-Commerce Website Development, React Development, Supabase Developer, Custom Software Sri Lanka',
   image: '/og-image.png',
-  url: typeof window !== 'undefined' ? window.location.href : 'https://dexlanka.com',
+  url: typeof window !== 'undefined' ? window.location.pathname : '/',
   type: 'website',
   noindex: false,
   nofollow: false,
 };
 
-const siteUrl = import.meta.env.VITE_SITE_URL || (typeof window !== 'undefined' ? window.location.origin : 'https://dexlanka.com');
-const siteName = 'DexLanka';
+const siteUrl = import.meta.env.VITE_SITE_URL || SITE_URL;
+const siteName = BUSINESS_INFO.name;
 
 export const useSEO = (seo: SEOProps = {}) => {
   useEffect(() => {
@@ -52,21 +53,27 @@ export const useSEO = (seo: SEOProps = {}) => {
     } = seo;
 
     // Full title with site name
-    const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
-    const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
-    const fullUrl = url.startsWith('http') ? url : `${siteUrl}${url}`;
-    const canonicalUrl = canonical || fullUrl;
+    const fullTitle = /DexLanka/i.test(title) ? title : `${title} | ${siteName}`;
+    const normalizedPath = url === '/' ? '/' : `/${url.replace(/^\/+/, '')}`;
+    const fullImage = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? image : `/${image}`}`;
+    const fullUrl = url.startsWith('http') ? url : `${siteUrl}${normalizedPath}`;
+    const canonicalUrl = canonical
+      ? canonical.startsWith('http')
+        ? canonical
+        : `${siteUrl}${canonical.startsWith('/') ? canonical : `/${canonical}`}`
+      : fullUrl;
 
     // Update document title
     document.title = fullTitle;
 
-    // Remove existing meta tags
+    // Remove existing dynamically-created meta tags
     const existingMetaTags = document.querySelectorAll('meta[data-seo]');
     existingMetaTags.forEach(tag => tag.remove());
 
-    // Helper function to create meta tags
-    const createMetaTag = (name: string, content: string, property?: boolean) => {
-      const meta = document.createElement('meta');
+    // Helper function to create/update meta tags without leaving duplicate descriptions across routes
+    const upsertMetaTag = (name: string, content: string, property?: boolean) => {
+      const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+      const meta = (document.querySelector(selector) as HTMLMetaElement) || document.createElement('meta');
       if (property) {
         meta.setAttribute('property', name);
       } else {
@@ -74,41 +81,47 @@ export const useSEO = (seo: SEOProps = {}) => {
       }
       meta.setAttribute('content', content);
       meta.setAttribute('data-seo', 'true');
-      document.head.appendChild(meta);
+      if (!meta.parentElement) {
+        document.head.appendChild(meta);
+      }
     };
 
     // Basic meta tags
-    createMetaTag('description', description);
-    createMetaTag('keywords', keywords);
-    if (author) createMetaTag('author', author);
+    upsertMetaTag('title', fullTitle);
+    upsertMetaTag('description', description);
+    upsertMetaTag('keywords', keywords);
+    if (author) upsertMetaTag('author', author);
 
     // Robots meta
     const robotsContent = [
       noindex ? 'noindex' : 'index',
       nofollow ? 'nofollow' : 'follow',
     ].join(', ');
-    createMetaTag('robots', robotsContent);
+    upsertMetaTag('robots', robotsContent);
 
     // Open Graph tags
-    createMetaTag('og:title', fullTitle, true);
-    createMetaTag('og:description', description, true);
-    createMetaTag('og:image', fullImage, true);
-    createMetaTag('og:url', fullUrl, true);
-    createMetaTag('og:type', type, true);
-    createMetaTag('og:site_name', siteName, true);
-    createMetaTag('og:locale', 'en_US', true);
+    upsertMetaTag('og:title', fullTitle, true);
+    upsertMetaTag('og:description', description, true);
+    upsertMetaTag('og:image', fullImage, true);
+    upsertMetaTag('og:image:alt', fullTitle, true);
+    upsertMetaTag('og:url', fullUrl, true);
+    upsertMetaTag('og:type', type, true);
+    upsertMetaTag('og:site_name', siteName, true);
+    upsertMetaTag('og:locale', 'en_US', true);
 
     // Twitter Card tags
-    createMetaTag('twitter:card', 'summary_large_image');
-    createMetaTag('twitter:title', fullTitle);
-    createMetaTag('twitter:description', description);
-    createMetaTag('twitter:image', fullImage);
+    upsertMetaTag('twitter:card', 'summary_large_image');
+    upsertMetaTag('twitter:url', fullUrl);
+    upsertMetaTag('twitter:title', fullTitle);
+    upsertMetaTag('twitter:description', description);
+    upsertMetaTag('twitter:image', fullImage);
+    upsertMetaTag('twitter:image:alt', fullTitle);
 
     // Article specific tags
     if (type === 'article') {
-      if (publishedTime) createMetaTag('article:published_time', publishedTime, true);
-      if (modifiedTime) createMetaTag('article:modified_time', modifiedTime, true);
-      if (author) createMetaTag('article:author', author, true);
+      if (publishedTime) upsertMetaTag('article:published_time', publishedTime, true);
+      if (modifiedTime) upsertMetaTag('article:modified_time', modifiedTime, true);
+      if (author) upsertMetaTag('article:author', author, true);
     }
 
     // Canonical URL

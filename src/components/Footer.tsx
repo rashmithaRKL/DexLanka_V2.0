@@ -1,24 +1,66 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { ArrowRight, Facebook, Instagram, Mail, MapPin, Phone, Twitter, Youtube } from 'lucide-react';
+import { BUSINESS_INFO } from '@/data/site';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
+  const quickLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Services', path: '/services' },
+    { name: 'Projects', path: '/gallery' },
+    { name: 'Packages', path: '/packages' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'Contact', path: '/contact' },
+  ];
+
+  const localServices = [
+    { name: 'Web Development Sri Lanka', path: '/web-development-sri-lanka' },
+    { name: 'Mobile Apps Sri Lanka', path: '/mobile-app-development-sri-lanka' },
+    { name: 'E-commerce Websites', path: '/ecommerce-website-development-sri-lanka' },
+    { name: 'POS Systems', path: '/pos-system-sri-lanka' },
+    { name: 'Inventory Systems', path: '/inventory-management-system-sri-lanka' },
+    { name: 'Custom Software', path: '/custom-software-development-sri-lanka' },
+  ];
+
+  const internationalServices = [
+    { name: 'React + Supabase Agency', path: '/react-supabase-development-agency' },
+    { name: 'SaaS MVP Development', path: '/saas-mvp-development' },
+    { name: 'Admin Dashboards', path: '/admin-dashboard-development' },
+    { name: 'Laravel to React Migration', path: '/laravel-to-react-migration' },
+    { name: 'Startup Web Apps', path: '/startup-web-app-development' },
+    { name: 'Hire React Developer', path: '/hire-react-developer-sri-lanka' },
+  ];
+
+  const renderLinks = (links: Array<{ name: string; path: string }>) => (
+    <ul className="space-y-3">
+      {links.map((link) => (
+        <li key={link.name}>
+          <Link to={link.path} className="text-gray-400 hover:text-white transition-colors inline-flex items-center group">
+            <ArrowRight size={14} className="mr-2 text-dexRed transition-transform group-hover:translate-x-1" />
+            <span>{link.name}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <footer className="bg-darkBlue pt-20 pb-10">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
           <div className="space-y-6">
-            <div className="flex items-center">
+            <Link to="/" className="flex items-center">
               <span className="text-2xl font-bold">
                 <span className="dex-span">Dex</span>
                 <span className="lanka-span">Lanka</span>
               </span>
-            </div>
+            </Link>
             <p className="text-gray-400 max-w-xs">
-              Premium software solutions tailored to your business needs. We build digital experiences that transform companies.
+              DexLanka Software Solutions builds websites, mobile apps, e-commerce stores, POS systems, inventory systems,
+              dashboards, and custom business software for Sri Lankan SMEs and international startups.
             </p>
             <div className="flex space-x-4">
               <a href="https://www.facebook.com/profile.php?id=61574091291394" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-dexRed transition-colors" aria-label="Facebook">
@@ -38,44 +80,17 @@ const Footer: React.FC = () => {
 
           <div>
             <h3 className="text-white font-semibold text-lg mb-6">Quick Links</h3>
-            <ul className="space-y-3">
-              {[
-                { name: 'Home', path: '/' },
-                { name: 'About Us', path: '/about' },
-                { name: 'Services', path: '/services' },
-                { name: 'Packages', path: '/packages' },
-                { name: 'Contact', path: '/contact' },
-                { name: 'Terms and Conditions', path: '/terms-and-conditions' },
-              ].map((link) => (
-                <li key={link.name}>
-                  <Link to={link.path} className="text-gray-400 hover:text-white transition-colors inline-flex items-center group">
-                    <ArrowRight size={14} className="mr-2 text-dexRed transition-transform group-hover:translate-x-1" />
-                    <span>{link.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {renderLinks(quickLinks)}
           </div>
 
           <div>
-            <h3 className="text-white font-semibold text-lg mb-6">Services</h3>
-            <ul className="space-y-3">
-              {[
-                'Web Development',
-                'Mobile Apps',
-                'UI/UX Design',
-                'E-Commerce',
-                'Desktop Applications',
-                'Digital Marketing',
-              ].map((service) => (
-                <li key={service}>
-                  <Link to="/services" className="text-gray-400 hover:text-white transition-colors inline-flex items-center group">
-                    <ArrowRight size={14} className="mr-2 text-dexRed transition-transform group-hover:translate-x-1" />
-                    <span>{service}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-white font-semibold text-lg mb-6">Local Services</h3>
+            {renderLinks(localServices)}
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-6">International Services</h3>
+            {renderLinks(internationalServices)}
           </div>
 
           <div>
@@ -83,20 +98,18 @@ const Footer: React.FC = () => {
             <ul className="space-y-5">
               <li className="flex items-start">
                 <MapPin size={20} className="text-dexRed shrink-0 mt-1 mr-3" />
-                <span className="text-gray-400">
-                  Meegoda, Homagama, Sri Lanka
-                </span>
+                <span className="text-gray-400">{BUSINESS_INFO.location}</span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="text-dexRed shrink-0 mr-3" />
-                <a href="tel:+94123456789" className="text-gray-400 hover:text-white transition-colors">
-                  +94 70 558 8789
+                <a href={`tel:${BUSINESS_INFO.phoneHref}`} className="text-gray-400 hover:text-white transition-colors">
+                  {BUSINESS_INFO.phone}
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="text-dexRed shrink-0 mr-3" />
-                <a href="mailto:info@dexlanka.com" className="text-gray-400 hover:text-white transition-colors">
-                  info@dexlanka.com
+                <a href={`mailto:${BUSINESS_INFO.email}`} className="text-gray-400 hover:text-white transition-colors">
+                  {BUSINESS_INFO.email}
                 </a>
               </li>
             </ul>
@@ -105,13 +118,17 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500">
-              &copy; {currentYear} DexLanka. All rights reserved.
-            </p>
-            <div className="flex gap-6 text-sm">
-              <Link to="/terms-and-conditions" className="text-gray-500 hover:text-white transition-colors">
-                Terms and Conditions
+            <p className="text-gray-500">&copy; {currentYear} {BUSINESS_INFO.name}. All rights reserved.</p>
+            <div className="flex flex-wrap justify-center gap-6 text-sm">
+              <Link to="/privacy-policy" className="text-gray-500 hover:text-white transition-colors">
+                Privacy Policy
               </Link>
+              <Link to="/terms-and-conditions" className="text-gray-500 hover:text-white transition-colors">
+                Terms / Refund / Cancellation
+              </Link>
+              <a href="/sitemap.xml" className="text-gray-500 hover:text-white transition-colors">
+                Sitemap
+              </a>
             </div>
           </div>
         </div>

@@ -1,22 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MessageCircle } from 'lucide-react';
+import { trustTechnologies, whatsappUrl } from '@/data/site';
 
-// Import a placeholder video - you'll need to replace this with your actual video file
-const videoSource = "https://dl.dropboxusercontent.com/scl/fi/a1x7q1s5g0g3h6odynpkl/tech-background.mp4?rlkey=i2ui0xw6y8lbll3cpkl9mde15";
-
-const generateBubbles = () => {
-  return Array.from({ length: 60 }).map((_, index) => ({
-    id: index,
-    size: Math.random() * 60 + 20,
-    left: Math.random() * 100,
-    delay: Math.random() * 10,
-    duration: Math.random() * 8 + 2,
-  }));
-};
 const HeroSection: React.FC = () => {
-  const [bubbles, setBubbles] = useState(generateBubbles);
-
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Video Background */}
@@ -44,7 +31,9 @@ const HeroSection: React.FC = () => {
           width='100%' 
           height='100%'
           title="Spline Animation Desktop"
+          loading="eager"
           className="touch-none"
+          tabIndex={-1}
           style={{ 
             border: 'none',
             transform: 'translateX(25%) scale(1.2)',
@@ -67,7 +56,9 @@ const HeroSection: React.FC = () => {
           width='100%' 
           height='100%'
           title="Spline Animation Mobile"
+          loading="lazy"
           className="touch-none"
+          tabIndex={-1}
           style={{ 
             border: 'none',
             // Zoom and shift up slightly on mobile to match the desktop framing (hide legs/Built with Spline)
@@ -98,7 +89,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 pointer-events-none leading-tight"
           >
-            Elevate Your Digital Presence With{' '}
+            Build Your Website, App, or Business Software with{' '}
             <span className="dex-span">Dex</span>
             <span className="lanka-span">Lanka</span>
           </motion.h1>
@@ -109,7 +100,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-2xl mx-auto md:mx-0 pointer-events-none"
           >
-            We build premium, innovative software solutions that transform businesses and deliver exceptional user experiences.
+            Modern web development, mobile apps, e-commerce stores, POS systems, inventory systems, and custom software for Sri Lankan businesses and global startups.
           </motion.p>
 
           <motion.div
@@ -119,19 +110,36 @@ const HeroSection: React.FC = () => {
             className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pointer-events-none justify-center md:justify-start"
           >
             <a
-              href="/packages"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-5 sm:px-6 py-2.5 sm:py-3 bg-dexRed text-white font-medium rounded-lg transition-transform hover:translate-y-[-2px] active:translate-y-[0px] flex items-center justify-center pointer-events-auto touch-manipulation"
             >
-              View Packages
-              <ArrowRight size={16} className="ml-2" />
+              Get Free Quote on WhatsApp
+              <MessageCircle size={16} className="ml-2" />
             </a>
 
             <a
-              href="/contact"
+              href="/gallery"
               className="px-5 sm:px-6 py-2.5 sm:py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-all pointer-events-auto touch-manipulation justify-center flex items-center"
             >
-              Get in Touch
+              View Projects
+              <ArrowRight size={16} className="ml-2" />
             </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="mt-6 flex flex-wrap gap-2 justify-center md:justify-start pointer-events-auto"
+            aria-label="DexLanka trust technologies"
+          >
+            {trustTechnologies.map((tech) => (
+              <span key={tech} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-xs sm:text-sm text-gray-100">
+                {tech}
+              </span>
+            ))}
           </motion.div>
         </motion.div>
       </div>

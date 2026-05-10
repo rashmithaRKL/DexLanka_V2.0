@@ -80,7 +80,10 @@ const ContactForm: React.FC = () => {
       transition={{ duration: 0.5 }}
       className="glass rounded-2xl overflow-hidden shadow-soft p-8 w-full max-w-xl mx-auto"
     >
-      <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
+      <h2 className="text-2xl font-bold mb-2">Get Free Website Quote</h2>
+      <p className="text-gray-300 text-sm mb-6">
+        Share your business type, project idea, must-have features, and preferred timeline.
+      </p>
       
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -145,9 +148,12 @@ const ContactForm: React.FC = () => {
             className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed"
           >
             <option value="" disabled>Select a subject</option>
-            <option value="General Inquiry">General Inquiry</option>
-            <option value="Project Request">Project Request</option>
-            <option value="Support">Technical Support</option>
+            <option value="Website Quote">Website Quote</option>
+            <option value="Mobile App Quote">Mobile App Quote</option>
+            <option value="E-commerce Website">E-commerce Website</option>
+            <option value="POS / Inventory System">POS / Inventory System</option>
+            <option value="Custom Software">Custom Software</option>
+            <option value="Maintenance Support">Maintenance Support</option>
             <option value="Other">Other</option>
           </select>
         </div>
@@ -164,7 +170,7 @@ const ContactForm: React.FC = () => {
             onChange={handleChange}
             rows={5}
             className="w-full px-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:ring-1 focus:ring-dexRed resize-none"
-            placeholder="Your message..."
+            placeholder="Tell us about your business, project goal, required features, budget range, and timeline..."
           ></textarea>
         </div>
         
@@ -177,7 +183,7 @@ const ContactForm: React.FC = () => {
             <>Processing...</>
           ) : (
             <>
-              <span>Send Message</span>
+              <span>Request Free Quote</span>
               <Send size={16} className="ml-2" />
             </>
           )}

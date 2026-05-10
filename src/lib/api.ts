@@ -1,5 +1,37 @@
-import { supabase, ContactSubmission, Project, Testimonial, Package, TemplateItem, TemplatePurchase, TemplateCustomization, OrderRecord } from './supabase'
+import { supabase, isSupabaseConfigured, ContactSubmission, Project, Testimonial, Package, TemplateItem, TemplatePurchase, TemplateCustomization, OrderRecord } from './supabase'
 import { sendContactEmail } from './emailService'
+
+const databaseConfigurationMessage =
+  'Supabase is not configured for this local app. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to .env.local, then restart the Vite dev server.'
+
+const normalizeTemplate = (template: TemplateItem): TemplateItem => {
+  const fallbackImage =
+    template.thumbnail_url ||
+    template.image ||
+    template.screenshots?.[0] ||
+    template.preview_url ||
+    '/placeholder.svg'
+
+  return {
+    ...template,
+    image: template.image || fallbackImage,
+    thumbnail_url: template.thumbnail_url || template.image || fallbackImage,
+    screenshots: template.screenshots || [],
+    tags: template.tags || [],
+    features: template.features || [],
+    technologies: template.technologies || [],
+    compatibility: template.compatibility || [],
+    is_featured: Boolean(template.is_featured),
+    download_enabled: template.download_enabled !== false,
+    storage_type: template.storage_type || 'supabase',
+  }
+}
+
+const requireSupabase = () => {
+  if (!isSupabaseConfigured) {
+    throw new Error(databaseConfigurationMessage)
+  }
+}
 
 // Contact Form API
 export const submitContactForm = async (formData: {
@@ -10,6 +42,11 @@ export const submitContactForm = async (formData: {
   message: string
 }) => {
   try {
+    if (!isSupabaseConfigured) {
+      await sendContactEmail(formData)
+      return { success: true, saved: false }
+    }
+
     // Save to database first
     const { data, error } = await supabase
       .from('contact_submissions')
@@ -20,7 +57,7 @@ export const submitContactForm = async (formData: {
       throw new Error(`Failed to save contact form: ${error.message}`)
     }
 
-    // Try to send email notification to dexlanka@gmail.com
+    // Try to send email notification to info@dexlanka.com
     try {
       await sendContactEmail(formData)
     } catch (emailError) {
@@ -310,44 +347,55 @@ export const getUserOrders = async (userEmail: string): Promise<OrderRecord[]> =
 
 // Templates API
 export const getTemplates = async (): Promise<TemplateItem[]> => {
+  requireSupabase()
+
   const { data, error } = await supabase
     .from('templates')
     .select('*')
+    .eq('is_active', true)
+    .order('order_index', { ascending: true })
     .order('created_at', { ascending: false })
 
   if (error) {
     throw new Error(`Failed to fetch templates: ${error.message}`)
   }
 
-  return data || []
+  return (data || []).map(normalizeTemplate)
 }
 
-export const getTemplate = async (id: number): Promise<TemplateItem> => {
+export const getTemplate = async (id: number): Promise<TemplateItem | null> => {
+  requireSupabase()
+
   const { data, error } = await supabase
     .from('templates')
     .select('*')
     .eq('id', id)
-    .single()
+    .eq('is_active', true)
+    .maybeSingle()
 
   if (error) {
     throw new Error(`Failed to fetch template: ${error.message}`)
   }
 
-  return data
+  return data ? normalizeTemplate(data) : null
 }
 
 export const getFeaturedTemplates = async (): Promise<TemplateItem[]> => {
+  requireSupabase()
+
   const { data, error } = await supabase
     .from('templates')
     .select('*')
+    .eq('is_active', true)
     .eq('is_featured', true)
+    .order('order_index', { ascending: true })
     .order('created_at', { ascending: false })
 
   if (error) {
     throw new Error(`Failed to fetch featured templates: ${error.message}`)
   }
 
-  return data || []
+  return (data || []).map(normalizeTemplate)
 }
 
 export const getTemplatePurchases = async (): Promise<TemplatePurchase[]> => {

@@ -117,7 +117,7 @@ DexLanka Support Team`
     }
 
     // Confirm email direction before sending
-    if (!confirm(`Are you sure you want to send this reply?\n\nFROM: dexlanka@gmail.com (DexLanka)\nTO: ${message.email} (${message.name})\n\nThis will send the email TO the customer who contacted you.`)) {
+    if (!confirm(`Are you sure you want to send this reply?\n\nFROM: info@dexlanka.com (DexLanka)\nTO: ${message.email} (${message.name})\n\nThis will send the email TO the customer who contacted you.`)) {
       return;
     }
 
@@ -128,7 +128,7 @@ DexLanka Support Team`
       const templateParams = {
         // Sender information (DexLanka)
         from_name: 'DexLanka Team',
-        from_email: 'dexlanka@gmail.com',
+        from_email: 'info@dexlanka.com',
         
         // Recipient information (The person who contacted you)
         to_email: message.email,        // This is the customer's email
@@ -143,7 +143,7 @@ DexLanka Support Team`
         original_message: message.message,
         
         // Email settings
-        reply_to: 'dexlanka@gmail.com',  // Where customer can reply to
+        reply_to: 'info@dexlanka.com',  // Where customer can reply to
         message_id: message.id.toString()
       };
 
@@ -158,7 +158,7 @@ DexLanka Support Team`
       if (result.status === 200) {
         console.log('Reply sent successfully:', {
           to: message.email,
-          from: 'dexlanka@gmail.com',
+          from: 'info@dexlanka.com',
           subject: replyData.subject,
           template: TEMPLATE_ID
         });

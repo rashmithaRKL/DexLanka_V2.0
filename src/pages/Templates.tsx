@@ -4,7 +4,7 @@ import Footer from '@/components/Footer';
 import AnimatedText from '@/components/AnimatedText';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Search, Filter } from 'lucide-react';
+import { Search, Filter, AlertCircle, RefreshCw } from 'lucide-react';
 import TemplateCard from '@/components/TemplateCard';
 import { useSEO } from '@/hooks/useSEO';
 import { BreadcrumbSchema } from '@/components/StructuredData';
@@ -28,7 +28,14 @@ const Templates = () => {
     threshold: 0.1,
   });
 
-  const { templates, loading: templatesLoading } = useTemplates();
+  const { templates, loading: templatesLoading, error: templatesError, refetch: refetchTemplates } = useTemplates();
+
+  const getTemplateImage = (template: typeof templates[number]) =>
+    template.thumbnail_url ||
+    template.image ||
+    (template.screenshots && template.screenshots.length > 0 ? template.screenshots[0] : '') ||
+    template.preview_url ||
+    '/placeholder.svg';
 
   const categories = [
     { id: 'all', label: 'All Templates', count: templates.length },
@@ -103,7 +110,7 @@ const Templates = () => {
                   key={template.id}
                   template={{
                     ...template,
-                    image: template.thumbnail_url || (template.screenshots && template.screenshots.length > 0 ? template.screenshots[0] : template.preview_url) || '',
+                    image: getTemplateImage(template),
                     previewUrl: template.preview_url,
                     isFeatured: template.is_featured,
                   }}
@@ -166,6 +173,27 @@ const Templates = () => {
               <div className="w-16 h-16 border-4 border-dexRed border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <p className="text-gray-400">Loading templates...</p>
             </div>
+          ) : templatesError ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={templatesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              className="glass rounded-2xl p-8 text-center max-w-3xl mx-auto"
+            >
+              <AlertCircle size={56} className="text-dexRed mx-auto mb-4" />
+              <h3 className="text-2xl font-semibold mb-3">Template catalog is not connected</h3>
+              <p className="text-gray-300 mb-6">
+                {import.meta.env.DEV
+                  ? templatesError
+                  : 'Templates are temporarily unavailable. Please contact DexLanka for the latest template catalog.'}
+              </p>
+              <button
+                onClick={refetchTemplates}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-dexRed text-white rounded-lg font-medium hover:bg-dexRed/90 transition-colors"
+              >
+                <RefreshCw size={18} />
+                Reload Templates
+              </button>
+            </motion.div>
           ) : filteredTemplates.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredTemplates.map((template, index) => (
@@ -173,7 +201,7 @@ const Templates = () => {
                   key={template.id}
                   template={{
                     ...template,
-                    image: template.thumbnail_url || (template.screenshots && template.screenshots.length > 0 ? template.screenshots[0] : template.preview_url) || '',
+                    image: getTemplateImage(template),
                     previewUrl: template.preview_url,
                     isFeatured: template.is_featured,
                   }}

@@ -67,6 +67,10 @@ const MobileTemplateViewer: React.FC<MobileTemplateViewerProps> = ({ template })
                 <img
                   src={getScreenshotUrl(screenshots[currentScreenshotIndex])}
                   alt={`${template.title} screenshot ${currentScreenshotIndex + 1}`}
+                  width={420}
+                  height={746}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto rounded-lg border border-gray-700"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -135,7 +139,11 @@ const MobileTemplateViewer: React.FC<MobileTemplateViewerProps> = ({ template })
                 >
                   <img
                     src={getScreenshotUrl(screenshot)}
-                    alt={`Thumbnail ${index + 1}`}
+                    alt={`${template.title} screenshot thumbnail ${index + 1}`}
+                    width={160}
+                    height={90}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover aspect-video"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;

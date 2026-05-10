@@ -128,7 +128,11 @@ const Cart = () => {
                           <div className="w-full sm:w-32 h-32 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden">
                             <img
                               src={item.image || '/placeholder.svg'}
-                              alt={item.title}
+                              alt={`${item.title} template thumbnail`}
+                              width={128}
+                              height={128}
+                              loading="lazy"
+                              decoding="async"
                               className="w-full h-full object-cover"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;

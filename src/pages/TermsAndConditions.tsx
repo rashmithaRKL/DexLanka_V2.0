@@ -6,6 +6,9 @@ import AnimatedText from '@/components/AnimatedText';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { FileText, Shield, CreditCard, AlertCircle, CheckCircle, Lock } from 'lucide-react';
+import { BreadcrumbSchema } from '@/components/StructuredData';
+import { BUSINESS_INFO } from '@/data/site';
+import { useSEO } from '@/hooks/useSEO';
 
 const TermsAndConditions = () => {
   const [contentRef, contentInView] = useInView({
@@ -13,14 +16,22 @@ const TermsAndConditions = () => {
     threshold: 0.1,
   });
 
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  useSEO({
+    title: 'Terms, Payment, Refund & Cancellation Policy | DexLanka',
+    description:
+      'Read DexLanka Software Solutions terms, payment conditions, refund policy, cancellation policy, digital product terms, and custom software service policies.',
+    keywords: 'DexLanka terms, refund policy, cancellation policy, payment terms, software service policy Sri Lanka',
+    url: '/terms-and-conditions',
+    canonical: '/terms-and-conditions',
+    image: '/og-image.png',
+    type: 'website',
   });
+
+  const currentDate = 'May 9, 2026';
 
   return (
     <div className="bg-background text-foreground min-h-screen">
+      <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Terms and Conditions', url: '/terms-and-conditions' }]} />
       <Navbar />
 
       {/* Hero Section */}
@@ -61,14 +72,14 @@ const TermsAndConditions = () => {
                   <h2 className="text-3xl font-bold">Introduction</h2>
                 </div>
                 <p className="text-gray-300 leading-relaxed">
-                  Welcome to DexLanka. These Terms and Conditions ("Terms") govern your use of our website and services, 
+                  Welcome to {BUSINESS_INFO.name}. These Terms and Conditions ("Terms") govern your use of our website and services, 
                   including payment processing through our payment gateways. By accessing our website or making a purchase, 
                   you agree to be bound by these Terms. Please read them carefully.
                 </p>
                 <p className="text-gray-300 leading-relaxed mt-4">
-                  DexLanka ("we," "us," or "our") operates as a premium IT, branding, and digital services provider 
-                  in Sri Lanka. We use PayHere as our primary payment gateway and 2Checkout as our secondary payment 
-                  gateway to process payments securely.
+                  DexLanka ("we," "us," or "our") operates as a software solutions provider in Sri Lanka. We build websites, 
+                  e-commerce platforms, apps, POS systems, inventory systems, dashboards, templates, and custom software. 
+                  Where online payments are enabled, payment gateways process transactions securely.
                 </p>
               </div>
 
@@ -177,7 +188,7 @@ const TermsAndConditions = () => {
                     <p>
                       <strong className="text-white">3.3 Payment Disputes:</strong> If you have any concerns about 
                       a charge on your account, please contact us immediately at{' '}
-                      <a href="mailto:dexlanka@gmail.com" className="text-dexRed hover:underline">dexlanka@gmail.com</a>. 
+                      <a href={`mailto:${BUSINESS_INFO.email}`} className="text-dexRed hover:underline">{BUSINESS_INFO.email}</a>. 
                       We will investigate and resolve the issue promptly.
                     </p>
                     <p>
@@ -200,14 +211,15 @@ const TermsAndConditions = () => {
                   <div>
                     <h3 className="text-2xl font-semibold mb-4 text-dexRed">1. Services</h3>
                     <p className="mb-2">
-                      DexLanka provides premium IT, branding, and digital services including but not limited to:
+                      DexLanka provides software and digital services including but not limited to:
                     </p>
                     <ul className="list-disc list-inside space-y-2 ml-4">
                       <li>Web Development and Web Applications</li>
                       <li>Mobile Application Development</li>
                       <li>UI/UX Design Services</li>
                       <li>E-Commerce Solutions</li>
-                      <li>Desktop Applications</li>
+                      <li>POS and Inventory Systems</li>
+                      <li>Admin Dashboards and Custom Software</li>
                       <li>Digital Marketing Services</li>
                       <li>Template Sales and Customizations</li>
                     </ul>
@@ -329,7 +341,7 @@ const TermsAndConditions = () => {
                       <p>
                         <strong className="text-white">7.1 Contact Us First:</strong> If you have any concerns or 
                         disputes, please contact us at{' '}
-                        <a href="mailto:dexlanka@gmail.com" className="text-dexRed hover:underline">dexlanka@gmail.com</a> 
+                        <a href={`mailto:${BUSINESS_INFO.email}`} className="text-dexRed hover:underline">{BUSINESS_INFO.email}</a> 
                         {' '}or call us at{' '}
                         <a href="tel:+94705588789" className="text-dexRed hover:underline">+94 70 558 8789</a>. 
                         We will work with you to resolve any issues.
@@ -355,11 +367,11 @@ const TermsAndConditions = () => {
                     <h3 className="text-2xl font-semibold mb-4 text-dexRed">9. Contact Information</h3>
                     <div className="space-y-2">
                       <p>
-                        <strong className="text-white">Company:</strong> DexLanka
+                        <strong className="text-white">Company:</strong> {BUSINESS_INFO.name}
                       </p>
                       <p>
                         <strong className="text-white">Email:</strong>{' '}
-                        <a href="mailto:dexlanka@gmail.com" className="text-dexRed hover:underline">dexlanka@gmail.com</a>
+                        <a href={`mailto:${BUSINESS_INFO.email}`} className="text-dexRed hover:underline">{BUSINESS_INFO.email}</a>
                       </p>
                       <p>
                         <strong className="text-white">Phone:</strong>{' '}

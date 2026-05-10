@@ -4,6 +4,7 @@ import emailjs from '@emailjs/browser';
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const CONTACT_EMAIL = 'info@dexlanka.com';
 
 // Initialize EmailJS if configuration is available
 if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
@@ -32,7 +33,7 @@ export const sendContactEmail = async (formData: ContactFormData): Promise<void>
       phone: formData.phone || 'Not provided',
       subject: formData.subject,
       message: formData.message,
-      to_email: 'dexlanka@gmail.com',
+      to_email: CONTACT_EMAIL,
       reply_to: formData.email,
     };
 
@@ -68,7 +69,7 @@ Message:
 ${formData.message}
   `);
   
-  return `mailto:dexlanka@gmail.com?subject=${subject}&body=${body}`;
+  return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 };
 
 // Alternative method using a simple fetch to a backend service
@@ -81,7 +82,7 @@ export const sendContactEmailViaAPI = async (formData: ContactFormData): Promise
       },
       body: JSON.stringify({
         ...formData,
-        to: 'dexlanka@gmail.com',
+        to: CONTACT_EMAIL,
       }),
     });
 

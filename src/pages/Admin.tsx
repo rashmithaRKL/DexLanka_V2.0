@@ -50,7 +50,7 @@ const Admin = () => {
   const { testimonials, loading: testimonialsLoading, refetch: refetchTestimonials } = useTestimonials()
   const { packages, loading: packagesLoading, refetch: refetchPackages } = usePackages()
   const { orders, loading: ordersLoading, refetch: refetchOrders } = useOrders()
-  const { templates, loading: templatesLoading, refetch: refetchTemplates } = useTemplates()
+  const { templates, loading: templatesLoading, error: templatesError, refetch: refetchTemplates } = useTemplates()
   const { purchases, loading: purchasesLoading, refetch: refetchPurchases } = useTemplatePurchases()
   const { customizations, loading: customizationsLoading, refetch: refetchCustomizations } = useTemplateCustomizations()
   const { toast } = useToast()
@@ -445,7 +445,14 @@ const Admin = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {templates.map((t) => (
+                    {templatesError && (
+                      <TableRow>
+                        <TableCell colSpan={7} className="text-center text-dexRed">
+                          {templatesError}
+                        </TableCell>
+                      </TableRow>
+                    )}
+                    {!templatesError && templates.map((t) => (
                       <TableRow key={t.id} className="hover:bg-white/5">
                         <TableCell className="font-mono text-xs">{t.id}</TableCell>
                         <TableCell className="font-medium text-white">{t.title}</TableCell>
@@ -476,7 +483,7 @@ const Admin = () => {
                         </TableCell>
                       </TableRow>
                     ))}
-                    {templates.length === 0 && (
+                    {!templatesError && templates.length === 0 && (
                       <TableRow>
                         <TableCell colSpan={7} className="text-center text-gray-400">No templates found</TableCell>
                       </TableRow>

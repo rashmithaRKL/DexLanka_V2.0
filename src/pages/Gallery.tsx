@@ -2,13 +2,25 @@
 import { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import GalleryHero from '@/components/GalleryHero';
 import AnimatedText from '@/components/AnimatedText';
 import GalleryGrid from '@/components/GalleryGrid';
 import StatsSection from '@/components/StatsSection';
+import { BreadcrumbSchema } from '@/components/StructuredData';
+import { useSEO } from '@/hooks/useSEO';
 
 
 const Gallery = () => {
+  useSEO({
+    title: 'Project Case Studies | DexLanka Software Solutions',
+    description:
+      'Explore DexLanka project case studies for websites, mobile apps, e-commerce, dashboards, UI/UX, and custom business software.',
+    keywords: 'DexLanka projects, website case studies Sri Lanka, software project portfolio, React projects Sri Lanka',
+    image: '/og-image.png',
+    url: '/gallery',
+    canonical: '/gallery',
+    type: 'website',
+  });
+
   useEffect(() => {
     // Scroll reveal animation
     const observerOptions = {
@@ -39,6 +51,7 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <BreadcrumbSchema items={[{ name: 'Home', url: '/' }, { name: 'Projects', url: '/gallery' }]} />
       <Navbar />
 
       {/* Hero Section */}

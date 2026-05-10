@@ -3,11 +3,18 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase environment variables')
+export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseKey)
+
+if (!isSupabaseConfigured && import.meta.env.DEV) {
+  console.warn(
+    'Supabase environment variables are missing. Public pages will render, but auth, admin, checkout, and database-backed forms need VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.'
+  )
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseKey || 'placeholder-anon-key'
+)
 
 // Database types
 export interface ContactSubmission {
@@ -99,6 +106,7 @@ export interface TemplateItem {
   description: string
   price: number
   category: string
+  image?: string
   preview_url?: string
   thumbnail_url?: string
   features: string[]
